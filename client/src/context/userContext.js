@@ -50,10 +50,6 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    // loginUser(authUser)
-  }, [])
-
   return (
     <userContext.Provider value={{
       users,

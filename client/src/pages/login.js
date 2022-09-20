@@ -1,6 +1,7 @@
 import '../resources/css/login.css'
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../context/userContext';
+import toast from 'react-hot-toast'
 
 
 export default function LoginPage() {
@@ -19,9 +20,35 @@ export default function LoginPage() {
       password
     }
 
-    const user = await loginUser(authUser)
-    await getUser(user.id)
-    navigate('/home')
+    if (email && password) {
+      const user = await loginUser(authUser)
+      console.log('logogog', user);
+      if (!user) {
+        toast.error('Usuario No Encontrado!',
+          {
+            style: {
+              borderRadius: '10px',
+              background: '#282c34',
+              color: '#2ececece',
+            },
+          }
+        );
+      } else {
+        navigate('/home')
+      }
+      // await getUser(user.id)
+    }
+    else {
+      toast.error('Hay campos vacios',
+        {
+          style: {
+            borderRadius: '10px',
+            background: '#282c34',
+            color: '#2ececece',
+          },
+        }
+      );
+    }
   }
 
   const handleSignin = () => {
@@ -44,6 +71,7 @@ export default function LoginPage() {
           <button type="submit" className='sendLogin'>Login</button>
         </form>
         <div className='option'>
+          <p id='txtNewAccount'>Obten una cuenta</p>
           <button className='sendSignin' onClick={handleSignin}>Signin</button>
         </div>
       </div>

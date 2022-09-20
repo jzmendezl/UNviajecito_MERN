@@ -7,6 +7,8 @@ import AccountPage from './pages/account';
 import RootPage from './pages/rootPage';
 import HomePage from './pages/home';
 
+import { Toaster } from 'react-hot-toast'
+
 function App() {
   return (
     <Router>
@@ -17,6 +19,10 @@ function App() {
         <Route path='/account' element={<AccountPage />} />
         <Route path='/home' element={<HomePage />} />
       </Routes>
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
     </Router>
   );
 }

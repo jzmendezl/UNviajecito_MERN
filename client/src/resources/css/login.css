@@ -146,3 +146,8 @@ input:-internal-autofill-selected {
 #btnGoogle {
     width: 20px;
 }
+
+#txtNewAccount {
+    /* font-family: 'sans-serif'; */
+    font-size: smaller;
+}
