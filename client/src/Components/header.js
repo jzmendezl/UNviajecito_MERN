@@ -1,19 +1,24 @@
 import { useNavigate } from 'react-router-dom'
 import '../resources/css/header.css'
 
+import { useUsers } from '../context/userContext'
+
 
 export default function Header() {
+
+  const { currentUser } = useUsers()
+  console.log('CurrUser', currentUser);
 
   let navigate = useNavigate();
 
   const goHome = () => {
-    navigate('/home')
+    navigate('/home', {state:  currentUser })
   }
   const goSearch = () => {
     navigate('/search')
   }
   const goAccount = () => {
-    navigate('/account')
+    navigate('/account', {state:  currentUser })
   }
   const LogOut = () => {
     navigate('/')

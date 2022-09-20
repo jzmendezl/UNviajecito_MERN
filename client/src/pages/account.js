@@ -1,13 +1,16 @@
-import React from 'react'
 import '../resources/css/account.css'
 import Header from '../Components/header'
 import Photo from '../resources/img/photo_user.svg'
 
 export default function AccountPage() {
 
+
+
   const linkVehicle = () => {
 
   }
+
+
 
   return (
     <div className='accountPage'>
@@ -20,7 +23,7 @@ export default function AccountPage() {
           </div>
           <div className='infoUser'>
             <p className='titleInfoUser'>Nombre : </p>
-            <p className='titleInfoUser'>Correo : </p>
+            <p className='titleInfoUser'>Correo : {  }</p>
           </div>
         </div>
 

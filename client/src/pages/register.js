@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import '../resources/css/register.css'
+import { useUsers } from '../context/userContext'
 
 export default function RegisterPage() {
-  const [state, setState] = useState(0);
-  let navigate = useNavigate();
 
-  const [newUser, setNewUser] = useState(null);
+  const { createUser } = useUsers()
+
+  let navigate = useNavigate();
 
   function validateDomain(email) {
     if (email.split('@')[1] === 'unal.edu.co') {
@@ -23,8 +23,10 @@ export default function RegisterPage() {
     event.preventDefault();
     let name = event.target[0].value;
     let lastname = event.target[1].value;
+    // eslint-disable-next-line no-unused-vars
     let cel = event.target[2].value;
     let email = event.target[3].value;
+    // eslint-disable-next-line no-unused-vars
     let pass = event.target[4].value;
 
     let expRegName = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/;
@@ -54,76 +56,62 @@ export default function RegisterPage() {
     return true;
   }
 
-  const handleSignInEmail = (event) => {
+  const handleSignInEmail = async (event) => {
+
     if (formValidate(event)) {
       console.log('Usuario Correcto');
-      // console.log(e);
-      // createUserWithEmailAndPassword(auth, event.target[3].value, event.target[4].value)
-      // .then((userCredential) => {
-      //   // Signed in
-      //   setNewUser(userCredential.user);
-      //   // ...
-      // })
-      // .catch((error) => {
-      //   const errorCode = error.code;
-      //   const errorMessage = error.message;
-      //   console.log(errorCode, ' ',errorMessage);
-      //   // ..
-      // });
-      
-      navigate('./login.js')
+
+      const newUser = {
+        name: event.target[0].value,
+        lastname: event.target[1].value,
+        celPhone: event.target[2].value,
+        email: event.target[3].value,
+        password: event.target[4].value
+
+      }
+
+      const currentUser = await createUser(newUser)
+      if (currentUser === 11000) {
+        alert('Correo en Uso')
+      } else {
+        navigate('/home')
+      }
+
     }
-    console.log(newUser);
-    navigate('/home');
+
   }
 
-
-  if (state === 0) {
-    return (
-      <div id='pageLogin'>
-        <div id='contentLogin'>
-          <form action="" id='formLogin' onSubmit={handleSignInEmail}>
-            <label htmlFor="name">
-              <span>Nombre</span>
-              <input type="text" name="name" id="name" placeholder='Example' />
-            </label>
-
-            <label htmlFor="lastName">
-              <span>Apellido</span>
-              <input type="text" name="lastName" id="lastName" placeholder='Example' />
-            </label>
-
-            <label htmlFor="phone">
-              <span>Celular</span>
-              <input type="tel" name="phone" id="phone" placeholder='3xx xxx xx xx  (Opcional)' />
-            </label>
-
-            <label htmlFor="email" className='lbl-email'>
-              <span className='txt-email'>Email</span>
-              <input type="email" name="email" id="email" placeholder='example@unal.edu.co' pattern=".+@unal.edu\.co" size="30" required></input>
-            </label>
-
-            <label htmlFor="password">
-              <span>Password</span>
-              <input type="password" name="password" id="password" />
-            </label>
-            <button type="submit" className='sendLogin'>Sign In</button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
-  if (state === 1) {
-    return (
-      <div>
-        Verifica Tu Correo
-      </div>
-    );
-  }
   return (
-    <div>
-      Loading...
+    <div id='pageLogin'>
+      <div id='contentLogin'>
+        <form action="" id='formLogin' onSubmit={handleSignInEmail}>
+          <label htmlFor="name">
+            <span>Nombre</span>
+            <input type="text" name="name" id="name" placeholder='Example' />
+          </label>
+
+          <label htmlFor="lastName">
+            <span>Apellido</span>
+            <input type="text" name="lastName" id="lastName" placeholder='Example' />
+          </label>
+
+          <label htmlFor="phone">
+            <span>Celular</span>
+            <input type="tel" name="phone" id="phone" placeholder='3xx xxx xx xx  (Opcional)' />
+          </label>
+
+          <label htmlFor="email" className='lbl-email'>
+            <span className='txt-email'>Email</span>
+            <input type="email" name="email" id="email" placeholder='example@unal.edu.co' pattern=".+@unal.edu\.co" size="30" required></input>
+          </label>
+
+          <label htmlFor="password">
+            <span>Password</span>
+            <input type="password" name="password" id="password" />
+          </label>
+          <button type="submit" className='sendLogin'>Sign In</button>
+        </form>
+      </div>
     </div>
   );
 }

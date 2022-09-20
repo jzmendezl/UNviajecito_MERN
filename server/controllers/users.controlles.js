@@ -18,6 +18,8 @@ export const createUsers = async (req, res) => {
   try {
     const { email, password } = req.body
 
+    await User.findOne({ email })
+
     // * image
 
     let photoUser = {
@@ -38,13 +40,14 @@ export const createUsers = async (req, res) => {
     const newUser = new User({ email, password: hashedPassword, photoUser })
     await newUser.save()
 
+
     return res.json(newUser)
 
   } catch (error) {
     console.log(error);
     console.error(error.message);
 
-    return res.status(500).json({ message: error.message })
+    return res.status(500).json({ message: error.message, code: error.code })
   }
 }
 
@@ -117,8 +120,8 @@ export const loginUser = async (req, res) => {
 
       return res.json({ id, email })
     }
-    
-    return res.json(currentUser)
+
+    // return res.json(currentUser.data)
 
   } catch (error) {
     return res.status(500).json({ message: error.message })
