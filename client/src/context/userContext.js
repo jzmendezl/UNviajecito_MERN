@@ -61,7 +61,7 @@ export const UserProvider = ({ children }) => {
       return error.response.data.code
     }
   }
-
+  
   return (
     <userContext.Provider value={{
       users,
@@ -69,7 +69,8 @@ export const UserProvider = ({ children }) => {
       getUser,
       loginUser,
       createUser,
-      currentUser
+      currentUser,
+      setCurrentUser
     }}>
       {children}
     </userContext.Provider>

@@ -7,7 +7,6 @@ import { useUsers } from '../context/userContext'
 export default function Header() {
 
   const { currentUser, setCurrentUser } = useUsers()
-  // console.log('CurrUser', currentUser);
 
   let navigate = useNavigate();
 
@@ -21,8 +20,8 @@ export default function Header() {
     navigate('/account', {state:  currentUser })
   }
   const LogOut = () => {
-    navigate('/')
     setCurrentUser(null)
+    navigate('/')
   }
 
   return (
