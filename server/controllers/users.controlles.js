@@ -19,8 +19,8 @@ export const createUsers = async (req, res) => {
   try {
     const { userName, celPhone, email, password } = req.body
     
-    const hashedPassword = encrypt(password)
-
+    const hashedPassword = await encrypt(password)
+    
     await User.findOne({ email })
 
     // * image

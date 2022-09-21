@@ -55,7 +55,7 @@ export const UserProvider = ({ children }) => {
   const createUser = async (newUser) => {
     try {
       const res = await createUsersRequest(newUser)
-      setUsers([...users, res.data])
+      setCurrentUser(res.data)
     } catch (error) {
       console.error(error);
       return error.response.data.code
