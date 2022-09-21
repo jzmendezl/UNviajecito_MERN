@@ -7,7 +7,7 @@ import { useUsers } from '../context/userContext'
 export default function Header() {
 
   const { currentUser } = useUsers()
-  console.log('CurrUser', currentUser);
+  // console.log('CurrUser', currentUser);
 
   let navigate = useNavigate();
 

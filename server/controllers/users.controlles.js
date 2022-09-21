@@ -114,7 +114,11 @@ export const loginUser = async (req, res) => {
     const authUser = await User.findOne({ email })
 
     if (!authUser) {
-      return res.sendStatus(404)
+      res.status(404)
+      res.send({
+        error: 'User not found'
+      })
+      return
     }
 
     const checkPassword = await compare(password, authUser.password)
@@ -133,6 +137,7 @@ export const loginUser = async (req, res) => {
       })
       return
     }
+
     // if (!authUser) {
     //   return res.sendStatus(404)
     // }

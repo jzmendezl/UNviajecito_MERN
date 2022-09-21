@@ -1,5 +1,5 @@
-import { useState, useContext, createContext, useEffect } from "react";
-import { getUsersRequest, createUsersRequest, loginUserRequest, getUserRequest } from "../api/users";
+import { useState, useContext, createContext, } from "react";
+import { createUsersRequest, loginUserRequest, getUserRequest } from "../api/users";
 
 
 const userContext = createContext()
@@ -12,10 +12,10 @@ export const useUsers = () => {
 
 export const UserProvider = ({ children }) => {
 
-  console.log('Container log');
   const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState()
-  const [authUser, setAuthUser] = useState()
+  // const [authUser, setAuthUser] = useState()
+  // console.log(authUser);
 
   // const getUsers = async () => {
   //   const res = await getUsersRequest()
@@ -32,11 +32,23 @@ export const UserProvider = ({ children }) => {
   const loginUser = async (user) => {
     try {
       const res = await loginUserRequest(user)
-      setAuthUser(res.data)
-      return res.data
+      if (res) {
+        // setAuthUser(res.data)
+        setCurrentUser(res.data)
+        return res.data
+      } else {
+        return '404'
+      }
     } catch (error) {
-      console.error(error);
-      return error.response.data.code
+      console.error(error.message);
+      if (error.message === 'Request failed with status code 409') {
+        return '409'
+      }
+      if (error.message === 'Request failed with status code 404') {
+        return '404'
+      }
+      // return error.response.data.code
+      return console.error(error);
     }
   }
 

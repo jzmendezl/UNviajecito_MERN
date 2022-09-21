@@ -43,9 +43,8 @@ input[type=number] { -moz-appearance:textfield; }
 .infoUser {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  /* padding: 30px;
-  gap: 20px; */
+  align-items: center;
+  color: #2ecece;
 }
 
 #photoUser {

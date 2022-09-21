@@ -4,16 +4,13 @@ import Photo from '../resources/img/photo_user.svg'
 import { useUsers } from '../context/userContext'
 
 export default function AccountPage() {
-  
-  const { currentUser } = useUsers()
-  console.log('ACT', currentUser);
 
+  const { currentUser } = useUsers()
+  // console.log('ACT', currentUser);
 
   const linkVehicle = () => {
 
   }
-
-
 
   return (
     <div className='accountPage'>
@@ -22,11 +19,12 @@ export default function AccountPage() {
       <div className='bodyAccount'>
         <div className='dataUser'>
           <div id='photoUser'>
-            <img src={Photo} alt="Foto Usuario" id='photoUser' />
+            <img src={currentUser ? currentUser.data.photoUser.url : Photo} alt="Foto Usuario" id='photoUser' />
           </div>
           <div className='infoUser'>
-            <p className='titleInfoUser'>Nombre : </p>
-            <p className='titleInfoUser'>Correo : {currentUser?currentUser.email:'Cargando'}</p>
+            <p className='titleInfoUser'>{currentUser ? currentUser.data.userName : 'Cargando'}</p>
+            <p className='titleInfoUser'>{currentUser ? currentUser.data.email : 'Cargando'}</p>
+            <p className='titleInfoUser'>{currentUser ? currentUser.data.celPhone : 'Cargando'}</p>
           </div>
         </div>
 
