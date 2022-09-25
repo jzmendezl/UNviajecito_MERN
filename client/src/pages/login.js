@@ -45,8 +45,8 @@ export default function LoginPage() {
             }
             );
           } else {
-            // setCurrentUser(user)
-            await navigate('/home')
+            setCurrentUser(user)
+            navigate('/home')
           }
         } else {
           toast.error('Falta contraseña!',
