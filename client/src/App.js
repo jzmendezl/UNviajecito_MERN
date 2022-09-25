@@ -17,7 +17,7 @@ function App() {
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/account' element={<AccountPage />} />
-        <Route path='/home' element={<HomePage />} />
+        <Route path='/aboutUs' element={<HomePage />} />
       </Routes>
       <Toaster
         position="top-center"

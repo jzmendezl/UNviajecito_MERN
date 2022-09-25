@@ -1,11 +1,11 @@
 import Header from '../Components/header'
-import '../resources/css/home.css'
+import '../resources/css/aboutUs.css'
 
-export default function HomePage() {
+export default function AboutUsPage() {
  
 
   return (
-    <div className='pageHome'>
+    <div className='pageAboutUs'>
       <Header />
     </div>
   )
