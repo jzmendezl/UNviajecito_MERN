@@ -80,7 +80,7 @@ export default function RegisterPage() {
       if (currentUser === 11000) {
         alert('Correo en Uso')
       } else {
-        navigate('/home')
+        navigate('/login')
       }
 
     }
