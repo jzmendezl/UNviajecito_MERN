@@ -1,5 +1,14 @@
 # UNviajecito_MERN
 
+Inicialmente debe instalar nodejs
+
+Luego hacer el clone del repositorio
+
+Ejecutar
+```
+npm install
+```
+
 Abrir una consola en la carpeta server y ejecutar la siguiente linea de codigo:
 
 ```
