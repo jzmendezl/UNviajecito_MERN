@@ -45,7 +45,7 @@ export default function RegisterPage() {
     // eslint-disable-next-line no-unused-vars
     let pass = event.target[3].value;
 
-    let expRegName = /^[a-z0-9_-]{3,16}$/;
+    let expRegName =  /^[a-zA-Z0-9\_\-]{4,16}$/;
 
     if (!userName) {
       alert('Nombre Requerido')
