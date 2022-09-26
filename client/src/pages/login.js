@@ -5,10 +5,14 @@ import toast from 'react-hot-toast'
 
 
 export default function LoginPage() {
-
-  const { loginUser, setCurrentUser } = useUsers()
-
+  
   let navigate = useNavigate();
+  
+  const { loginUser, isLogged } = useUsers()
+
+  if (isLogged()) {
+    navigate('/home')
+  }
 
   const handleLoginEmail = async (e) => {
     e.preventDefault();
@@ -45,7 +49,7 @@ export default function LoginPage() {
             }
             );
           } else {
-            setCurrentUser(user)
+            // setCurrentUser(user)
             navigate('/home')
           }
         } else {

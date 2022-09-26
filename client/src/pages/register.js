@@ -2,12 +2,20 @@ import { useNavigate } from 'react-router-dom';
 import '../resources/css/register.css'
 import { useUsers } from '../context/userContext'
 import toast from 'react-hot-toast'
+import { useEffect } from 'react';
 
 export default function RegisterPage() {
 
-  const { createUser } = useUsers()
+  let navigate = useNavigate()
 
-  let navigate = useNavigate();
+  const { isLogged, createUser } = useUsers()
+
+  useEffect(() => {
+    if (isLogged()) {
+      navigate('/home')
+    }
+  }, [isLogged, navigate])
+
 
   function validateDomain(email) {
     if (email.split('@')[1] === 'unal.edu.co') {
@@ -31,12 +39,13 @@ export default function RegisterPage() {
   const formValidate = (event) => {
     event.preventDefault();
     let userName = event.target[0].value;
+    // eslint-disable-next-line no-unused-vars
     let celPhone = event.target[1].value;
     let email = event.target[2].value;
     // eslint-disable-next-line no-unused-vars
     let pass = event.target[3].value;
 
-    let expRegName = /^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/;
+    let expRegName = /^[a-z0-9_-]{3,16}$/;
 
     if (!userName) {
       alert('Nombre Requerido')
@@ -44,7 +53,7 @@ export default function RegisterPage() {
     }
     if (!expRegName.exec(userName)) {
       // alert('El Campo Nombre Admite Letras Y Espacios')
-      toast.error('El Campo Nombre Admite Letras Y Espacio',
+      toast.error('El Campo Nombre de Usuario Admite Letras Y Espacio',
         {
           style: {
             borderRadius: '10px',
@@ -80,7 +89,7 @@ export default function RegisterPage() {
       if (currentUser === 11000) {
         alert('Correo en Uso')
       } else {
-        navigate('/login')
+        navigate('/home')
       }
 
     }

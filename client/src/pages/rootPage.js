@@ -1,15 +1,21 @@
 import React from 'react'
 import '../resources/css/rootpage.css'
 import { useNavigate } from 'react-router-dom'
+import { useUsers } from '../context/userContext'
 
 
 export default function RootPage() {
   let navigate = useNavigate()
+  const { isLogged } = useUsers()
+
+  if (isLogged()) {
+    navigate('/home')
+  }
 
   const goLogin = () => {
     navigate('login')
   }
-  
+
   const goRegister = () => {
     navigate('register')
   }

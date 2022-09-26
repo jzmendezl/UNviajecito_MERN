@@ -1,5 +1,5 @@
 import { useState, useContext, createContext, } from "react";
-import { createUsersRequest, loginUserRequest, getUserRequest } from "../api/users";
+import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest } from "../api/users";
 
 
 const userContext = createContext()
@@ -13,16 +13,17 @@ export const useUsers = () => {
 export const UserProvider = ({ children }) => {
 
   const [users, setUsers] = useState([])
-  const [currentUser, setCurrentUser] = useState()
-  // const [authUser, setAuthUser] = useState()
-  // console.log(authUser);
+  const [currentUser, setCurrentUser] = useState(null)
 
-  // const getUsers = async () => {
-  //   const res = await getUsersRequest()
-  //   console.log(res);
-  //   setUsers(res.data)
-  // }
-  
+  const isLogged = () => !!currentUser
+  const logout = () => setCurrentUser(null)
+
+  const getUsers = async () => {
+    const res = await getUsersRequest()
+    console.log(res);
+    setUsers(res.data)
+  }
+
   const getUser = async (id) => {
     const res = await getUserRequest(id)
     setCurrentUser(res.data)
@@ -34,8 +35,8 @@ export const UserProvider = ({ children }) => {
       const res = await loginUserRequest(user)
       if (res) {
         // setAuthUser(res.data)
-        setCurrentUser(res.data)
-        return res.data
+        setCurrentUser(res.data.data)
+        return res.data.data
       } else {
         return '404'
       }
@@ -61,11 +62,13 @@ export const UserProvider = ({ children }) => {
       return error.response.data.code
     }
   }
-  
+
   return (
     <userContext.Provider value={{
       users,
-      // getUsers,
+      isLogged,
+      logout,
+      getUsers,
       getUser,
       loginUser,
       createUser,
