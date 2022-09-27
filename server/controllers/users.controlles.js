@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 import { uploadPhotoUser, deletePhotoUser } from "../libs/cloudinary.js";
-import { encrypt } from '../libs/bcrypt.js';
+import { encrypt, compare } from '../libs/bcrypt.js';
+import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 export const loginUser = async (req, res) => {
@@ -8,33 +9,36 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body
     const authUser = await User.findOne({ email })
 
-    if (!authUser) {
-      res.status(404)
-      res.send({
-        error: 'User not found'
-      })
-      return
+    if (authUser && (await compare(password, authUser.password))) {
+      return res.send(authUser)
+    } else {
+      return res.status(401).json({message: 'Invalid Credentials'})
     }
+    // if (!authUser) {
+    //   res.status(404)
+    //   res.send({
+    //     error: 'User not found'
+    //   })
+    //   return
+    // }
 
-    const checkPassword = await compare(password, authUser.password)
+    // const checkPassword = await compare(password, authUser.password)
 
-    if (checkPassword) {
-      res.send({
-        data: authUser
-      })
-      return
-    }
+    // if (checkPassword) {
+    //   res.send(authUser)
+    //   return
+    // }
 
-    if (!checkPassword) {
-      res.status(409)
-      res.send({
-        error: 'Invalid Password'
-      })
-      return
-    }
+    // if (!checkPassword) {
+    //   res.status(409)
+    //   res.send({
+    //     error: 'Invalid Password'
+    //   })
+    //   return
+    // }
 
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    return res.status(401).json({ message: error.message })
   }
 }
 
@@ -56,7 +60,7 @@ export const createUsers = async (req, res) => {
     const newUser = new User({ userName, celPhone, email, password: hashedPassword, photoUser })
     await newUser.save()
 
-    return res.json(newUser)
+    return res.status(201).json(newUser)
 
   } catch (error) {
     console.log(error);

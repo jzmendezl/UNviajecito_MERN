@@ -33,21 +33,23 @@ export const UserProvider = ({ children }) => {
   const loginUser = async (user) => {
     try {
       const res = await loginUserRequest(user)
-      if (res) {
-        // setAuthUser(res.data)
-        setCurrentUser(res.data.data)
-        return res.data.data
-      } else {
-        return '404'
-      }
+      console.log(res);
+      setCurrentUser(res.data)
+      return res.data
+      // if (res) {
+      //   setCurrentUser(res.data)
+      //   return res.data
+      // } else {
+      //   return '404'
+      // }
     } catch (error) {
       console.error(error.message);
-      if (error.message === 'Request failed with status code 409') {
-        return '409'
+      if (error.message === 'Request failed with status code 409' || error.message === 'Request failed with status code 404' ) {
+        return '401'
       }
-      if (error.message === 'Request failed with status code 404') {
-        return '404'
-      }
+      // if (error.message === 'Request failed with status code 404') {
+      //   return '404'
+      // }
       // return error.response.data.code
       return console.error(error);
     }
