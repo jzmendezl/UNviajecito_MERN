@@ -1,16 +1,39 @@
 import User from '../models/User.js';
 import { uploadPhotoUser, deletePhotoUser } from "../libs/cloudinary.js";
-import fs from "fs-extra";
-import bcrypt, { compare } from 'bcrypt'
 import { encrypt } from '../libs/bcrypt.js';
+import jwt from 'jsonwebtoken'
 
-export const getUsers = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
-    const users = await User.find()
-    res.json(users)
-  } catch (error) {
-    console.error(error.message);
+    const { email, password } = req.body
+    const authUser = await User.findOne({ email })
 
+    if (!authUser) {
+      res.status(404)
+      res.send({
+        error: 'User not found'
+      })
+      return
+    }
+
+    const checkPassword = await compare(password, authUser.password)
+
+    if (checkPassword) {
+      res.send({
+        data: authUser
+      })
+      return
+    }
+
+    if (!checkPassword) {
+      res.status(409)
+      res.send({
+        error: 'Invalid Password'
+      })
+      return
+    }
+
+  } catch (error) {
     return res.status(500).json({ message: error.message })
   }
 }
@@ -18,26 +41,17 @@ export const getUsers = async (req, res) => {
 export const createUsers = async (req, res) => {
   try {
     const { userName, celPhone, email, password } = req.body
-    
+
     const hashedPassword = await encrypt(password)
-    
+
     await User.findOne({ email })
 
-    // * image
+    // * image dafault
 
     let photoUser = {
       "url": "https://res.cloudinary.com/joemendez/image/upload/v1663568344/usersPhoto/rzdivknzd1ojeeqtdg40.png",
       "publicId": "usersPhoto/rzdivknzd1ojeeqtdg40"
     };
-
-    // if (req.files?.photoUser) {
-    //   const result = await uploadPhotoUser(req.files.photoUser.tempFilePath)
-    //   await fs.remove(req.files.photoUser.tempFilePath)
-    //   photoUser = {
-    //     url: result.secure_url,
-    //     publicId: result.public_id
-    //   }
-    // }
 
     const newUser = new User({ userName, celPhone, email, password: hashedPassword, photoUser })
     await newUser.save()
@@ -74,6 +88,32 @@ export const updateUser = async (req, res) => {
   }
 }
 
+export const getUser = async (req, res) => {
+  try {
+    const getUser = await User.findById(req.params.id)
+
+    if (!getUser) {
+      return res.sendStatus(404)
+    }
+
+    return res.json(getUser)
+
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find()
+    res.json(users)
+  } catch (error) {
+    console.error(error.message);
+
+    return res.status(500).json({ message: error.message })
+  }
+}
+
 export const deleteUser = async (req, res) => {
   try {
     const deleteUser = await User.findByIdAndDelete(req.params.id)
@@ -93,72 +133,5 @@ export const deleteUser = async (req, res) => {
   }
 }
 
-export const getUser = async (req, res) => {
-  try {
-    const getUser = await User.findById(req.params.id)
 
-    if (!getUser) {
-      return res.sendStatus(404)
-    }
 
-    return res.json(getUser)
-
-  } catch (error) {
-    return res.status(500).json({ message: error.message })
-  }
-}
-
-export const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body
-    const authUser = await User.findOne({ email })
-
-    if (!authUser) {
-      res.status(404)
-      res.send({
-        error: 'User not found'
-      })
-      return
-    }
-
-    const checkPassword = await compare(password, authUser.password)
-
-    if (checkPassword) {
-      res.send({
-        data: authUser
-      })
-      return
-    }
-
-    if (!checkPassword) {
-      res.status(409)
-      res.send({
-        error: 'Invalid Password'
-      })
-      return
-    }
-
-    // if (!authUser) {
-    //   return res.sendStatus(404)
-    // }
-    // else {
-    //   const pss = (bcrypt.compare(password, authUser.password))
-    //   console.log('password ', pss);
-    //   if ((bcrypt.compare(password, authUser.password))) {
-        
-    //     const { id, email } = authUser
-
-    //     return res.json({ id, email })
-    //   }
-    //   else{
-    //     return res.json({message: 'Contraseña invalida'})
-    //   }
-
-    // }
-
-    // return res.json(currentUser.data)
-
-  } catch (error) {
-    return res.status(500).json({ message: error.message })
-  }
-}
