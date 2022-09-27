@@ -1,7 +1,6 @@
 import User from '../models/User.js';
 import { uploadPhotoUser, deletePhotoUser } from "../libs/cloudinary.js";
 import { encrypt, compare } from '../libs/bcrypt.js';
-import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 export const loginUser = async (req, res) => {
@@ -10,9 +9,15 @@ export const loginUser = async (req, res) => {
     const authUser = await User.findOne({ email })
 
     if (authUser && (await compare(password, authUser.password))) {
-      return res.send(authUser)
+      return res.status(201).json({
+        userName: authUser.userName,
+        celPhone: authUser.celPhone,
+        email: authUser.email,
+        photoUser: authUser.photoUser,
+        token: generateToken(authUser._id)
+      })
     } else {
-      return res.status(401).json({message: 'Invalid Credentials'})
+      return res.status(401).json({ message: 'Invalid Credentials' })
     }
     // if (!authUser) {
     //   res.status(404)
@@ -48,7 +53,7 @@ export const createUsers = async (req, res) => {
 
     const hashedPassword = await encrypt(password)
 
-    await User.findOne({ email })
+    const user = await User.findOne({ email })
 
     // * image dafault
 
@@ -57,15 +62,26 @@ export const createUsers = async (req, res) => {
       "publicId": "usersPhoto/rzdivknzd1ojeeqtdg40"
     };
 
-    const newUser = new User({ userName, celPhone, email, password: hashedPassword, photoUser })
-    await newUser.save()
+    const newUser = await User.create({
+      userName,
+      celPhone,
+      email,
+      password: hashedPassword,
+      photoUser,
+    })
 
-    return res.status(201).json(newUser)
+    if (newUser) {
+      return res.status(201).json({
+        userName,
+        celPhone,
+        email,
+        photoUser,
+        token: generateToken(newUser._id)
+      })
+    }
 
   } catch (error) {
-    console.log(error);
     console.error(error.message);
-
     return res.status(500).json({ message: error.message, code: error.code })
   }
 }
@@ -137,5 +153,8 @@ export const deleteUser = async (req, res) => {
   }
 }
 
-
-
+export const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '30d'
+  })
+}

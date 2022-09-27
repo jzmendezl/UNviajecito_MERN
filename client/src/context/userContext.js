@@ -33,7 +33,6 @@ export const UserProvider = ({ children }) => {
   const loginUser = async (user) => {
     try {
       const res = await loginUserRequest(user)
-      console.log(res);
       setCurrentUser(res.data)
       return res.data
       // if (res) {

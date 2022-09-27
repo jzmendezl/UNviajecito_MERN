@@ -42,7 +42,6 @@ export default function LoginPage() {
     try {
       if (email && password) {
         const user = await loginUser(authUser)
-        console.log(user);
         
         if (user) {
           toast.success('Usuario Logeado!',

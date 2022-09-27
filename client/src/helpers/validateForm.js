@@ -28,7 +28,7 @@ export const validateDomain = (email) => {
     // eslint-disable-next-line no-unused-vars
     let pass = event.target[3].value;
 
-    let expRegName =  /^[a-zA-Z0-9_-]{4,16}$/;
+    let expRegName =  /^[a-zA-Z0-9_-]{3,16}$/;
 
     if (!userName) {
       alert('Nombre Requerido')
