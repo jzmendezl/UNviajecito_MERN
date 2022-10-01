@@ -1,4 +1,4 @@
-import { useState, useContext, createContext, } from "react";
+import { useState, useContext, createContext, useEffect, } from "react";
 import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest } from "../api/users";
 
 
@@ -12,28 +12,43 @@ export const useUsers = () => {
 
 export const UserProvider = ({ children }) => {
 
-  const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState(null)
+  const [token, setToken] = useState('')
+
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem(
+      'loggedUser'
+    )
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setCurrentUser(user)
+    }
+  }, [])
 
   const isLogged = () => !!currentUser
-  const logout = () => setCurrentUser(null)
+  
+  const logout = () => {
+    window.localStorage.clear()
+    setCurrentUser(null)
+  }
 
   const getUsers = async () => {
     const res = await getUsersRequest()
     console.log(res);
-    setUsers(res.data)
+    setCurrentUser(res.data)
   }
 
-  const getUser = async (id) => {
-    const res = await getUserRequest(id)
-    setCurrentUser(res.data)
-    return res.data
+  const getUser = async (id, token) => {
+    const user = await getUserRequest(id, token)
+    setCurrentUser(user.data)
+    return user.data
   }
 
   const loginUser = async (user) => {
     try {
       const res = await loginUserRequest(user)
-      setCurrentUser(res.data)
+      setToken(res.data.token)
       return res.data
       // if (res) {
       //   setCurrentUser(res.data)
@@ -43,7 +58,7 @@ export const UserProvider = ({ children }) => {
       // }
     } catch (error) {
       console.error(error.message);
-      if (error.message === 'Request failed with status code 409' || error.message === 'Request failed with status code 404' ) {
+      if (error.message === 'Request failed with status code 409' || error.message === 'Request failed with status code 404') {
         return '401'
       }
       // if (error.message === 'Request failed with status code 404') {
@@ -66,7 +81,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <userContext.Provider value={{
-      users,
+      // users,
       isLogged,
       logout,
       getUsers,
@@ -74,7 +89,8 @@ export const UserProvider = ({ children }) => {
       loginUser,
       createUser,
       currentUser,
-      setCurrentUser
+      setCurrentUser,
+      token
     }}>
       {children}
     </userContext.Provider>

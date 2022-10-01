@@ -10,10 +10,11 @@ export const loginUser = async (req, res) => {
 
     if (authUser && (await compare(password, authUser.password))) {
       return res.status(201).json({
-        userName: authUser.userName,
-        celPhone: authUser.celPhone,
-        email: authUser.email,
-        photoUser: authUser.photoUser,
+        // userName: authUser.userName,
+        // celPhone: authUser.celPhone,
+        // email: authUser.email,
+        // photoUser: authUser.photoUser,
+        UID: authUser._id,
         token: generateToken(authUser._id)
       })
     } else {
@@ -53,7 +54,7 @@ export const createUsers = async (req, res) => {
 
     const hashedPassword = await encrypt(password)
 
-    const user = await User.findOne({ email })
+    await User.findOne({ email })
 
     // * image dafault
 
@@ -110,13 +111,24 @@ export const updateUser = async (req, res) => {
 
 export const getUser = async (req, res) => {
   try {
-    const getUser = await User.findById(req.params.id)
+    const user = await User.findById(req.params.id)
 
-    if (!getUser) {
+    if (!user) {
       return res.sendStatus(404)
     }
 
-    return res.json(getUser)
+    const newUser = {
+      email: user.email,
+      celPhone: user.celPhone,
+      userName: user.userName,
+      vehicle: user.vehicle,
+      favorite: user.favorite,
+      wheelHist: user.wheelHist,
+      photoUser: user.photoUser,
+      userWheels: user.userWheels
+    }
+
+    return res.json(newUser)
 
   } catch (error) {
     return res.status(500).json({ message: error.message })

@@ -1,16 +1,19 @@
-import React from 'react'
 import '../resources/css/rootpage.css'
 import { useNavigate } from 'react-router-dom'
 import { useUsers } from '../context/userContext'
+import { useEffect } from 'react'
 
 
 export default function RootPage() {
   let navigate = useNavigate()
   const { isLogged } = useUsers()
 
-  if (isLogged()) {
-    navigate('/home')
-  }
+
+  useEffect(() => {
+    if (isLogged()) {
+      navigate('/home')
+    }  
+  }, [isLogged, navigate])
 
   const goLogin = () => {
     navigate('login')

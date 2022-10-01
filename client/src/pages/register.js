@@ -16,9 +16,8 @@ export default function RegisterPage() {
   useEffect(() => {
     if (isLogged()) {
       navigate('/home')
-    }
+    }  
   }, [isLogged, navigate])
-
 
   // export const validateDomain = (email) => {
   //   if (email.split('@')[1] === 'unal.edu.co') {

@@ -39,7 +39,7 @@ export default function AccountPage() {
         </div>
 
         <div className='linkToUser'>
-          <div>
+          <div className='yourVehicles'>
             <p className='titleLinkUser'>Vehiculos vinculados a tu cuenta</p>
             <textarea name="listLink" id="listLink" cols="50" rows="10"></textarea>
           </div>

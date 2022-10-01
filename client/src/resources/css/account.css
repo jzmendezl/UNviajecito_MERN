@@ -34,10 +34,18 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 .dataUser {
+  height: fit-content;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  /* padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px; */
+  padding: 50px;
   gap: 50px;
-  margin-top: 150px;
+  margin-top: 100px;
+  border-radius: 14px;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
 }
 
 .infoUser {
@@ -62,6 +70,7 @@ input[type=number] { -moz-appearance:textfield; }
   margin-top: 50px;
   gap: 50px;
 }
+
 
 .titleLinkUser {
   text-align: center;
@@ -110,12 +119,27 @@ textarea {
 
 .linkToUser {
   align-items: center;
+  /* background: #ffffff; */
 }
 
+.yourVehicles {
+  margin-top: -50px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
+}
+
+
 .newLink {
-  width: 200px;
+  margin-top: -10px;
+  width: 300px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 40px;
+  padding-bottom: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* background: bisque; */
+  border-radius: 14px;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
 }
