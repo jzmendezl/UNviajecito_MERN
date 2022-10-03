@@ -11,7 +11,7 @@ export default function RootPage() {
 
   useEffect(() => {
     if (isLogged()) {
-      navigate('/home')
+      navigate('/account')
     }  
   }, [isLogged, navigate])
 

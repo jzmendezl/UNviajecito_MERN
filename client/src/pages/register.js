@@ -15,29 +15,9 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (isLogged()) {
-      navigate('/home')
+      navigate('/account')
     }  
   }, [isLogged, navigate])
-
-  // export const validateDomain = (email) => {
-  //   if (email.split('@')[1] === 'unal.edu.co') {
-  //     console.log('email Valido');
-  //     return true;
-  //   }
-  //   else {
-  //     toast.error('Correo Invalido!',
-  //       {
-  //         style: {
-  //           borderRadius: '10px',
-  //           background: '#282c34',
-  //           color: '#2ececece',
-  //         },
-  //       }
-  //     );
-  //     return false;
-  //   }
-  // }
-
 
   const handleSignInEmail = async (event) => {
 
@@ -55,7 +35,7 @@ export default function RegisterPage() {
       if (currentUser === 11000) {
         alert('Correo en Uso')
       } else {
-        navigate('/home')
+        navigate('/account')
       }
 
     }
@@ -74,11 +54,6 @@ export default function RegisterPage() {
             <span>Nombre de Usuario</span>
             <input type="text" name="name" id="name" placeholder='Example' />
           </label>
-
-          {/* <label htmlFor="lastName">
-            <span>Apellido</span>
-            <input type="text" name="lastName" id="lastName" placeholder='Example' />
-          </label> */}
 
           <label htmlFor="phone">
             <span>Celular</span>

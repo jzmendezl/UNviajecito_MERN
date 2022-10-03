@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Header from '../Components/header'
 import { useUsers } from '../context/userContext'
-import '../resources/css/home.css'
+import '../resources/css/aboutUs.css'
 
-export default function HomePage() {
+export default function AboutUsPage() {
 
   let navigate = useNavigate()
   const { isLogged } = useUsers()
@@ -18,7 +18,7 @@ export default function HomePage() {
 
 
   return (
-    <div className='pageHome'>
+    <div className='pageAboutUs'>
       <Header />
     </div>
   )

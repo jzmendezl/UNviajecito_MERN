@@ -15,7 +15,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (isLogged()) {
-      navigate('/home')
+      navigate('/account')
     }  
   }, [isLogged, navigate])
 
@@ -63,7 +63,7 @@ export default function LoginPage() {
             }
           );
           setTimeout(() => {
-            navigate('/home')
+            navigate('/account')
           }, 2000);
         } else {
           toast.error('Credenciales Invalidas!',
