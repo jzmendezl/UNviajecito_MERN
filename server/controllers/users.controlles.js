@@ -2,6 +2,7 @@ import User from '../models/User.js';
 import { uploadPhotoUser, deletePhotoUser } from "../libs/cloudinary.js";
 import { encrypt, compare } from '../libs/bcrypt.js';
 import jwt from 'jsonwebtoken'
+import { sendEmail, getTemplate } from "../libs/confirmMail.js";
 
 export const loginUser = async (req, res) => {
   try {
@@ -72,18 +73,21 @@ export const createUsers = async (req, res) => {
     })
 
     if (newUser) {
+      const token = generateToken(newUser._id)
+      const template = getTemplate(newUser.userName, token)
+      await sendEmail(newUser.email, 'Verify Your Email', template)
       return res.status(201).json({
         userName,
         celPhone,
         email,
         photoUser,
-        token: generateToken(newUser._id)
+        token
       })
     }
 
   } catch (error) {
     console.error(error.message);
-    return res.status(500).json({ message: error.message, code: error.code })
+    return res.status(500).json({ message: error.message, id: error.code })
   }
 }
 
@@ -125,10 +129,12 @@ export const getUser = async (req, res) => {
       favorite: user.favorite,
       wheelHist: user.wheelHist,
       photoUser: user.photoUser,
-      userWheels: user.userWheels
+      userWheels: user.userWheels,
+      verifyAccount: user.verifyAccount
     }
-
+    console.log(newUser);
     return res.json(newUser)
+    // return res.send({newUser})
 
   } catch (error) {
     return res.status(500).json({ message: error.message })
@@ -170,3 +176,49 @@ export const generateToken = (id) => {
     expiresIn: '30d'
   })
 }
+
+export const getTokenData = (token) => {
+  
+  let data = jwt.decode(token, process.env.JWT_SECRET,(err, decoded) => {
+      if(err) {
+          console.log('Error al obtener data del token');
+      } else {
+          data = decoded;
+      }
+  }
+  );
+
+  return data;
+}
+
+
+export const confirmUser = async (req, res) => {
+  try {
+    const { token } = req.params
+    const data = await getTokenData(token)
+
+    if (data === null) {
+      return res.json({
+        success: false,
+        msg: 'Error al obtener data'
+      });
+    }
+
+    const user = await User.findById(data.id) || null
+
+    // Actualizar usuario
+    user.verifyAccount = true
+    await user.save();
+
+    // Redireccionar a la confirmación
+    return res.redirect(`http://localhost:3000/confirm/${token}`);
+
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      msg: 'Error al confirmar usuario'
+    });
+  }
+}
+

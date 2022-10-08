@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --main-bg-color: #282c34;
+  --enfacis-color: #2ecece;
+}
+
+#pageSV {
+  background-color: #282c34;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+#bodySV {
+  width: 520px;
+  height: 350px;
+  padding: 50px 30px;
+
+  border-radius: 18px;
+
+  box-shadow: 0px 10px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.titleSV {
+  font-size: 25px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.txtbodySV {
+  text-align: justify;
+  padding-top: 10px;
+}
+
+.nameApp {
+  font-size: 35px;
+  color: #2ecece;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+#mailSV {
+  padding-top: 30px;
+  color: #2ecece;
+}

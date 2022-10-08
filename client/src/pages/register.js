@@ -16,7 +16,7 @@ export default function RegisterPage() {
   useEffect(() => {
     if (isLogged()) {
       navigate('/account')
-    }  
+    }
   }, [isLogged, navigate])
 
   const handleSignInEmail = async (event) => {
@@ -33,9 +33,9 @@ export default function RegisterPage() {
 
       const currentUser = await createUser(newUser)
       if (currentUser === 11000) {
-        alert('Correo en Uso')
+        console.log('BAD CREDENTIALS');
       } else {
-        navigate('/account')
+        navigate('/sendVerify')
       }
 
     }

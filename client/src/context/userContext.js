@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
     }
   }, [])
 
-  const isLogged = () => !!currentUser
+  const isLogged = () => !!(currentUser && currentUser.verifyAccount )
   
   const logout = () => {
     window.localStorage.clear()
@@ -50,21 +50,11 @@ export const UserProvider = ({ children }) => {
       const res = await loginUserRequest(user)
       setToken(res.data.token)
       return res.data
-      // if (res) {
-      //   setCurrentUser(res.data)
-      //   return res.data
-      // } else {
-      //   return '404'
-      // }
     } catch (error) {
       console.error(error.message);
       if (error.message === 'Request failed with status code 409' || error.message === 'Request failed with status code 404') {
         return '401'
       }
-      // if (error.message === 'Request failed with status code 404') {
-      //   return '404'
-      // }
-      // return error.response.data.code
       return console.error(error);
     }
   }
@@ -90,7 +80,7 @@ export const UserProvider = ({ children }) => {
       createUser,
       currentUser,
       setCurrentUser,
-      token
+      token,
     }}>
       {children}
     </userContext.Provider>
