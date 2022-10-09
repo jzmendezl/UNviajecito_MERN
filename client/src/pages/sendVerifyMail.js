@@ -3,7 +3,12 @@ import '../resources/css/sendVerify.css'
 
 const SendVerifyMail = () => {
 
-  const { currentUser } = useUsers()
+  const { currentUser, isLogged } = useUsers()
+
+    if (isLogged) {
+        window.close()
+    }
+    
   return (
     <div id='pageSV' >
       <div id = 'bodySV'>

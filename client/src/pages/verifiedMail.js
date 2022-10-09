@@ -1,9 +1,7 @@
 import "../resources/css/verifiedMail.css";
 
-
 const VerifiedMail = () => {
-
-    
+   
 
     return (
         <div id="pageVM">
