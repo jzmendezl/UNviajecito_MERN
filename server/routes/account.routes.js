@@ -1,20 +1,16 @@
 import { Router } from "express";
-import { getAllUsers, createUsers, updateUser, deleteUser, getUser, loginUser } from '../controllers/account.controlles.js'
+import { showAccount,editAccount,deleteAccount,addCar } from '../controllers/account.controlles.js'
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = Router()
 
-router.get('/users', getAllUsers)
+router.get('/user/account/:id', showAccount)
 
-router.post('/register', createUsers)
+router.put('/user/account/:id', editAccount)
 
-router.post('/login', loginUser)
+router.delete('/user/account/:id', deleteAccount)
 
-router.put('/users/:id', updateUser)
-
-router.delete('/users/:id', deleteUser)
-
-router.get('/users/:id', protect, getUser)
+//router.post('/user/account/NewCar', addCar)
 
 
 export default router
