@@ -1,3 +1,5 @@
+import "./JourneyList.css"
+
 function JourneyList(props){
     return(
         <section>

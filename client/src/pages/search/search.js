@@ -4,17 +4,22 @@ import RoutesUser from '../../Components/routesUser';
 import "../../resources/css/search.css";
 
 //New code
-import {Travel} from "./Travel"
 import {JourneyList} from "./JourneyList"
 import {JourneyItem} from "./JourneyItem"
 import { JourneySearch } from './JourneySearch';
 import {JourneyCounter} from "./JourneyCounter";
+import {CreateJourneyButton} from "./CreateJourneyButton";
 
 const defaultJourneys=[
-  {text:'Chapinero', completed:false},
+  {text:'Teusaquillo', completed:false},
+  {text:'Chapinero Alto', completed:false},
   {text:'Engativa', completed:false},
   {text:'Suba', completed:false},
-  {text:'Bosa Recreo', completed:false}
+  {text:'Bosa Recreo', completed:false},
+  {text:'CC Titan Plaza', completed:false},
+  {text:'Rafael Uribe', completed:false},
+  {text:'Soledad', completed:false},
+  {text:'Puente Aranda', completed:false},
 ];
 
 export default function SearchPage() {
@@ -79,25 +84,30 @@ export default function SearchPage() {
       </div>
       
       <div className='NewCode'>
-      <Travel/>
-        <JourneyCounter
+        <React.Fragment>
+          <JourneyCounter
           completedJourneys = {completedJourneys}
           totalJourneys = {totalJourneys}
-        />
-        <JourneySearch
-          setString={setString}
-          setStringFunction = {setStringFunction}
-        />
-        <JourneyList>
-          {filtering.map(journey =>(
-            <JourneyItem 
-            key = {journey.text} 
-            text = {journey.text}
-            onComplete = {() => completeJourney(journey.text)}
-            onDelete = {() =>deleteJourney(journey.text)} 
-            />
-          ))}
-        </JourneyList>
+          />
+          <JourneySearch
+            setString={setString}
+            setStringFunction = {setStringFunction}
+          />
+          <JourneyList>
+            {filtering.map(journey =>(
+              <JourneyItem 
+              key = {journey.text} 
+              text = {journey.text}
+              
+              onComplete = {() => completeJourney(journey.text)}
+              onDelete = {() =>deleteJourney(journey.text)} 
+              completed = {journey.completed}
+              />
+            ))}
+          </JourneyList>
+          <CreateJourneyButton/>
+        </React.Fragment>
+      
       </div>
 
     </div>

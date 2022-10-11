@@ -1,4 +1,5 @@
 import React from "react";
+import "./JourneySearch.css"
 
 function JourneySearch({setString,setStringFunction}){
 
@@ -9,14 +10,12 @@ function JourneySearch({setString,setStringFunction}){
     };
     return(
         <div>
-            <input
+            <input 
+            className="JourneySearch"
             placeholder="Busqueda de viaje"
             value = {setString}
             onChange = {onChangeWriting}
             />
-            <p>
-                {setString}
-            </p>
         </div>
     )
 }
