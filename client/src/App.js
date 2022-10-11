@@ -8,7 +8,7 @@ import RootPage from './pages/rootPage';
 import AboutUsPage from './pages/aboutUs';
 
 import { Toaster } from 'react-hot-toast'
-import SearchPage from './pages/search';
+import SearchPage from './pages/search/search';
 import VerifiedMail from './pages/verifiedMail';
 import SendVerifyMail from './pages/sendVerifyMail';
 
