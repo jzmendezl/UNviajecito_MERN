@@ -2,40 +2,59 @@ import '../resources/css/login.css'
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../context/userContext';
 import toast from 'react-hot-toast'
+import { useEffect, useState } from 'react';
 
 
 export default function LoginPage() {
 
-  const { loginUser, setCurrentUser } = useUsers()
-
   let navigate = useNavigate();
+
+  const { loginUser, isLogged, getUser } = useUsers()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  useEffect(() => {
+    if (isLogged()) {
+      navigate('/account')
+    }  
+  }, [isLogged, navigate])
 
   const handleLoginEmail = async (e) => {
     e.preventDefault();
-    let email = e.target[0].value;
-    let password = e.target[1].value;
+
+    if (!email || !password) {
+      toast.error('Completa Los Campos!',
+        {
+          style: {
+            borderRadius: '10px',
+            background: '#282c34',
+            color: '#2ececece',
+          },
+        }
+      );
+    }
+
     const authUser = {
       email,
       password
     }
 
     try {
-      if (email) {
-        if (password) {
-          const user = await loginUser(authUser)
-          // console.log('user', user);
-          if (user === '409') {
-            toast.error('Contraseña Incorrecta!',
-              {
-                style: {
-                  borderRadius: '10px',
-                  background: '#282c34',
-                  color: '#2ececece',
-                },
-              }
-            );
-          } else if (user === '404') {
-            toast.error('Correo Incorrecto!',
+      if (email && password) {
+        const newUser = await loginUser(authUser)
+
+        if (newUser) {
+          window.localStorage.setItem(
+            'User', JSON.stringify({ 'token': newUser.token, 'UID': newUser.UID })
+          )
+          
+          const user = await getUser(newUser.UID, newUser.token)
+          console.log('User', user);
+
+          window.localStorage.setItem(
+            'loggedUser', JSON.stringify(user)
+          )
+          toast.success('Usuario Logeado!',
             {
               style: {
                 borderRadius: '10px',
@@ -43,13 +62,12 @@ export default function LoginPage() {
                 color: '#2ececece',
               },
             }
-            );
-          } else {
-            setCurrentUser(user)
-            navigate('/home')
-          }
+          );
+          setTimeout(() => {
+            navigate('/account')
+          }, 2000);
         } else {
-          toast.error('Falta contraseña!',
+          toast.error('Credenciales Invalidas!',
             {
               style: {
                 borderRadius: '10px',
@@ -59,57 +77,15 @@ export default function LoginPage() {
             }
           );
         }
-      } else {
-        toast.error('Falta Correo!',
-          {
-            style: {
-              borderRadius: '10px',
-              background: '#282c34',
-              color: '#2ececece',
-            },
-          }
-        );
       }
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
     }
   }
-
-  //   if (email && password) {
-  //     const user = await loginUser(authUser)
-  //     console.log('logogog', user);
-  //     if (!user) {
-  //       toast.error('Usuario No Encontrado!',
-  //         {
-  //           style: {
-  //             borderRadius: '10px',
-  //             background: '#282c34',
-  //             color: '#2ececece',
-  //           },
-  //         }
-  //       );
-  //     } else {
-  //       navigate('/home')
-  //     }
-  //     // await getUser(user.id)
-  //   }
-  //   else {
-  //     toast.error('Hay campos vacios',
-  //       {
-  //         style: {
-  //           borderRadius: '10px',
-  //           background: '#282c34',
-  //           color: '#2ececece',
-  //         },
-  //       }
-  //     );
-  //   }
-  // }
 
   const handleSignin = () => {
     navigate('/register')
   }
-
 
   return (
     <div id='pageLogin'>
@@ -117,11 +93,11 @@ export default function LoginPage() {
         <form id='formLogin' onSubmit={handleLoginEmail}>
           <label htmlFor="email" className='lbl-email'>
             <span className='txt-email'>Email</span>
-            <input type="email" name="email" id="email" placeholder='example@example.com' />
+            <input type="email" name="email" id="email" placeholder='example@example.com' onChange={(e) => setEmail(e.target.value)} />
           </label>
           <label htmlFor="password">
             <span>Password</span>
-            <input type="password" name="password" id="password" />
+            <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} />
           </label>
           <button type="submit" className='sendLogin'>Login</button>
         </form>

@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true
+    unique: true,
+    lowercase: true    
   },
   password: {
     type: String,
@@ -41,6 +42,11 @@ const userSchema = new mongoose.Schema({
   userWheels: {
     type: Array,
     required: false,
+  },
+  verifyAccount: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 }, {
   timestamps: true

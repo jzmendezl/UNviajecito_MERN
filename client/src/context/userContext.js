@@ -1,5 +1,5 @@
-import { useState, useContext, createContext, } from "react";
-import { createUsersRequest, loginUserRequest, getUserRequest } from "../api/users";
+import { useState, useContext, createContext, useEffect, } from "react";
+import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest } from "../api/users";
 
 
 const userContext = createContext()
@@ -12,42 +12,49 @@ export const useUsers = () => {
 
 export const UserProvider = ({ children }) => {
 
-  const [users, setUsers] = useState([])
-  const [currentUser, setCurrentUser] = useState()
-  // const [authUser, setAuthUser] = useState()
-  // console.log(authUser);
+  const [currentUser, setCurrentUser] = useState(null)
+  const [token, setToken] = useState('')
 
-  // const getUsers = async () => {
-  //   const res = await getUsersRequest()
-  //   console.log(res);
-  //   setUsers(res.data)
-  // }
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem(
+      'loggedUser'
+    )
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setCurrentUser(user)
+    }
+  }, [])
+
+  const isLogged = () => !!(currentUser && currentUser.verifyAccount )
   
-  const getUser = async (id) => {
-    const res = await getUserRequest(id)
+  const logout = () => {
+    window.localStorage.clear()
+    setCurrentUser(null)
+  }
+
+  const getUsers = async () => {
+    const res = await getUsersRequest()
+    console.log(res);
     setCurrentUser(res.data)
-    return res.data
+  }
+
+  const getUser = async (id, token) => {
+    const user = await getUserRequest(id, token)
+    setCurrentUser(user.data)
+    return user.data
   }
 
   const loginUser = async (user) => {
     try {
       const res = await loginUserRequest(user)
-      if (res) {
-        // setAuthUser(res.data)
-        setCurrentUser(res.data)
-        return res.data
-      } else {
-        return '404'
-      }
+      setToken(res.data.token)
+      return res.data
     } catch (error) {
       console.error(error.message);
-      if (error.message === 'Request failed with status code 409') {
-        return '409'
+      if (error.message === 'Request failed with status code 409' || error.message === 'Request failed with status code 404') {
+        return '401'
       }
-      if (error.message === 'Request failed with status code 404') {
-        return '404'
-      }
-      // return error.response.data.code
       return console.error(error);
     }
   }
@@ -61,16 +68,19 @@ export const UserProvider = ({ children }) => {
       return error.response.data.code
     }
   }
-  
+
   return (
     <userContext.Provider value={{
-      users,
-      // getUsers,
+      // users,
+      isLogged,
+      logout,
+      getUsers,
       getUser,
       loginUser,
       createUser,
       currentUser,
-      setCurrentUser
+      setCurrentUser,
+      token,
     }}>
       {children}
     </userContext.Provider>

@@ -2,11 +2,21 @@ import '../resources/css/account.css'
 import Header from '../Components/header'
 import Photo from '../resources/img/photo_user.svg'
 import { useUsers } from '../context/userContext'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export default function AccountPage() {
 
-  const { currentUser } = useUsers()
-  // console.log('ACT', currentUser);
+  const { currentUser, isLogged } = useUsers()
+  console.log('ACT', currentUser);
+
+  let navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isLogged()) {
+      navigate('/')
+    }
+  }, [isLogged, navigate])
 
   const linkVehicle = () => {
 
@@ -19,17 +29,17 @@ export default function AccountPage() {
       <div className='bodyAccount'>
         <div className='dataUser'>
           <div id='photoUser'>
-            <img src={currentUser ? currentUser.data.photoUser.url : Photo} alt="Foto Usuario" id='photoUser' />
+            <img src={currentUser ? currentUser?.photoUser?.url : Photo} alt="Foto Usuario" id='photoUser' />
           </div>
           <div className='infoUser'>
-            <p className='titleInfoUser'>{currentUser ? currentUser.data.userName : 'Cargando'}</p>
-            <p className='titleInfoUser'>{currentUser ? currentUser.data.email : 'Cargando'}</p>
-            <p className='titleInfoUser'>{currentUser ? currentUser.data.celPhone : 'Cargando'}</p>
+            <p className='titleInfoUser'>{currentUser ? currentUser?.userName : 'Cargando'}</p>
+            <p className='titleInfoUser'>{currentUser ? currentUser?.email : 'Cargando'}</p>
+            <p className='titleInfoUser'>{currentUser ? currentUser?.celPhone : 'Cargando'}</p>
           </div>
         </div>
 
         <div className='linkToUser'>
-          <div>
+          <div className='yourVehicles'>
             <p className='titleLinkUser'>Vehiculos vinculados a tu cuenta</p>
             <textarea name="listLink" id="listLink" cols="50" rows="10"></textarea>
           </div>

@@ -1,54 +1,93 @@
 import User from '../models/User.js';
 import { uploadPhotoUser, deletePhotoUser } from "../libs/cloudinary.js";
-import fs from "fs-extra";
-import bcrypt, { compare } from 'bcrypt'
-import { encrypt } from '../libs/bcrypt.js';
+import { encrypt, compare } from '../libs/bcrypt.js';
+import jwt from 'jsonwebtoken'
+import { sendEmail, getTemplate } from "../libs/confirmMail.js";
 
-export const getUsers = async (req, res) => {
+export const loginUser = async (req, res) => {
   try {
-    const users = await User.find()
-    res.json(users)
-  } catch (error) {
-    console.error(error.message);
+    const { email, password } = req.body
+    const authUser = await User.findOne({ email })
 
-    return res.status(500).json({ message: error.message })
+    if (authUser && (await compare(password, authUser.password))) {
+      return res.status(201).json({
+        // userName: authUser.userName,
+        // celPhone: authUser.celPhone,
+        // email: authUser.email,
+        // photoUser: authUser.photoUser,
+        UID: authUser._id,
+        token: generateToken(authUser._id)
+      })
+    } else {
+      return res.status(401).json({ message: 'Invalid Credentials' })
+    }
+    // if (!authUser) {
+    //   res.status(404)
+    //   res.send({
+    //     error: 'User not found'
+    //   })
+    //   return
+    // }
+
+    // const checkPassword = await compare(password, authUser.password)
+
+    // if (checkPassword) {
+    //   res.send(authUser)
+    //   return
+    // }
+
+    // if (!checkPassword) {
+    //   res.status(409)
+    //   res.send({
+    //     error: 'Invalid Password'
+    //   })
+    //   return
+    // }
+
+  } catch (error) {
+    return res.status(401).json({ message: error.message })
   }
 }
 
 export const createUsers = async (req, res) => {
   try {
     const { userName, celPhone, email, password } = req.body
-    
+
     const hashedPassword = await encrypt(password)
-    
+
     await User.findOne({ email })
 
-    // * image
+    // * image dafault
 
     let photoUser = {
       "url": "https://res.cloudinary.com/joemendez/image/upload/v1663568344/usersPhoto/rzdivknzd1ojeeqtdg40.png",
       "publicId": "usersPhoto/rzdivknzd1ojeeqtdg40"
     };
 
-    // if (req.files?.photoUser) {
-    //   const result = await uploadPhotoUser(req.files.photoUser.tempFilePath)
-    //   await fs.remove(req.files.photoUser.tempFilePath)
-    //   photoUser = {
-    //     url: result.secure_url,
-    //     publicId: result.public_id
-    //   }
-    // }
+    const newUser = await User.create({
+      userName,
+      celPhone,
+      email,
+      password: hashedPassword,
+      photoUser,
+    })
 
-    const newUser = new User({ userName, celPhone, email, password: hashedPassword, photoUser })
-    await newUser.save()
-
-    return res.json(newUser)
+    if (newUser) {
+      const token = generateToken(newUser._id)
+      const template = getTemplate(newUser.userName, token)
+      await sendEmail(newUser.email, 'Verify Your Email', template)
+      return res.status(201).json({
+        userName,
+        celPhone,
+        email,
+        photoUser,
+        token
+      })
+    }
 
   } catch (error) {
-    console.log(error);
     console.error(error.message);
-
-    return res.status(500).json({ message: error.message, code: error.code })
+    return res.status(500).json({ message: error.message, id: error.code })
   }
 }
 
@@ -74,6 +113,45 @@ export const updateUser = async (req, res) => {
   }
 }
 
+export const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+      return res.sendStatus(404)
+    }
+
+    const newUser = {
+      email: user.email,
+      celPhone: user.celPhone,
+      userName: user.userName,
+      vehicle: user.vehicle,
+      favorite: user.favorite,
+      wheelHist: user.wheelHist,
+      photoUser: user.photoUser,
+      userWheels: user.userWheels,
+      verifyAccount: user.verifyAccount
+    }
+    console.log(newUser);
+    return res.json(newUser)
+    // return res.send({newUser})
+
+  } catch (error) {
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find()
+    res.json(users)
+  } catch (error) {
+    console.error(error.message);
+
+    return res.status(500).json({ message: error.message })
+  }
+}
+
 export const deleteUser = async (req, res) => {
   try {
     const deleteUser = await User.findByIdAndDelete(req.params.id)
@@ -93,72 +171,54 @@ export const deleteUser = async (req, res) => {
   }
 }
 
-export const getUser = async (req, res) => {
-  try {
-    const getUser = await User.findById(req.params.id)
+export const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: '30d'
+  })
+}
 
-    if (!getUser) {
-      return res.sendStatus(404)
+export const getTokenData = (token) => {
+  
+  let data = jwt.decode(token, process.env.JWT_SECRET,(err, decoded) => {
+      if(err) {
+          console.log('Error al obtener data del token');
+      } else {
+          data = decoded;
+      }
+  }
+  );
+
+  return data;
+}
+
+
+export const confirmUser = async (req, res) => {
+  try {
+    const { token } = req.params
+    const data = await getTokenData(token)
+
+    if (data === null) {
+      return res.json({
+        success: false,
+        msg: 'Error al obtener data'
+      });
     }
 
-    return res.json(getUser)
+    const user = await User.findById(data.id) || null
+
+    // Actualizar usuario
+    user.verifyAccount = true
+    await user.save();
+
+    // Redireccionar a la confirmación
+    return res.redirect(`http://localhost:3000/confirm/${token}`);
 
   } catch (error) {
-    return res.status(500).json({ message: error.message })
+    console.log(error);
+    return res.json({
+      success: false,
+      msg: 'Error al confirmar usuario'
+    });
   }
 }
 
-export const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body
-    const authUser = await User.findOne({ email })
-
-    if (!authUser) {
-      res.status(404)
-      res.send({
-        error: 'User not found'
-      })
-      return
-    }
-
-    const checkPassword = await compare(password, authUser.password)
-
-    if (checkPassword) {
-      res.send({
-        data: authUser
-      })
-      return
-    }
-
-    if (!checkPassword) {
-      res.status(409)
-      res.send({
-        error: 'Invalid Password'
-      })
-      return
-    }
-
-    // if (!authUser) {
-    //   return res.sendStatus(404)
-    // }
-    // else {
-    //   const pss = (bcrypt.compare(password, authUser.password))
-    //   console.log('password ', pss);
-    //   if ((bcrypt.compare(password, authUser.password))) {
-        
-    //     const { id, email } = authUser
-
-    //     return res.json({ id, email })
-    //   }
-    //   else{
-    //     return res.json({message: 'Contraseña invalida'})
-    //   }
-
-    // }
-
-    // return res.json(currentUser.data)
-
-  } catch (error) {
-    return res.status(500).json({ message: error.message })
-  }
-}

@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --main-bg-color: #282c34;
+    --enfacis-color: #2ecece;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #282c34 inset !important;
+    -webkit-text-fill-color: #fff;
+}
+
+::-webkit-calendar-picker-indicator { padding-left: 170px; margin-top: -18px;}
+
+#bodyAR {
+    background-color: #282c34;
+    padding: 60px;
+    width: 900px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    margin-top: 100px;
+    box-shadow: 0px 10px 10px 10px #101114;
+    border-radius: 18px;
+}
+
+#titleAR {
+    margin-bottom: 80px;
+    font-size: 50px;
+    color: #2ecece;
+}
+
+.formAR {
+    width: 800px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, 200px);
+    gap: 40px;
+}
+
+label input:focus {
+    border: none;
+    background: none;
+    outline: none;
+    border-bottom: 1px solid #2ecece;
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+input:-internal-autofill-selected {
+    color: #fff;
+}
+
+#dateTime {
+    border-bottom: none;
+}
+
+#btnFormAR {
+    border: none;
+    background: none;
+    color: #2ecece;
+    font-size: 20px;
+    margin-top: 140px;
+    margin-left: 400px;
+    outline-color: #2ecece;
+    cursor: pointer;
+}
+
+#btnFormAR:hover {
+    font-size: 25px;
+    color: cornflowerblue;
+}

@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --main-bg-color: #282c34;
+    --enfacis-color: #2ecece;
+  }
+  
+  #pageVM {
+    background-color: #282c34;
+    min-height: 100vh;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+  }
+
+  #bodyVM {
+    width: 520px;
+    height: 350px;
+    padding: 50px 30px;
+
+    border-radius: 18px;
+
+    box-shadow: 0px 10px 10px 15px rgba(0, 0, 0, 0.2);
+    
+  }
+
+  #titleVM {
+    font-size: 25px;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+
+  #nameAPPVM {
+    font-size: 25px;
+    color: #2ecece;
+    text-align: center;
+    padding-bottom: 80px;
+  }
+
+  #bodytxtVM {
+    text-align: justify;
+    padding-bottom: 50PX;
+  }
+
+  #redirectVM {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  #linkVM {
+    color: #2ecece;
+  }

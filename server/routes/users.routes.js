@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { getUsers, createUsers, updateUser, deleteUser, getUser, loginUser } from '../controllers/users.controlles.js'
+import { getAllUsers, createUsers, updateUser, deleteUser, getUser, loginUser, confirmUser } from '../controllers/users.controlles.js'
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = Router()
 
-router.get('/users', getUsers)
+router.get('/users', getAllUsers)
 
 router.post('/register', createUsers)
 
@@ -13,7 +14,9 @@ router.put('/users/:id', updateUser)
 
 router.delete('/users/:id', deleteUser)
 
-router.get('/users/:id', getUser)
+router.get('/users/:id', protect, getUser)
+
+router.get('/confirm/:token', confirmUser)
 
 
 export default router

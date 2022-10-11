@@ -5,9 +5,12 @@ import LoginPage from './pages/login';
 import RegisterPage from './pages/register';
 import AccountPage from './pages/account';
 import RootPage from './pages/rootPage';
-import HomePage from './pages/home';
+import AboutUsPage from './pages/aboutUs';
 
 import { Toaster } from 'react-hot-toast'
+import SearchPage from './pages/search';
+import VerifiedMail from './pages/verifiedMail';
+import SendVerifyMail from './pages/sendVerifyMail';
 
 function App() {
   return (
@@ -15,9 +18,12 @@ function App() {
       <Routes>
         <Route exact path='/' element={<RootPage />} />
         <Route path='/register' element={<RegisterPage />} />
+        <Route path='/confirm/:token' element={<VerifiedMail />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/account' element={<AccountPage />} />
-        <Route path='/home' element={<HomePage />} />
+        <Route path='/search' element={<SearchPage />} />
+        <Route path='/aboutUs' element={<AboutUsPage />} />
+        <Route path='/sendVerify' element={<SendVerifyMail />} />
       </Routes>
       <Toaster
         position="top-center"
