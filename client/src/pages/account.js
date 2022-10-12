@@ -29,15 +29,17 @@ export default function AccountPage() {
 
   const linkVehicle = async (e) => {
     e.preventDefault();
-    setVehicle({
-      kind: e.target[0].value || e.target[1].value,
-      plate: e.target[2].value,
-      model: e.target[3].value,
-      color: e.target[4].value,
-      seats: e.target[5].value
-    })
-    const vu = await addVehicle(vehicle)
+    const newVehicle = {
+      kind,
+      plate,
+      model,
+      color,
+      seats
+    }
+    setVehicle(newVehicle)
+    const vu = await addVehicle(newVehicle)
     console.log(vu);
+    setKind('')
     setPlate('')
     setModel('')
     setColor('')
@@ -46,7 +48,7 @@ export default function AccountPage() {
     // setVehicle('')
   }
 
-  console.log(vehicle);
+  // console.log(kind);
 
   return (
     <div className='accountPage'>
@@ -86,12 +88,18 @@ export default function AccountPage() {
           <div className='newLink'>
             <form onSubmit={linkVehicle}>
               <p className='titleLinkUser'>Vincular Vehiculo a la cuenta</p>
-              <label htmlFor="type" className='lblLinkUser'>
-                <p className='titleFormLink'>Carro</p>
-                <input type='radio' id='type' name='type' value={'Carro'} onChange={(e) => setKind(e.target.value)} />
-                <p className='titleFormLink'>Moto</p>
-                <input type='radio' id='type' name='type' value={'Moto'} onChange={(e) => setKind(e.target.value)} />
-              </label>
+              <div id='kind'>
+                <label htmlFor="kindCar" className='lblLinkUser'>
+                  <p className='titleFormLink'>Carro</p>
+                  <input type='radio' id='kindCar' name='kind' value={'Carro'} onChange={(e) => setKind(e.target.value)} />
+                  {/* <p className='titleFormLink'>Moto</p>
+                <input type='radio' id='kind' name='kind' value={'Moto'} onChange={(e) => setKind(e.target.value)} /> */}
+                </label>
+                <label htmlFor="kindBike" className='lblLinkUser'>
+                  <p className='titleFormLink'>Moto</p>
+                  <input type='radio' id='kindBike' name='kind' value={'Moto'} onChange={(e) => setKind(e.target.value)} />
+                </label>
+              </div>
               <label htmlFor="plate" className='lblLinkUser'>
                 <p className='titleFormLink'>Placa</p>
                 <input type="text" id='plate' onChange={(e) => setPlate(e.target.value)} />

@@ -3,7 +3,6 @@ import Vehicle from '../models/Vehicle.js';
 export const addVehicle = async (req, res) => {
     try {
         const { kind, plate, model, color, seats } = req.body
-        console.log(kind, plate, model, color, seats);
         await Vehicle.findOne({ plate })
 
         const newVehicle = await Vehicle.create({
