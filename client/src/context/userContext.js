@@ -1,5 +1,6 @@
 import { useState, useContext, createContext, useEffect, } from "react";
 import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest } from "../api/users";
+import { addVehicleRequest, getVehicleRequest } from "../api/vehicle";
 
 
 const userContext = createContext()
@@ -14,6 +15,7 @@ export const UserProvider = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState(null)
   const [token, setToken] = useState('')
+  const [userVehicle, setUserVehicle] = useState(null)
 
 
   useEffect(() => {
@@ -26,8 +28,8 @@ export const UserProvider = ({ children }) => {
     }
   }, [])
 
-  const isLogged = () => !!(currentUser && currentUser.verifyAccount )
-  
+  const isLogged = () => !!(currentUser && currentUser.verifyAccount)
+
   const logout = () => {
     window.localStorage.clear()
     setCurrentUser(null)
@@ -69,6 +71,22 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  const addVehicle = async (vehicleUser) => {
+    try {
+      const vehicle = await addVehicleRequest(vehicleUser)
+      setUserVehicle(vehicle.data)
+      return vehicle.data
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const getVehicle = async (VID) => {
+    const vehicle = await getVehicleRequest(VID)
+    setUserVehicle(vehicle.data)
+    return vehicle.data
+  }
+
   return (
     <userContext.Provider value={{
       // users,
@@ -81,6 +99,8 @@ export const UserProvider = ({ children }) => {
       currentUser,
       setCurrentUser,
       token,
+      addVehicle,
+      getVehicle,
     }}>
       {children}
     </userContext.Provider>

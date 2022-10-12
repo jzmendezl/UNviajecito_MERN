@@ -11,38 +11,12 @@ export const loginUser = async (req, res) => {
 
     if (authUser && (await compare(password, authUser.password))) {
       return res.status(201).json({
-        // userName: authUser.userName,
-        // celPhone: authUser.celPhone,
-        // email: authUser.email,
-        // photoUser: authUser.photoUser,
         UID: authUser._id,
         token: generateToken(authUser._id)
       })
     } else {
       return res.status(401).json({ message: 'Invalid Credentials' })
     }
-    // if (!authUser) {
-    //   res.status(404)
-    //   res.send({
-    //     error: 'User not found'
-    //   })
-    //   return
-    // }
-
-    // const checkPassword = await compare(password, authUser.password)
-
-    // if (checkPassword) {
-    //   res.send(authUser)
-    //   return
-    // }
-
-    // if (!checkPassword) {
-    //   res.status(409)
-    //   res.send({
-    //     error: 'Invalid Password'
-    //   })
-    //   return
-    // }
 
   } catch (error) {
     return res.status(401).json({ message: error.message })
@@ -190,7 +164,6 @@ export const getTokenData = (token) => {
 
   return data;
 }
-
 
 export const confirmUser = async (req, res) => {
   try {
