@@ -68,17 +68,42 @@ export default function AccountPage() {
 
         <div className='linkToUser'>
           <div className='yourVehicles'>
-            <p className='titleLinkUser'>Vehiculos vinculados a tu cuenta</p>
+            <p className='titleLinkUserView'>Vehiculos vinculados a tu cuenta</p>
             {
               vehicle
                 ?
                 <ul>
                   <p>Vehiculo</p>
-                  <li>Tipo {vehicle.type}</li>
-                  <li>Placa {vehicle.plate}</li>
-                  <li>Modelo {vehicle.model}</li>
-                  <li>Color {vehicle.color}</li>
-                  <li>Puestos {vehicle.seats}</li>
+                  <li className='viewVehicle'>
+
+                    <p className='titleViewForm'>Tipo</p>
+                    <p className='valueViewForm'>{vehicle.kind}</p>
+
+                  </li>
+                  <li className='viewVehicle'>
+
+                    <p className='titleViewForm'>Placa</p>
+                    <p className='valueViewForm'>{vehicle.plate}</p>
+
+                  </li>
+                  <li className='viewVehicle'>
+
+                    <p className='titleViewForm'>Modelo</p>
+                    <p className='valueViewForm'>{vehicle.model}</p>
+
+                  </li>
+                  <li className='viewVehicle'>
+
+                    <p className='titleViewForm'>Color</p>
+                    <p className='valueViewForm'>{vehicle.color}</p>
+
+                  </li>
+                  <li className='viewVehicle'>
+
+                    <p className='titleViewForm'>Puestos</p>
+                    <p className='valueViewForm'>{vehicle.seats}</p>
+
+                  </li>
                 </ul>
                 :
                 <p>No tienes vehiculos asociados a tu cuenta</p>
