@@ -2,6 +2,7 @@ import express from "express";
 import fileUpload from "express-fileupload";
 import usersRoutes from "./routes/users.routes.js";
 import vehiclesRoutes from "./routes/vehicle.routes.js"
+import travelsRoutes from "./routes/travels.routes.js";
 import cors from 'cors'
 
 
@@ -21,5 +22,6 @@ app.use(fileUpload({
 
 app.use(usersRoutes)
 app.use(vehiclesRoutes)
+app.use(travelsRoutes)
 
 export default app
