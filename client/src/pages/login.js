@@ -9,7 +9,7 @@ export default function LoginPage() {
 
   let navigate = useNavigate();
 
-  const { loginUser, isLogged, getUser } = useUsers()
+  const { loginUser, isLogged, getUser,  } = useUsers()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 

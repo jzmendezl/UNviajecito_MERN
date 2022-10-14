@@ -71,7 +71,7 @@ export const updateUser = async (req, res) => {
 
     let photoUser;
 
-    if (req.files.photoUser) {
+    if (req.files?.photoUser) {
       const result = await uploadPhotoUser(req.files.photoUser.tempFilePath)
       photoUser = {
         url: result.secure_url,

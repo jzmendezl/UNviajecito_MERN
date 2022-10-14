@@ -1,25 +1,29 @@
 import mongoose from "mongoose";
 
 const vehicleSchema = new mongoose.Schema({
-    kind:{
+    kind: {
         type: String,
         required: true
     },
-    plate:{
+    plate: {
         type: String,
         required: true,
         unique: true,
     },
-    model:{
+    model: {
         type: Number,
         required: true
     },
-    color:{
+    color: {
         type: String,
         required: true
     },
-    seats:{
+    seats: {
         type: Number,
+        required: true
+    },
+    UID: {
+        type: String,
         required: true
     }
 })

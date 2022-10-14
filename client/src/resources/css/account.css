@@ -5,15 +5,18 @@
   -moz-osx-font-smoothing: grayscale;
   --main-bg-color: #282c34;
   --enfacis-color: #2ecece;
+  box-sizing: border-box;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input[type=number] { -moz-appearance:textfield; }
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 .accountPage {
   min-height: 100vh;
@@ -76,7 +79,14 @@ input[type=number] { -moz-appearance:textfield; }
   text-align: center;
   padding-bottom: 50px;
   color: var(--enfacis-color);
-  
+
+}
+
+.titleLinkUserView {
+  text-align: center;
+  padding-bottom: 50px;
+  color: var(--enfacis-color);
+  margin-top: 20px;
 }
 
 textarea {
@@ -147,4 +157,19 @@ textarea {
 #kind {
   display: flex;
   flex-direction: row;
+}
+
+.viewVehicle {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  /* justify-content: space-between; */
+  /* width: 200px; */
+  /* background: #e44c4c; */
+}
+
+.titleViewForm {
+  width: 100px;
+  margin-left: 20px;
+  color: #2ecece;
 }

@@ -1,5 +1,5 @@
 import { useState, useContext, createContext, useEffect, } from "react";
-import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest } from "../api/users";
+import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest, updateUserRequest } from "../api/users";
 import { addVehicleRequest, getVehicleRequest } from "../api/vehicle";
 
 
@@ -71,6 +71,17 @@ export const UserProvider = ({ children }) => {
     }
   }
 
+  const updateUser = async (id, token, userUpdate) => {
+    try {
+      const user = await updateUserRequest(id, token, userUpdate)
+      console.log('uc', user.data);
+      setCurrentUser(user.data)
+      return user.data
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   const addVehicle = async (vehicleUser) => {
     try {
       const vehicle = await addVehicleRequest(vehicleUser)
@@ -96,6 +107,7 @@ export const UserProvider = ({ children }) => {
       getUser,
       loginUser,
       createUser,
+      updateUser,
       currentUser,
       setCurrentUser,
       token,

@@ -16,6 +16,9 @@ export default function Header() {
   const goSearch = () => {
     navigate('/search')
   }
+  const goSearch2 = () => {
+    navigate('/search2')
+  }
   const goAccount = () => {
     navigate('/account', {state:  currentUser })
   }
@@ -29,6 +32,7 @@ export default function Header() {
       <div className='navBar'>
         <div className='optNavBar' onClick={goAccount}>Cuenta</div>
         <div className='optNavBar' onClick={goSearch}>Buscar</div>
+        <div className='optNavBar' onClick={goSearch2}>Buscar 2</div>
         <div className='optNavBar' onClick={goAboutUs}>About Us</div>
         <div className='optNavBar' onClick={LogOut}>LogOut</div>
       </div>

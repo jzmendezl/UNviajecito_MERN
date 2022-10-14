@@ -11,6 +11,7 @@ import { Toaster } from 'react-hot-toast'
 import SearchPage from './pages/search/search';
 import VerifiedMail from './pages/verifiedMail';
 import SendVerifyMail from './pages/sendVerifyMail';
+import Searchv2 from './pages/searchv2';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/account' element={<AccountPage />} />
         <Route path='/search' element={<SearchPage />} />
+        <Route path='/search2' element={<Searchv2 />} />
         <Route path='/aboutUs' element={<AboutUsPage />} />
         <Route path='/sendVerify' element={<SendVerifyMail />} />
       </Routes>
