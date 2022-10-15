@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useUsers } from '../context/userContext'
 import '../resources/css/routesUser.css'
 
 const RoutesUser = () => {
 
-    const { currentUser } = useUsers()
+    const { currentUser, addTravel } = useUsers()
 
     const [source, setSource] = useState('')
     const [destination, setDestination] = useState('')
@@ -13,17 +13,26 @@ const RoutesUser = () => {
     const [price, setPrice] = useState(0)
     const [contactForm, setContactForm] = useState('')
     const [remark, setRemark] = useState('')
-    
-    const [travel, setTravel] = useState({})
+    const [userVehicle, setUserVehicle] = useState([])
+    const [vehicleToTravel, setVehicleToTravel] = useState(null)
 
-    const addNewRouteUser = (e) => {
+    useEffect(() => {
+        setUserVehicle(currentUser.vehicle)
+    }, [])
+
+    const [travel, setTravel] = useState(null)
+    // console.log(travel);
+    // console.log(vehicleToTravel);
+    // console.log(userVehicle);
+
+    const addNewRouteUser = async (e) => {
         e.preventDefault()
 
 
         const newTravel = {
             userName: currentUser.userName,
             contact: contactForm,
-            vehicle: currentUser.vehicle[0],
+            vehicle: userVehicle[vehicleToTravel],
             source: source,
             destiny: destination,
             date: Date.parse(date),
@@ -33,10 +42,11 @@ const RoutesUser = () => {
         }
         setTravel(newTravel)
 
+        // const res = await addTravel(newTravel)
+        // console.log(res);
         console.log(newTravel);
 
     }
-
 
     const sendRoute = () => {
 
@@ -83,6 +93,19 @@ const RoutesUser = () => {
                 <label htmlFor="remark">
                     <span>Observaciones</span>
                     <input type="text" name='remark' id='remark' onChange={e => setRemark(e.target.value)} />
+                </label>
+                <label htmlFor="vehicle">
+                    {/* <span>Observaciones</span> */}
+                    <select name="vehicle" id="vehicle" onChange={e => setVehicleToTravel(e.target.value)}>
+                        {
+                            userVehicle.map((vehicle, index) => (
+                                <option value={index} >
+                                    {vehicle.plate}
+                                </option>
+                            ))
+                        }
+                    </select>
+
                 </label>
                 <button type="submit" id='btnFormAR' onClick={sendRoute}>Agregar</button>
             </form>

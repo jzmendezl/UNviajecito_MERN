@@ -67,10 +67,7 @@ export const createUsers = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const bd = req.body
-    console.log(bd);
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    console.log(updatedUser);
     
     let photoUser;
 

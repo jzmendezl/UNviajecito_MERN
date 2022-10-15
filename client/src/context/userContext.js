@@ -1,6 +1,6 @@
 import { useState, useContext, createContext, useEffect, } from "react";
+import { addTravelRequest, getTravelRequest, getTravelsRequest } from "../api/travels";
 import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest, updateUserRequest } from "../api/users";
-import { addVehicleRequest, getVehicleRequest } from "../api/vehicle";
 
 
 const userContext = createContext()
@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState(null)
   const [token, setToken] = useState('')
-  const [userVehicle, setUserVehicle] = useState(null)
+  // const [userVehicle, setUserVehicle] = useState(null)
 
 
   useEffect(() => {
@@ -74,7 +74,6 @@ export const UserProvider = ({ children }) => {
   const updateUser = async (id, userUpdate) => {
     try {
       const user = await updateUserRequest(id, userUpdate)
-      console.log('uc', user.data);
       setCurrentUser(user.data)
       return user.data
     } catch (error) {
@@ -82,20 +81,29 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const addVehicle = async (vehicleUser) => {
+  const addTravel = async (travel) => {
     try {
-      const vehicle = await addVehicleRequest(vehicleUser)
-      setUserVehicle(vehicle.data)
-      return vehicle.data
+      const res = await addTravelRequest(travel)
+      return res
     } catch (error) {
-      console.error(error);
+      console.error({message: error.message});
     }
   }
 
-  const getVehicle = async (VID) => {
-    const vehicle = await getVehicleRequest(VID)
-    setUserVehicle(vehicle.data)
-    return vehicle.data
+  const getTravel = async (id) => {
+    try {
+      return await getTravelRequest(id)
+    } catch (error) {
+      console.error({message: error.message});
+    }
+  }
+
+  const getTravels = async () => {
+      try {
+        return await getTravelsRequest()
+      } catch (error) {
+        console.error({message: error.message});
+      }
   }
 
   return (
@@ -111,8 +119,9 @@ export const UserProvider = ({ children }) => {
       currentUser,
       setCurrentUser,
       token,
-      addVehicle,
-      getVehicle,
+      addTravel,
+      getTravel,
+      getTravels
     }}>
       {children}
     </userContext.Provider>

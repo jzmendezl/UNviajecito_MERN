@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function AccountPage() {
 
-  const { currentUser, isLogged, addVehicle, getVehicle, setCurrentUser, updateUser } = useUsers()
+  const { currentUser, isLogged, setCurrentUser, updateUser } = useUsers()
   const [userCredentials, setUserCredentials] = useState('')
 
   const [kind, setKind] = useState(0)
@@ -32,7 +32,7 @@ export default function AccountPage() {
 
     setVehicle(currentUser?.vehicle)
 
-    const updateData = async () => {
+    const updateData = async (id, filter) => {
       try {
         const res = await updateUser(userCredentials.UID, { vehicle })
         setUpdateInfo(false)
@@ -50,7 +50,7 @@ export default function AccountPage() {
     }
 
 
-  }, [isLogged, navigate, updateInfo])
+  }, [currentUser?.vehicle, isLogged, navigate, setCurrentUser, updateInfo, updateUser, userCredentials.UID, vehicle])
 
   const getCredentials = () => {
     const user = JSON.parse(window.localStorage.getItem('User'))
