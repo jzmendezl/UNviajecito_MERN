@@ -12,7 +12,7 @@ npm install
 Abrir una consola en la carpeta server y ejecutar la siguiente linea de codigo:
 
 ```
-npm i express express-fileupload mongoose dotenv fs-extra http-errors morgan
+npm i express express-fileupload mongoose dotenv fs-extra http-errors morgan jsonwebtoken
 ```
 
 Ahora para correr el servidor ejecutar el comando
