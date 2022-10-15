@@ -71,9 +71,9 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const updateUser = async (id, token, userUpdate) => {
+  const updateUser = async (id, userUpdate) => {
     try {
-      const user = await updateUserRequest(id, token, userUpdate)
+      const user = await updateUserRequest(id, userUpdate)
       console.log('uc', user.data);
       setCurrentUser(user.data)
       return user.data

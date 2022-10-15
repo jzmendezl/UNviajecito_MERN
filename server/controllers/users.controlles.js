@@ -67,8 +67,11 @@ export const createUsers = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
+    const bd = req.body
+    console.log(bd);
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-
+    console.log(updatedUser);
+    
     let photoUser;
 
     if (req.files?.photoUser) {
@@ -78,7 +81,7 @@ export const updateUser = async (req, res) => {
         publicId: result.public_id
       }
     }
-
+    
     return res.send(updatedUser)
 
   } catch (error) {
@@ -106,7 +109,6 @@ export const getUser = async (req, res) => {
       userWheels: user.userWheels,
       verifyAccount: user.verifyAccount
     }
-    console.log(newUser);
     return res.json(newUser)
     // return res.send({newUser})
 
@@ -152,13 +154,13 @@ export const generateToken = (id) => {
 }
 
 export const getTokenData = (token) => {
-  
-  let data = jwt.decode(token, process.env.JWT_SECRET,(err, decoded) => {
-      if(err) {
-          console.log('Error al obtener data del token');
-      } else {
-          data = decoded;
-      }
+
+  let data = jwt.decode(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      console.log('Error al obtener data del token');
+    } else {
+      data = decoded;
+    }
   }
   );
 

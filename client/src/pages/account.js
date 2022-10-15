@@ -8,8 +8,6 @@ import { useEffect, useState } from 'react'
 export default function AccountPage() {
 
   const { currentUser, isLogged, addVehicle, getVehicle, setCurrentUser, updateUser } = useUsers()
-  // console.log('ACT', currentUser);
-
   const [userCredentials, setUserCredentials] = useState('')
 
   const [kind, setKind] = useState(0)
@@ -17,7 +15,10 @@ export default function AccountPage() {
   const [model, setModel] = useState('')
   const [color, setColor] = useState('')
   const [seats, setSeats] = useState(0)
-  const [vehicle, setVehicle] = useState(null)
+  const [vehicle, setVehicle] = useState([])
+  const [updateInfo, setUpdateInfo] = useState(false)
+  // const vehicle = []
+
 
 
   let navigate = useNavigate()
@@ -29,8 +30,27 @@ export default function AccountPage() {
       setUserCredentials(getCredentials())
     }
 
+    setVehicle(currentUser?.vehicle)
 
-  }, [isLogged, navigate])
+    const updateData = async () => {
+      try {
+        const res = await updateUser(userCredentials.UID, { vehicle })
+        setUpdateInfo(false)
+        console.log(res);
+        return res
+
+      } catch (error) {
+        console.error({ message: error });
+      }
+    }
+
+    if (updateInfo) {
+      const user = updateData()
+      setCurrentUser(user)
+    }
+
+
+  }, [isLogged, navigate, updateInfo])
 
   const getCredentials = () => {
     const user = JSON.parse(window.localStorage.getItem('User'))
@@ -46,25 +66,16 @@ export default function AccountPage() {
       plate,
       model,
       color,
-      seats,
-      UID: userCredentials.UID
+      seats
     }
-
-    setVehicle(newVehicle)
-    const res = await addVehicle(newVehicle)
-    const VID = res.id
-    console.log(VID);
-    await setCurrentUser({ ...currentUser, vehicle: VID })
-    setKind('')
-    setPlate('')
-    setModel('')
-    setColor('')
-    setSeats('0')
+    vehicle.push(newVehicle)
+    await setCurrentUser({ ...currentUser, vehicle: vehicle })
+    setUpdateInfo(true)
     e.target.reset()
-    // setVehicle('')
   }
 
-  
+
+
   return (
     <div className='accountPage'>
       <Header />
@@ -85,38 +96,38 @@ export default function AccountPage() {
           <div className='yourVehicles'>
             <p className='titleLinkUserView'>Vehiculos vinculados a tu cuenta</p>
             {
-              vehicle
+              currentUser?.vehicle.length > 0
                 ?
                 <ul>
                   <p>Vehiculo</p>
                   <li className='viewVehicle'>
 
                     <p className='titleViewForm'>Tipo</p>
-                    <p className='valueViewForm'>{vehicle.kind}</p>
+                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.kind : 'Cargando'}</p>
 
                   </li>
                   <li className='viewVehicle'>
 
                     <p className='titleViewForm'>Placa</p>
-                    <p className='valueViewForm'>{vehicle.plate}</p>
+                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.plate : 'Cargando'}</p>
 
                   </li>
                   <li className='viewVehicle'>
 
                     <p className='titleViewForm'>Modelo</p>
-                    <p className='valueViewForm'>{vehicle.model}</p>
+                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.model : 'Cargando'}</p>
 
                   </li>
                   <li className='viewVehicle'>
 
                     <p className='titleViewForm'>Color</p>
-                    <p className='valueViewForm'>{vehicle.color}</p>
+                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.color : 'Cargando'}</p>
 
                   </li>
                   <li className='viewVehicle'>
 
                     <p className='titleViewForm'>Puestos</p>
-                    <p className='valueViewForm'>{vehicle.seats}</p>
+                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.seats : 'Cargando'}</p>
 
                   </li>
                 </ul>
