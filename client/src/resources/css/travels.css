@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --main-bg-color: #282c34;
+    --enfacis-color: #2ecece;
+    box-sizing: border-box;
+}
+
+.travelsPage {
+    background-color: #282c34;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+}
+
+.bodyTP {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    width: 80vw;
+    margin-top: 100px;
+}
+
+.rigthTP {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 500px;
+    padding: 20px;
+
+    border-radius: 18px;
+    box-shadow: 0px 10px 10px 10px #14171b;
+}
+
+.leftTP {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 500px;
+}
+
+#cancelAddRoute {
+    margin-top: 50px;
+    margin-left: 840px;
+
+    border: none;
+    background: none;
+}
+
+.myTravelTP {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 400px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+
+    border-radius: 18px;
+    box-shadow: 0px 10px 10px 10px #14171b;
+}
