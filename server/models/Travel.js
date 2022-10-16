@@ -10,8 +10,11 @@ const travelSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String
+    },
     vehicle: {
-        type: Array,
+        type: Object,
         required: true
     },
     source: {
@@ -33,6 +36,10 @@ const travelSchema = new mongoose.Schema({
     remark: {
         type: String
     },
+    passengers: {
+        type: Array,
+        default: []
+    }
 
 })
 

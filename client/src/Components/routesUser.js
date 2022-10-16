@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useUsers } from '../context/userContext'
 import '../resources/css/routesUser.css'
 
 const RoutesUser = () => {
 
-    const { currentUser, addTravel } = useUsers()
+    const { currentUser, addTravel, viewRender, setViewRender } = useUsers()
+    const [userWheels, setUserWheels] = useState([])
 
     const [source, setSource] = useState('')
     const [destination, setDestination] = useState('')
@@ -18,6 +20,7 @@ const RoutesUser = () => {
 
     useEffect(() => {
         setUserVehicle(currentUser.vehicle)
+        setUserWheels(currentUser.userWheels)
     }, [])
 
     const [travel, setTravel] = useState(null)
@@ -32,27 +35,28 @@ const RoutesUser = () => {
         const newTravel = {
             userName: currentUser.userName,
             contact: contactForm,
+            email: currentUser.email,
             vehicle: userVehicle[vehicleToTravel],
             source: source,
             destiny: destination,
-            date: Date.parse(date),
+            dateTime: Date.parse(date),
             seats: parseInt(seats),
             price: parseInt(price),
             remark: remark
         }
         setTravel(newTravel)
-
-        // const res = await addTravel(newTravel)
-        // console.log(res);
-        console.log(newTravel);
-
+        const res = await addTravel(newTravel)
+        userWheels.push(res?.tid)
     }
 
     const sendRoute = () => {
-
+        
+        setTimeout(() => {
+            setViewRender(false)
+        }, 1000);
     }
 
-
+    console.log('rute', currentUser);
     return (
         <div id='bodyAR'>
             <p id='titleAR'>Agregar Nueva Ruta</p>

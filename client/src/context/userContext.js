@@ -1,5 +1,5 @@
 import { useState, useContext, createContext, useEffect, } from "react";
-import { addTravelRequest, getTravelRequest, getTravelsRequest } from "../api/travels";
+import { addTravelRequest, getTravelRequest, getAllTravelsRequest } from "../api/travels";
 import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest, updateUserRequest } from "../api/users";
 
 
@@ -15,6 +15,7 @@ export const UserProvider = ({ children }) => {
 
   const [currentUser, setCurrentUser] = useState(null)
   const [token, setToken] = useState('')
+  const [viewRender, setViewRender] = useState(false)
   // const [userVehicle, setUserVehicle] = useState(null)
 
 
@@ -84,7 +85,7 @@ export const UserProvider = ({ children }) => {
   const addTravel = async (travel) => {
     try {
       const res = await addTravelRequest(travel)
-      return res
+      return res.data
     } catch (error) {
       console.error({message: error.message});
     }
@@ -98,9 +99,11 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-  const getTravels = async () => {
+  const getAllTravels = async () => {
       try {
-        return await getTravelsRequest()
+        const res = await getAllTravelsRequest()
+        
+        return res.data
       } catch (error) {
         console.error({message: error.message});
       }
@@ -111,6 +114,8 @@ export const UserProvider = ({ children }) => {
       // users,
       isLogged,
       logout,
+      viewRender,
+      setViewRender,
       getUsers,
       getUser,
       loginUser,
@@ -121,7 +126,7 @@ export const UserProvider = ({ children }) => {
       token,
       addTravel,
       getTravel,
-      getTravels
+      getAllTravels
     }}>
       {children}
     </userContext.Provider>

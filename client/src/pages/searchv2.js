@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import CardSearch from "../Components/cardSearch";
 import Header from "../Components/header"
 import RoutesUser from "../Components/routesUser"
+import { useUsers } from "../context/userContext";
 import "../resources/css/search2.css";
 
 
@@ -9,12 +10,28 @@ const Searchv2 = () => {
 
     const [addRoute, setAddRoute] = useState(false)
     const [search, setSearch] = useState('')
+    const [results, setResults] = useState([])
+    const { getAllTravels } = useUsers()
+
+    useEffect(() => {
+        const getTravels = async () => {
+            try {
+                const res = await getAllTravels()
+                console.log('res', res);
+                setResults(res)
+            } catch (error) {
+                console.error({ message: error.message });
+            }
+        }
+        getTravels()
+    }, [getAllTravels])
 
     const addNewRoute = () => {
         setAddRoute(!addRoute)
     }
 
     console.log(search);
+    console.log(results);
 
     return (
         <div className='pageSearch'>
@@ -40,13 +57,22 @@ const Searchv2 = () => {
 
                             <div className="bodyCardsSP">
                                 <div className="cardsSP">
-                                    <CardSearch />
-                                    <CardSearch />
-                                    <CardSearch />
-                                    <CardSearch />
-                                    <CardSearch />
-                                    <CardSearch />
-                                    <CardSearch />
+                                    {
+                                        results?.map(card => (
+                                            <CardSearch
+                                                key={card.id}
+                                                userName={card.userName}
+                                                contact={card.contact}
+                                                vehicle={card.vehicle}
+                                                source={card.source}
+                                                destiny={card.destiny}
+                                                price={card.price}
+                                                dateTime={card.dateTime}
+                                                remark={card.remark}
+                                            />
+                                        ))
+                                    }
+
                                 </div>
 
                                 <div className="filterSP">
@@ -59,11 +85,11 @@ const Searchv2 = () => {
                                         <div>
                                             <label htmlFor="carField" className="fielFormSP">
                                                 <input type="radio" name="kind" id="carField" />
-                                                <p class="txtField">Carro</p>
+                                                <p className="txtField">Carro</p>
                                             </label>
                                             <label htmlFor="bikeField" className="fielFormSP">
                                                 <input type="radio" name="kind" id="bikeField" />
-                                                <p class="txtField">Moto</p>
+                                                <p className="txtField">Moto</p>
                                             </label>
                                         </div>
 
@@ -72,19 +98,19 @@ const Searchv2 = () => {
                                         <div>
                                             <label htmlFor="to5Field" className="fielFormSP">
                                                 <input type="radio" name="price" id="to5Field" />
-                                                <p class="txtField">Desde $5.000</p>
+                                                <p className="txtField">Desde $5.000</p>
                                             </label>
                                             <label htmlFor="5to10Field" className="fielFormSP">
                                                 <input type="radio" name="price" id="5to10Field" />
-                                                <p class="txtField">De $5.000 a $10.000</p>
+                                                <p className="txtField">De $5.000 a $10.000</p>
                                             </label>
                                             <label htmlFor="10to15Field" className="fielFormSP">
                                                 <input type="radio" name="price" id="10to15Field" />
-                                                <p class="txtField">De $10.000 a $15.000</p>
+                                                <p className="txtField">De $10.000 a $15.000</p>
                                             </label>
                                             <label htmlFor="more15Field" className="fielFormSP">
                                                 <input type="radio" name="price" id="more15Field" />
-                                                <p class="txtField">Mas de $15.000</p>
+                                                <p className="txtField">Mas de $15.000</p>
                                             </label>
                                         </div>
 
@@ -93,11 +119,11 @@ const Searchv2 = () => {
                                         <div>
                                             <label htmlFor="sourceField" className="fielFormSP">
                                                 <input type="radio" name="place" id="sourceField" />
-                                                <p class="txtField">Origen</p>
+                                                <p className="txtField">Origen</p>
                                             </label>
                                             <label htmlFor="destinyField" className="fielFormSP">
                                                 <input type="radio" name="place" id="destinyField" />
-                                                <p class="txtField">Destino</p>
+                                                <p className="txtField">Destino</p>
                                             </label>
                                         </div>
 

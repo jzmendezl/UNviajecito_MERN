@@ -68,7 +68,7 @@ input:-internal-autofill-selected {
     color: #2ecece;
     font-size: 20px;
     margin-top: 140px;
-    margin-left: 400px;
+    margin-left: 150px;
     outline-color: #2ecece;
     cursor: pointer;
 }

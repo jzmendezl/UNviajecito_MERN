@@ -1,26 +1,27 @@
-import { useState } from 'react'
 import Header from '../Components/header'
 import RoutesUser from '../Components/routesUser'
+import { useUsers } from '../context/userContext'
 import '../resources/css/travels.css'
 import cancelBtn from '../resources/img/cancelIcon.svg'
 
 const TravelsPage = () => {
 
-    const [addRoute, setAddRoute] = useState(false)
+    // const [addRoute, setAddRoute] = useState(false)
+    const {viewRender, setViewRender} = useUsers()
 
     const addNewRoute = () => {
-        setAddRoute(!addRoute)
+        setViewRender(!viewRender)
     }
 
     const cancelAddRoute = () => {
-        setAddRoute(false)
+        setViewRender(false)
     }
 
     return (
         <div className='travelsPage'>
             <Header />
             {
-                addRoute
+                viewRender
                     ?
                     <div>
                         <button onClick={cancelAddRoute} id='cancelAddRoute'>
@@ -39,6 +40,8 @@ const TravelsPage = () => {
                         <div className='leftTP'>
                             <div className='myTravelTP'>
                                 Viajes Creados
+
+                                
                             </div>
 
                             <div className='addTravelTP'>
