@@ -38,7 +38,6 @@ const travelSchema = new mongoose.Schema({
     },
     passengers: {
         type: Array,
-        default: []
     }
 
 })

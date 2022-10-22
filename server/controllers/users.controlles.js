@@ -31,11 +31,16 @@ export const createUsers = async (req, res) => {
 
     await User.findOne({ email })
 
+    // if (req.files.photoUser) {
+    //   const res = await uploadPhotoUser(req.files.photoUser.tempFilePath)
+    //   console.log(res);
+    // }
+
     // * image dafault
 
     let photoUser = {
-      "url": "https://res.cloudinary.com/joemendez/image/upload/v1663568344/usersPhoto/rzdivknzd1ojeeqtdg40.png",
-      "publicId": "usersPhoto/rzdivknzd1ojeeqtdg40"
+      "url": "https://res.cloudinary.com/joemendez/image/upload/v1666375716/usersPhoto/IconUser_dqau58.png",
+      "public_id": 'usersPhoto/k2kfvqwqj6v0iuqknhxz'
     };
 
     const newUser = await User.create({

@@ -56,25 +56,35 @@ export const getTravel = async (req, res) => {
         const travel = await Travel.findById(req.params.id)
 
         if (!travel) {
-            return res.status(404).json({message: 'No Found Travel'})
+            return res.status(404).json({ message: 'No Found Travel' })
         }
 
         return res.status(200).json(travel)
     } catch (error) {
-        return res.json({message: error.message})
+        return res.json({ message: error.message })
     }
 }
 
 export const getAllTravels = async (req, res) => {
     try {
         const travels = await Travel.find()
-        
+
         if (!travels) {
-            return res.status(404).json({message: 'No Found Travels'})
+            return res.status(404).json({ message: 'No Found Travels' })
         }
 
         return res.status(201).json(travels)
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        return res.status(500).json({ message: error.message })
+    }
+}
+
+export const updateTravel = async (req, res) => {
+    try {
+        const updatedTravel = await Travel.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        
+        return res.send(updatedTravel)
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
     }
 }

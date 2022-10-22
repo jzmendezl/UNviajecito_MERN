@@ -1,5 +1,5 @@
 import { useState, useContext, createContext, useEffect, } from "react";
-import { addTravelRequest, getTravelRequest, getAllTravelsRequest } from "../api/travels";
+import { addTravelRequest, getTravelRequest, getAllTravelsRequest, updateTravelRequest } from "../api/travels";
 import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest, updateUserRequest } from "../api/users";
 
 
@@ -28,6 +28,14 @@ export const UserProvider = ({ children }) => {
       setCurrentUser(user)
     }
   }, [])
+
+
+  const getCredentials = () => {
+    const user = JSON.parse(window.localStorage.getItem('User'))
+    const token = user.token
+    const UID = user.UID
+    return { token, UID }
+  }
 
   const isLogged = () => !!(currentUser && currentUser.verifyAccount)
 
@@ -109,9 +117,21 @@ export const UserProvider = ({ children }) => {
       }
   }
 
+  const updateTravel = async (id, filter) => {
+    try {
+      const res = await updateTravelRequest(id, filter)
+      console.log(res.data);
+      return res.data
+    } catch (error) {
+      console.error({message: error.message});
+    }
+
+  }
+
   return (
     <userContext.Provider value={{
       // users,
+      getCredentials,
       isLogged,
       logout,
       viewRender,
@@ -126,7 +146,8 @@ export const UserProvider = ({ children }) => {
       token,
       addTravel,
       getTravel,
-      getAllTravels
+      getAllTravels,
+      updateTravel
     }}>
       {children}
     </userContext.Provider>

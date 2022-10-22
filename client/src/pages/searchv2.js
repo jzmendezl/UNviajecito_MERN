@@ -17,7 +17,6 @@ const Searchv2 = () => {
         const getTravels = async () => {
             try {
                 const res = await getAllTravels()
-                console.log('res', res);
                 setResults(res)
             } catch (error) {
                 console.error({ message: error.message });
@@ -29,9 +28,6 @@ const Searchv2 = () => {
     const addNewRoute = () => {
         setAddRoute(!addRoute)
     }
-
-    console.log(search);
-    console.log(results);
 
     return (
         <div className='pageSearch'>
@@ -60,13 +56,16 @@ const Searchv2 = () => {
                                     {
                                         results?.map(card => (
                                             <CardSearch
-                                                key={card.id}
+                                                key={card._id}
+                                                TID={card._id}
                                                 userName={card.userName}
                                                 contact={card.contact}
                                                 vehicle={card.vehicle}
+                                                passengers={card.passengers}
                                                 source={card.source}
                                                 destiny={card.destiny}
                                                 price={card.price}
+                                                seats={card.vehicle.seats}
                                                 dateTime={card.dateTime}
                                                 remark={card.remark}
                                             />
@@ -124,14 +123,6 @@ const Searchv2 = () => {
                                             <label htmlFor="destinyField" className="fielFormSP">
                                                 <input type="radio" name="place" id="destinyField" />
                                                 <p className="txtField">Destino</p>
-                                            </label>
-                                        </div>
-
-                                        <p className="titleFields">Localidad</p>
-
-                                        <div>
-                                            <label htmlFor="" className="fielFormSP">
-                                                <select name="" id="selectSP"></select>
                                             </label>
                                         </div>
                                     </form>

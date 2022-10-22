@@ -49,7 +49,6 @@ export default function LoginPage() {
           )
           
           const user = await getUser(newUser.UID, newUser.token)
-          console.log('User', user);
 
           window.localStorage.setItem(
             'loggedUser', JSON.stringify(user)

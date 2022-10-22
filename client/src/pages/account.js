@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function AccountPage() {
 
-  const { currentUser, isLogged, setCurrentUser, updateUser } = useUsers()
+  const { currentUser, isLogged, setCurrentUser, updateUser, getCredentials } = useUsers()
   const [userCredentials, setUserCredentials] = useState('')
 
   const [kind, setKind] = useState(0)
@@ -15,7 +15,7 @@ export default function AccountPage() {
   const [model, setModel] = useState('')
   const [color, setColor] = useState('')
   const [seats, setSeats] = useState(0)
-  const [vehicle, setVehicle] = useState([])
+  const [vehicleUser, setVehicleUser] = useState([])
   const [updateInfo, setUpdateInfo] = useState(false)
   // const vehicle = []
 
@@ -29,12 +29,12 @@ export default function AccountPage() {
     } else {
       setUserCredentials(getCredentials())
     }
-
-    setVehicle(currentUser?.vehicle)
+    
+    setVehicleUser(currentUser?.vehicle)
 
     const updateData = async (id, filter) => {
       try {
-        const res = await updateUser(userCredentials.UID, { vehicle })
+        const res = await updateUser(id, filter)
         setUpdateInfo(false)
         console.log(res);
         return res
@@ -45,19 +45,19 @@ export default function AccountPage() {
     }
 
     if (updateInfo) {
-      const user = updateData()
+      const user = updateData(userCredentials.UID, { vehicleUser })
       setCurrentUser(user)
     }
 
 
-  }, [currentUser?.vehicle, isLogged, navigate, setCurrentUser, updateInfo, updateUser, userCredentials.UID, vehicle])
+  }, [currentUser?.vehicle, getCredentials, isLogged, navigate, setCurrentUser, updateInfo, updateUser, userCredentials.UID, vehicleUser])
 
-  const getCredentials = () => {
-    const user = JSON.parse(window.localStorage.getItem('User'))
-    const token = user.token
-    const UID = user.UID
-    return { token, UID }
-  }
+  // const getCredentials = () => {
+  //   const user = JSON.parse(window.localStorage.getItem('User'))
+  //   const token = user.token
+  //   const UID = user.UID
+  //   return { token, UID }
+  // }
 
   const linkVehicle = async (e) => {
     e.preventDefault();
@@ -68,13 +68,11 @@ export default function AccountPage() {
       color,
       seats
     }
-    vehicle.push(newVehicle)
-    await setCurrentUser({ ...currentUser, vehicle: vehicle })
+    vehicleUser.push(newVehicle)
+    await setCurrentUser({ ...currentUser, vehicle: vehicleUser })
     setUpdateInfo(true)
     e.target.reset()
   }
-
-
 
   return (
     <div className='accountPage'>
