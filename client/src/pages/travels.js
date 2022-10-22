@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import CreatedTravels from '../Components/createdTravels'
 import Header from '../Components/header'
 import RoutesUser from '../Components/routesUser'
 import { useUsers } from '../context/userContext'
@@ -6,8 +8,27 @@ import cancelBtn from '../resources/img/cancelIcon.svg'
 
 const TravelsPage = () => {
 
-    // const [addRoute, setAddRoute] = useState(false)
-    const {viewRender, setViewRender, currentUser} = useUsers()
+    const { viewRender, setViewRender, currentUser, getTravel, } = useUsers()
+
+    const [infoTravels, setInfoTravels] = useState([])
+
+    useEffect(() => {
+
+        const getInfoTravelsUser = async () => {
+            const results = []
+
+            currentUser?.userWheels.forEach(async travel => {
+                const res = await getTravel(travel)
+                results.push(res.data)
+                setInfoTravels(results)
+            })
+
+        }
+
+        getInfoTravelsUser()
+
+    }, [currentUser?.userWheels, getTravel])
+
 
     const addNewRoute = () => {
         setViewRender(!viewRender)
@@ -17,7 +38,7 @@ const TravelsPage = () => {
         setViewRender(false)
     }
 
-    console.log(currentUser);
+    console.log(currentUser?.userWheels);
 
     return (
         <div className='travelsPage'>
@@ -36,24 +57,28 @@ const TravelsPage = () => {
                         <div className='rigthTP'>
                             <div>
                                 <p>Historial</p>
-                                
-                                {
-                                    currentUser?.wheelHist.length > 0
-                                    ?
-                                        <p>{currentUser?.wheelHist?.forEach(element => {
-                                          <p>{element}</p>
-                                        })}</p>
-                                    :
-                                    <p>Por el Momento No Has Hecho Ningun Viaje</p>
-                                }
+
                             </div>
                         </div>
 
                         <div className='leftTP'>
                             <div className='myTravelTP'>
-                                Viajes Creados
+                                <p>Viajes Creados</p>
+                                {
+                                    infoTravels.map(travel => (
+                                        <CreatedTravels
+                                            key={travel._id}
+                                            source={travel.source}
+                                            destiny={travel.destiny}
+                                            dateTime={travel.dateTime}
+                                            price={travel.price}
+                                            vehicle={travel.vehicle}
+                                            passengers={travel.passengers}
+                                            remark={travel.remark}
 
-                                
+                                        />
+                                    ))
+                                }
                             </div>
 
                             <div className='addTravelTP'>

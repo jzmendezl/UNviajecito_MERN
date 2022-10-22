@@ -17,7 +17,11 @@ const CardSearch = (props) => {
         if (parseInt(props.vehicle.seats) > 0) {
             if (!props.passengers.includes(credentials.UID)) {
                 try {
-                    props.passengers.push(credentials.UID)
+                    const passenger = {
+                        UID: credentials.UID,
+                        namePassenger: currentUser.userName
+                    }
+                    props.passengers.push(passenger)
                     const passengers = props.passengers
                     await updateTravel(props.TID, { passengers })
                     setCurrentUser({ ...currentUser, wheelHist: props.TID })

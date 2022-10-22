@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useUsers } from '../context/userContext'
 import '../resources/css/routesUser.css'
 
 const RoutesUser = () => {
 
-    const { currentUser, addTravel, viewRender, setViewRender } = useUsers()
-    const [userWheels, setUserWheels] = useState([])
+    const { currentUser, addTravel, setViewRender, setCurrentUser, getCredentials, updateUser } = useUsers()
 
     const [source, setSource] = useState('')
     const [destination, setDestination] = useState('')
@@ -17,12 +15,17 @@ const RoutesUser = () => {
     const [remark, setRemark] = useState('')
     const [userVehicle, setUserVehicle] = useState([])
     const [vehicleToTravel, setVehicleToTravel] = useState(null)
+    const [credentials, setCredentials] = useState(null)
+
+    const [userWheels, setUserWheels] = useState([])
 
     useEffect(() => {
         setUserVehicle(currentUser.vehicle)
+        setCredentials(getCredentials())
         setUserWheels(currentUser.userWheels)
-    }, [])
+    }, [currentUser.userWheels, currentUser.vehicle, getCredentials])
 
+    // eslint-disable-next-line no-unused-vars
     const [travel, setTravel] = useState(null)
     // console.log(travel);
     // console.log(vehicleToTravel);
@@ -46,17 +49,18 @@ const RoutesUser = () => {
         }
         setTravel(newTravel)
         const res = await addTravel(newTravel)
-        userWheels.push(res?.tid)
+        userWheels.push(res.tid)
+        setCurrentUser({ ...currentUser, userWheels })
+        await updateUser(credentials.UID, { ...currentUser, userWheels })
     }
 
     const sendRoute = () => {
-        
         setTimeout(() => {
             setViewRender(false)
         }, 1000);
     }
 
-    console.log('rute', currentUser);
+    console.log('rute', travel);
     return (
         <div id='bodyAR'>
             <p id='titleAR'>Agregar Nueva Ruta</p>

@@ -15,6 +15,7 @@ const travelSchema = new mongoose.Schema({
     },
     vehicle: {
         type: Object,
+        unique: false,
         required: true
     },
     source: {

@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --main-bg-color: #282c34;
+    --enfacis-color: #2ecece;
+    box-sizing: border-box;
+  }
+
+  .objectCT {
+    position: relative;
+    margin-top: 20px;
+    width: 280px;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0px 10px 10px 10px #0e1013;
+  }
+
+  .fieldCT {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+  }
+
+  .titleFieldCT {
+    color: #2ecece;
+    width: 90px;
+  }
+
+  #btnViewCT {
+    position: absolute;
+    top: 15px;
+    left: 250px;
+    cursor: pointer;
+  }
