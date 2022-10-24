@@ -5,6 +5,7 @@
     -moz-osx-font-smoothing: grayscale;
     --main-bg-color: #282c34;
     --enfacis-color: #2ecece;
+    box-sizing: border-box;
 }
 
 input:-webkit-autofill,

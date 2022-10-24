@@ -39,6 +39,9 @@ const travelSchema = new mongoose.Schema({
     },
     passengers: {
         type: Array,
+    },
+    ratings: {
+        type: Array,
     }
 
 })

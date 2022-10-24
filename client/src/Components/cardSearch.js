@@ -38,7 +38,6 @@ const CardSearch = (props) => {
         }
 
     }
-    console.log(currentUser);
 
     return (
         <div className='cardSearch'>

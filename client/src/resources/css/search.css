@@ -21,22 +21,3 @@
   #bodyRU {
     margin-top: 50px;
   }
-
-  #zoneAddSP {
-    width: 80vw;
-    height: 0px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-  }
-
-  #btnAddRouteSP {
-    border: none;
-    background: none;
-    color: #2ecece;
-    cursor: pointer;
-    font-size: 17px;
-  }
-  #btnAddRouteSP:hover {
-    font-size: 20px;
-  }

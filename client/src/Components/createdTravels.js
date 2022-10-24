@@ -7,7 +7,11 @@ const CreatedTravels = (props) => {
   const moreInfo = () => {
     setViewMoreInfo(!viewMoreInfo)
   }
-  console.log(props);
+
+  const formatDate = (date) =>{
+    return new Date(date).toLocaleString('es-CO')
+  }
+
 
   return (
     <div className="objectCT" >
@@ -28,7 +32,7 @@ const CreatedTravels = (props) => {
             </div>
             <div className="fieldCT">
               <p className='titleFieldCT'>Fecha</p>
-              <p>{props.dateTime}</p>
+              <p>{formatDate(props.dateTime)}</p>
             </div>
             <div className="fieldCT">
               <p className='titleFieldCT'>Precio</p>
@@ -68,7 +72,7 @@ const CreatedTravels = (props) => {
             </div>
             <div className="fieldCT">
               <p className='titleFieldCT'>Fecha</p>
-              <p>{props.dateTime}</p>
+              <p>{formatDate(props.dateTime)}</p>
             </div>
           </div>
       }

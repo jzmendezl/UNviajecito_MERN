@@ -33,34 +33,7 @@
   #bodyRU {
     margin-top: 50px;
   }
-
-  #zoneAddSP {
-    margin-top: 50px;
-    width: 80vw;
-    height: max-content;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    box-sizing: border-box;
-  }
-
-  #btnAddRouteSP {
-    border: none;
-    background: none;
-    color: #2ecece;
-    cursor: pointer;
-    font-size: 17px;
-    height: 30px;
-  }
-
-  #btnAddRouteSP:hover {
-    font-size: 20px;
-  }
-
-  #formAddRouteSP {
-    margin-top: -80px;
-  }
-
+  
   #searchBar {
     display: flex;
     flex-direction: row;

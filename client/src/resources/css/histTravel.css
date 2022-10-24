@@ -8,7 +8,7 @@
     box-sizing: border-box;
   }
 
-  .objectCT {
+  .objectHT {
     position: relative;
     margin-top: 20px;
     margin-bottom: 30px;
@@ -18,20 +18,53 @@
     box-shadow: 0px 10px 10px 10px #0e1013;
   }
 
-  .fieldCT {
+  .fieldHT {
     display: flex;
     flex-direction: row;
     padding-top: 10px;
   }
 
-  .titleFieldCT {
+  .titleFieldHT {
     color: #2ecece;
     width: 90px;
   }
 
-  #btnViewCT {
+  #btnViewHT {
     position: absolute;
     top: 15px;
     left: 320px;
     cursor: pointer;
+  }
+
+  #titleRateHT{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: #2ecece;
+    text-align: center;
+  }
+
+  #rateTravelField{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 310px;
+    height: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .rateStar {
+    cursor: pointer;
+    opacity: 20%;
+  }
+
+  .rateStar:hover {
+    width: 20px;
+    height: 20px;
+    color: #298f8f;
+    opacity: 100%;
+  }
+
+  .starIcon {
+    width: 20px;
+    height: 20px;
   }

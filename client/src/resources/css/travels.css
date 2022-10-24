@@ -20,10 +20,35 @@
 
 .bodyTP {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     justify-content: space-evenly;
     width: 80vw;
+    margin-top: 40px;
+}
+
+.addTravelTP {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 30px;
+}
+
+#btnAddRouteTP {
+    border: none;
+    background: none;
+    color: #2ecece;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+#btnAddRouteTP:hover {
+    font-size: 20px;
+  }
+
+.downTP {
     margin-top: 100px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
 }
 
 .rigthTP {
@@ -34,8 +59,8 @@
     height: 500px;
     padding: 20px;
 
-    border-radius: 18px;
-    box-shadow: 0px 10px 10px 10px #14171b;
+    /* border-radius: 18px;
+    box-shadow: 0px 10px 10px 10px #14171b; */
 }
 
 .leftTP {
@@ -62,8 +87,4 @@
     height: 400px;
     margin-bottom: 50px;
     padding: 20px 80px;
-
-
-    border-radius: 18px;
-    box-shadow: 0px 10px 10px 10px #14171b;
 }
