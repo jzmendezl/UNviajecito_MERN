@@ -17,108 +17,117 @@ const RoutesUser = () => {
     const [vehicleToTravel, setVehicleToTravel] = useState(null)
     const [credentials, setCredentials] = useState(null)
 
-    const [userWheels, setUserWheels] = useState([])
+    const [wheels, setWheels] = useState([])
 
     useEffect(() => {
-        setUserVehicle(currentUser.vehicle)
+        setUserVehicle(currentUser?.vehicle)
         setCredentials(getCredentials())
-        setUserWheels(currentUser.userWheels)
-    }, [currentUser.userWheels, currentUser.vehicle, getCredentials])
+        setWheels(currentUser?.userWheels)
+}, [currentUser?.userWheels, currentUser?.vehicle, getCredentials])
 
-    // eslint-disable-next-line no-unused-vars
-    const [travel, setTravel] = useState(null)
-    // console.log(travel);
-    // console.log(vehicleToTravel);
-    // console.log(userVehicle);
+const [travel, setTravel] = useState(null)
 
-    const addNewRouteUser = async (e) => {
-        e.preventDefault()
+const updateData = async (id, filter) => {
+    try {
+      const res = await updateUser(id, filter)
+      return res
+    } catch (error) {
+      console.error({ message: error });
+    }
+  }
+
+const addNewRouteUser = async (e) => {
+    e.preventDefault()
 
 
-        const newTravel = {
-            userName: currentUser.userName,
-            contact: contactForm,
-            email: currentUser.email,
-            vehicle: userVehicle[vehicleToTravel],
-            source: source,
-            destiny: destination,
-            dateTime: Date.parse(date),
-            seats: parseInt(seats),
-            price: parseInt(price),
-            remark: remark
-        }
-        setTravel(newTravel)
-        const res = await addTravel(newTravel)
-        userWheels.push(res.tid)
-        setCurrentUser({ ...currentUser, userWheels })
-        await updateUser(credentials.UID, { ...currentUser, userWheels })
+    const newTravel = {
+        userName: currentUser.userName,
+        contact: contactForm,
+        email: currentUser.email,
+        vehicle: userVehicle[vehicleToTravel],
+        source: source,
+        destiny: destination,
+        dateTime: Date.parse(date),
+        seats: parseInt(seats),
+        price: parseInt(price),
+        remark: remark,
+        status: 'Created'
     }
 
-    const sendRoute = () => {
-        setTimeout(() => {
-            setViewRender(false)
-        }, 1000);
-    }
+    setTravel(newTravel)
+    const res = await addTravel(newTravel)
+    wheels.push(res.tid)
+    setCurrentUser({ ...currentUser, userWheels: wheels })
+    await updateData(credentials.UID, { userWheels: wheels })
+    // await updateUser(credentials.UID, { userWheels: wheels })
+}
 
-    console.log('rute', travel);
-    return (
-        <div id='bodyAR'>
-            <p id='titleAR'>Agregar Nueva Ruta</p>
-            <form className='formAR' onSubmit={addNewRouteUser}>
-                <label htmlFor="placeSource">
-                    <span>Origen</span>
-                    <input type="text" name='placeSource' id='placeSource' onChange={e => setSource(e.target.value)} />
-                </label>
-                <label htmlFor="placeDestination">
-                    <span>Destino</span>
-                    <input type="text" name='placeDestination' id='placeDestination' onChange={e => setDestination(e.target.value)} />
-                </label>
-                <label htmlFor="dateTime">
-                    <span>Fecha y Hora</span>
-                    <input type='datetime-local' name='dateTime' id='dateTime' onChange={e => setDate(e.target.value)} />
-                </label>
-                <label htmlFor="quotas">
-                    <span>Cupos</span>
-                    <input type="number" min={1} max={5} name='quotas' id='quotas' onChange={e => setSeats(e.target.value)} />
-                </label>
-                <label htmlFor="price">
-                    <span>Precio</span>
-                    <input type='number' name='price' id='price' onChange={e => setPrice(e.target.value)} />
-                </label>
-                <label htmlFor="contactForm">
-                    <span>Forma de Contacto</span>
-                    <div id='contactForm'>
-                        <label htmlFor="email">
-                            <input type="radio" name="contact" id="email" value={currentUser.email} onClick={e => setContactForm(e.target.value)} />
-                            <p>Correo</p>
-                        </label>
-                        <label htmlFor="celphone">
-                            <input type="radio" name="contact" id="celphone" value={currentUser.celPhone} onClick={e => setContactForm(e.target.value)} />
-                            <p>Celular</p>
-                        </label>
-                    </div>
-                </label>
-                <label htmlFor="remark">
-                    <span>Observaciones</span>
-                    <input type="text" name='remark' id='remark' onChange={e => setRemark(e.target.value)} />
-                </label>
-                <label htmlFor="vehicle">
-                    {/* <span>Observaciones</span> */}
-                    <select name="vehicle" id="vehicle" onChange={e => setVehicleToTravel(e.target.value)}>
-                        {
-                            userVehicle.map((vehicle, index) => (
-                                <option value={index} >
-                                    {vehicle.plate}
-                                </option>
-                            ))
-                        }
-                    </select>
+const sendRoute = () => {
+    setTimeout(() => {
+        setViewRender(false)
+    }, 1000);
+}
 
-                </label>
-                <button type="submit" id='btnFormAR' onClick={sendRoute}>Agregar</button>
-            </form>
-        </div>
-    )
+console.log(currentUser);
+return (
+    <div id='bodyAR'>
+        <p id='titleAR'>Agregar Nueva Ruta</p>
+        <form className='formAR' onSubmit={addNewRouteUser}>
+            <label htmlFor="placeSource">
+                <span>Origen</span>
+                <input type="text" name='placeSource' id='placeSource' onChange={e => setSource(e.target.value)} />
+            </label>
+            <label htmlFor="placeDestination">
+                <span>Destino</span>
+                <input type="text" name='placeDestination' id='placeDestination' onChange={e => setDestination(e.target.value)} />
+            </label>
+            <label htmlFor="dateTime">
+                <span>Fecha y Hora</span>
+                <input type='datetime-local' name='dateTime' id='dateTime' onChange={e => setDate(e.target.value)} />
+            </label>
+            <label htmlFor="quotas">
+                <span>Cupos</span>
+                <input type="number" min={1} max={5} name='quotas' id='quotas' onChange={e => setSeats(e.target.value)} />
+            </label>
+            <label htmlFor="price">
+                <span>Precio</span>
+                <input type='number' name='price' id='price' onChange={e => setPrice(e.target.value)} />
+            </label>
+            <label htmlFor="contactForm">
+                <span>Forma de Contacto</span>
+                <div id='contactForm'>
+                    <label htmlFor="email">
+                        <input type="radio" name="contact" id="email" value={currentUser.email} onClick={e => setContactForm(e.target.value)} />
+                        <p>Correo</p>
+                    </label>
+                    <label htmlFor="celphone">
+                        <input type="radio" name="contact" id="celphone" value={currentUser.celPhone} onClick={e => setContactForm(e.target.value)} />
+                        <p>Celular</p>
+                    </label>
+                </div>
+            </label>
+            <label htmlFor="remark">
+                <span>Observaciones</span>
+                <input type="text" name='remark' id='remark' onChange={e => setRemark(e.target.value)} />
+            </label>
+            <label htmlFor="vehicle">
+                {/* <span>Observaciones</span> */}
+                <select name="vehicle" id="vehicle" onChange={e => setVehicleToTravel(e.target.value)}>
+                    <option value="">--Please choose an option--</option>
+                    {
+                        userVehicle.map((vehicle, index) => (
+                            <option value={index} >
+                                {vehicle.plate}
+                            </option>
+                        ))
+                    }
+                </select>
+
+            </label>
+            <button type="submit" id='btnFormAR' onClick={sendRoute}>Agregar</button>
+        </form>
+    </div>
+)
 }
 
 export default RoutesUser

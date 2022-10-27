@@ -11,10 +11,11 @@ export const addTravel = async (req, res) => {
             price,
             dateTime,
             remark,
-            vehicle
+            vehicle,
+            status
         } = req.body
         // await Travel.findOne({ userName })
-        console.log('body', userName, contact, email, source, destiny, price, remark, vehicle);
+        console.log('body', userName, contact, email, source, destiny, price, remark, vehicle, status);
 
         const newTravel = await Travel.create({
             userName,
@@ -26,6 +27,7 @@ export const addTravel = async (req, res) => {
             price,
             dateTime,
             remark,
+            status
         })
         console.log(newTravel);
         newTravel.save()
@@ -43,6 +45,7 @@ export const addTravel = async (req, res) => {
             dateTime,
             remark,
             tid,
+            status
 
         })
 

@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
     }
   }, [])
 
-
+ 
   const getCredentials = () => {
     const user = JSON.parse(window.localStorage.getItem('User'))
     const token = user.token

@@ -7,6 +7,7 @@ import "../resources/css/search2.css";
 
 const Searchv2 = () => {
 
+    const { currentUser } = useUsers()
     const [search, setSearch] = useState('')
     const [results, setResults] = useState([])
     const { getAllTravels } = useUsers()
@@ -15,15 +16,32 @@ const Searchv2 = () => {
         const getTravels = async () => {
             try {
                 const res = await getAllTravels()
-                setResults(res)
+
+                // * Filter user
+                let TravelsUser = []
+                // eslint-disable-next-line array-callback-return
+                currentUser?.userWheels.map(travel => {
+                    TravelsUser.push(travel)
+                })
+
+                let noUserTravels = res.filter(travel => TravelsUser.indexOf(travel._id) === -1)
+
+                //  * Filter on travel
+                let onTravel = []
+                // eslint-disable-next-line array-callback-return
+                currentUser?.wheelHist.map(travel => {
+                    onTravel.push(travel)
+                })
+
+                let viewTravels = noUserTravels.filter(travel => onTravel.indexOf(travel._id) === -1)
+
+                setResults(viewTravels)
             } catch (error) {
                 console.error({ message: error.message });
             }
         }
         getTravels()
-    }, [getAllTravels])
-
-    console.log(search);
+    }, [currentUser?.userWheels, currentUser?.wheelHist, getAllTravels])
 
     return (
         <div className='pageSearch'>

@@ -10,24 +10,42 @@ import cancelBtn from '../resources/img/cancelIcon.svg'
 const TravelsPage = () => {
 
     const { viewRender, setViewRender, currentUser, getTravel, } = useUsers()
+    // const [wheeelsRender, setWheeelsRender] = useState([])
+    // const [histRender, setHistRender] = useState([])
+    const [results, setResults] = useState([])
+    const [histUser, setHistUser] = useState([])
 
+    // const [histUser, setHistUser] = useState([])
     const [infoTravels, setInfoTravels] = useState([])
 
     useEffect(() => {
-
         const getInfoTravelsUser = async () => {
-            const results = []
-
             currentUser?.userWheels.forEach(async travel => {
-                const res = await getTravel(travel)
-                results.push(res.data)
-                setInfoTravels(results)
+                const { data } = await getTravel(travel)
+                results.push(data)
             })
-
+            setResults(results)
+            setInfoTravels(results)
         }
-        getInfoTravelsUser()
 
-    }, [currentUser?.userWheels, getTravel])
+        const getHistUser = async () => {
+
+            currentUser?.wheelHist.forEach(async travel => {
+                const { data } = await getTravel(travel)
+                histUser.push(data)
+            })
+            setHistUser(histUser)
+        }
+
+        if (infoTravels.length === 0) {
+            getInfoTravelsUser()
+        }
+
+        if (histUser.length === 0) {
+            getHistUser()
+        }
+
+    }, [currentUser?.userWheels, currentUser?.wheelHist, getTravel, histUser, infoTravels.length, results])
 
 
     const addNewRoute = () => {
@@ -38,6 +56,9 @@ const TravelsPage = () => {
         setViewRender(false)
     }
 
+    // console.log('infoT', infoTravels);
+    // console.log('Hist', histUser);
+    // console.log(currentUser);
 
     return (
         <div className='travelsPage'>
@@ -62,7 +83,26 @@ const TravelsPage = () => {
 
                                 <p>Historial</p>
                                 <div>
-                                    <HistTravel/>
+                                    {
+                                        histUser
+                                            ?
+                                            histUser.map(travel => (
+                                                <HistTravel
+                                                    key={travel._id}
+                                                    tid={travel._id}
+                                                    source={travel.source}
+                                                    destiny={travel.destiny}
+                                                    dateTime={travel.dateTime}
+                                                    price={travel.price}
+                                                    vehicle={travel.vehicle}
+                                                    passengers={travel.passengers}
+                                                    remark={travel.remark}
+                                                    status={travel.status}
+                                                />
+                                            ))
+                                            :
+                                            'No Has Participado En Ningun Viaje Aun'
+                                    }
                                 </div>
                             </div>
 
@@ -73,6 +113,7 @@ const TravelsPage = () => {
                                         infoTravels.map(travel => (
                                             <CreatedTravels
                                                 key={travel._id}
+                                                tid={travel._id}
                                                 source={travel.source}
                                                 destiny={travel.destiny}
                                                 dateTime={travel.dateTime}
@@ -80,6 +121,7 @@ const TravelsPage = () => {
                                                 vehicle={travel.vehicle}
                                                 passengers={travel.passengers}
                                                 remark={travel.remark}
+                                                status={travel.status}
                                             />
                                         ))
                                     }

@@ -35,3 +35,10 @@
     left: 320px;
     cursor: pointer;
   }
+
+  #btnStartCT {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    cursor: pointer;
+  }

@@ -3,11 +3,12 @@ import starIcon from '../resources/img/starIcon2.png'
 
 import React, { useState } from 'react'
 
-const HistTravel = () => {
+const HistTravel = (props) => {
 
     const [viewMoreInfo, setViewMoreInfo] = useState(false)
     const [isRating, setIsRating] = useState(false)
     const [rate, setRate] = useState(0)
+    const [statusTravel, setStatusTravel] = useState(false)
 
     const moreInfo = () => {
         setViewMoreInfo(!viewMoreInfo)
@@ -21,8 +22,11 @@ const HistTravel = () => {
     const formatDate = (date) => {
         return new Date(date).toLocaleString('es-CO')
     }
+    if (props.status === 'Finished') {
+        setStatusTravel(true)
+    }
 
-    console.log(rate);
+    // console.log(rate);
 
     return (
         <div className='objectHT'>
@@ -34,38 +38,38 @@ const HistTravel = () => {
                         </button>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Origen</p>
-                            <p>{ }</p>
+                            <p>{props.source}</p>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Destino</p>
-                            <p>{ }</p>
+                            <p>{props.destiny}</p>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Fecha</p>
-                            <p>{ }</p>
+                            <p>{formatDate(props.dateTime)}</p>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Precio</p>
-                            <p>{ }</p>
+                            <p>{props.price}</p>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Cupos</p>
-                            <p>{ }</p>
+                            <p>{props.seats}</p>
                         </div>
                         <div className="fieldHT">
-                            <p className='titleFieldHT'>Pasajeros</p>
+                            <p className='titleFieldHT'>Estado</p>
                             <p>
                                 {
-                                    // props.passengers.map(passenger => (
-                                    //     <li key={passenger.UID} id='listPassengers' >
-                                    //         {passenger.namePassenger}
-                                    //     </li>
-                                    // ))
+                                    props.status === 'Created'
+                                        ? 'Creado'
+                                        : props.status === 'Started'
+                                            ? 'Iniciado'
+                                            : 'Finalizado'
                                 }
                             </p>
                         </div>
                         {
-                            !isRating
+                            !isRating && statusTravel
                                 ?
                                 <div>
                                     <p id='titleRateHT'>Calificar</p>
@@ -102,15 +106,15 @@ const HistTravel = () => {
                         </button>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Origen</p>
-                            <p>{ }</p>
+                            <p>{props.source}</p>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Destino</p>
-                            <p>{ }</p>
+                            <p>{props.destiny}</p>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Fecha</p>
-                            <p>{ }</p>
+                            <p>{formatDate(props.dateTime)}</p>
                         </div>
                     </div>
             }

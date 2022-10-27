@@ -16,64 +16,49 @@ export default function AccountPage() {
   const [color, setColor] = useState('')
   const [seats, setSeats] = useState(0)
   const [vehicleUser, setVehicleUser] = useState([])
-  const [updateInfo, setUpdateInfo] = useState(false)
-  // const vehicle = []
-
-
 
   let navigate = useNavigate()
 
   useEffect(() => {
+
     if (!isLogged()) {
       navigate('/')
     } else {
       setUserCredentials(getCredentials())
     }
-    
+
     setVehicleUser(currentUser?.vehicle)
 
-    const updateData = async (id, filter) => {
-      try {
-        const res = await updateUser(id, filter)
-        setUpdateInfo(false)
-        console.log(res);
-        return res
+  }, [currentUser?.vehicle, getCredentials, isLogged, navigate])
 
-      } catch (error) {
-        console.error({ message: error });
-      }
+  const updateData = async (id, filter) => {
+    try {
+      const res = await updateUser(id, filter)
+      return res
+    } catch (error) {
+      console.error({ message: error });
     }
+  }
 
-    if (updateInfo) {
-      const user = updateData(userCredentials.UID, { vehicleUser })
-      setCurrentUser(user)
-    }
-
-
-  }, [currentUser?.vehicle, getCredentials, isLogged, navigate, setCurrentUser, updateInfo, updateUser, userCredentials.UID, vehicleUser])
-
-  // const getCredentials = () => {
-  //   const user = JSON.parse(window.localStorage.getItem('User'))
-  //   const token = user.token
-  //   const UID = user.UID
-  //   return { token, UID }
-  // }
 
   const linkVehicle = async (e) => {
     e.preventDefault();
-    const newVehicle = {
+
+    let vehicle = {
       kind,
       plate,
       model,
       color,
       seats
     }
-    vehicleUser.push(newVehicle)
-    await setCurrentUser({ ...currentUser, vehicle: vehicleUser })
-    setUpdateInfo(true)
+
+    vehicleUser.push(vehicle)
+    setCurrentUser({ ...currentUser, vehicle: vehicleUser })
+    await updateData(userCredentials.UID, { vehicle: vehicleUser })
     e.target.reset()
   }
 
+console.log(currentUser);
   return (
     <div className='accountPage'>
       <Header />
@@ -94,7 +79,7 @@ export default function AccountPage() {
           <div className='yourVehicles'>
             <p className='titleLinkUserView'>Vehiculos vinculados a tu cuenta</p>
             {
-              currentUser?.vehicle.length > 0
+              currentUser?.vehicle?.length > 0
                 ?
                 <ul>
                   <p>Vehiculo</p>
