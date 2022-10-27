@@ -21,11 +21,17 @@ const CardSearch = (props) => {
                         UID: credentials.UID,
                         namePassenger: currentUser.userName
                     }
+
+                    const wheelHist = {
+                        TID: props.TID,
+                        isRate: false
+                    }
+
                     props.passengers.push(passenger)
                     const passengers = props.passengers
                     await updateTravel(props.TID, { passengers })
-                    setCurrentUser({ ...currentUser, wheelHist: props.TID })
-                    await updateUser(credentials.UID, { ...currentUser, wheelHist: props.TID })
+                    setCurrentUser({ ...currentUser, wheelHist })
+                    await updateUser(credentials.UID, { ...currentUser, wheelHist })
 
                 } catch (error) {
                     console.error({ message: error.message });
