@@ -31,7 +31,7 @@ const TravelsPage = () => {
             currentUser?.wheelHist?.forEach(async travel => {
                 const { data } = await getTravel(travel.TID)
                 histResults.push(data)
-                setHistUser(histResults)
+                setHistUser([...histResults])
             })
         }
 

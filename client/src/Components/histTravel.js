@@ -20,22 +20,21 @@ const HistTravel = (props) => {
             setStatusTravel(true)
         }
 
-
-
         const ratingTrtavel = async () => {
             const addRate = []
             props?.ratings?.forEach(rate => (addRate.push(rate)))
             // addRate.push(props.ratings)
             addRate.push(rate)
+            setRate(0)
             const ratings = addRate
             await updateTravel(props.tid, { ratings: ratings })
             const index = currentUser?.wheelHist?.findIndex(travel =>  travel.TID === props.tid)
-            console.log('Este',{ ...currentUser?.wheelHist[index], isRate: true });
-            const wheelHistUpdate = { ...currentUser?.wheelHist[index], isRate: true }
-            const wheelHist = currentUser?.wheelHist.splice(index, 1, wheelHistUpdate)
-            console.log(wheelHist);
-            await setCurrentUser({ ...currentUser?.wheelHist[index], isRate: true })
-            await updateUser(userCredentials.UID, { ...currentUser?.wheelHist[0], isRate: true })
+            let newHist = [...currentUser?.wheelHist]
+            newHist[index] = {...newHist[index], isRate: true}
+            const wheelHist = newHist
+
+            setCurrentUser({ ...currentUser, wheelHist: wheelHist })
+            await updateUser(userCredentials.UID, { ...currentUser, wheelHist: wheelHist })
         }
 
         if (rate !== 0) {
@@ -43,9 +42,9 @@ const HistTravel = (props) => {
             setIsRating(true)
         }
 
-    }, [rate])
-    console.log(currentUser);
-
+    }, [currentUser, currentUser?.wheelHist, getCredentials, props?.ratings, props.status, props.tid, rate, setCurrentUser, updateTravel, updateUser, userCredentials.UID])
+    
+    
     const moreInfo = () => {
         setViewMoreInfo(!viewMoreInfo)
     }
