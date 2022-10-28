@@ -28,7 +28,7 @@ const TravelsPage = () => {
         
         const getHistUser = async () => {
 
-            currentUser?.wheelHist.forEach(async travel => {
+            currentUser?.wheelHist?.forEach(async travel => {
                 const { data } = await getTravel(travel.TID)
                 histResults.push(data)
                 setHistUser(histResults)

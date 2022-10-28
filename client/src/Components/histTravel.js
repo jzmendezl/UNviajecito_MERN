@@ -6,7 +6,7 @@ import { useUsers } from '../context/userContext'
 
 const HistTravel = (props) => {
 
-    const { updateTravel, updateUser, getCredentials, currentUser } = useUsers()
+    const { updateTravel, updateUser, getCredentials, currentUser , setCurrentUser} = useUsers()
     const [viewMoreInfo, setViewMoreInfo] = useState(false)
     const [isRating, setIsRating] = useState(currentUser?.wheelHist?.isRate)
     const [rate, setRate] = useState(0)
@@ -24,14 +24,17 @@ const HistTravel = (props) => {
 
         const ratingTrtavel = async () => {
             const addRate = []
-            props.ratings.forEach(rate => (addRate.push(rate)))
+            props?.ratings?.forEach(rate => (addRate.push(rate)))
             // addRate.push(props.ratings)
             addRate.push(rate)
             const ratings = addRate
-            // console.log(ratings);
-            // await updateTravel(props.tid, { ratings: ratings })
-            // await updateUser(userCredentials.UID, { ...currentUser, ratings: ratings })
+            await updateTravel(props.tid, { ratings: ratings })
             const index = currentUser?.wheelHist?.findIndex(travel =>  travel.TID === props.tid)
+            console.log('Este',{ ...currentUser?.wheelHist[index], isRate: true });
+            const wheelHistUpdate = { ...currentUser?.wheelHist[index], isRate: true }
+            const wheelHist = currentUser?.wheelHist.splice(index, 1, wheelHistUpdate)
+            console.log(wheelHist);
+            await setCurrentUser({ ...currentUser?.wheelHist[index], isRate: true })
             await updateUser(userCredentials.UID, { ...currentUser?.wheelHist[0], isRate: true })
         }
 
