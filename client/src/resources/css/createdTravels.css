@@ -13,15 +13,33 @@
     margin-top: 20px;
     margin-bottom: 30px;
     width: 350px;
-    padding: 20px;
+    padding-bottom: 20px;
     border-radius: 14px;
     box-shadow: 0px 10px 10px 10px #0e1013;
+  }
+
+  .headCard {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #282c34;
+    font-weight: 800;
+
+    /* margin: -20px; */
+    border-radius: 14px 14px 0px 0px;
+    width: 350px;
+    height: 50px;
+    background: rgba(255, 228, 196, 0.233);
   }
 
   .fieldCT {
     display: flex;
     flex-direction: row;
-    padding-top: 10px;
+    /* padding-top: 10px;
+    padding-left: 30px; */
+    margin-top: 10px;
+    padding: 10px 30px 0px 30px;
   }
 
   .titleFieldCT {
@@ -30,15 +48,24 @@
   }
 
   #btnViewCT {
-    position: absolute;
-    top: 15px;
-    left: 320px;
+    /* position: absolute; */
+    /* top: 10px;
+    left: 300px; */
     cursor: pointer;
+    
+    background: none;
+    border: none;
+    transform: rotate(90deg);
   }
 
   #btnStartCT {
-    position: absolute;
-    top: 15px;
-    left: 20px;
     cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  #btnFinishCT {
+    cursor: pointer;
+    background: none;
+    border: none;
   }

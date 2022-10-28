@@ -5,13 +5,24 @@ import applyIcon from '../resources/img/applyIcon.png'
 
 const CardSearch = (props) => {
 
-    const { updateTravel, getCredentials, currentUser, setCurrentUser, updateUser } = useUsers()
+    const { updateTravel, getCredentials, currentUser, setCurrentUser, updateUser, getTravel } = useUsers()
     const [credentials, setCredentials] = useState(null)
+    const [onTravel, setOnTravel] = useState(false)
     // const [acceptTravel, setAcceptTravel] = useState(false)
 
     useEffect(() => {
         setCredentials(getCredentials())
+
     }, [getCredentials])
+
+    const verifyPassenger = async () => {
+        const { data } = await getTravel(props.TID)
+        if (!data.passengers.includes(credentials?.UID)) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     const applyTravel = async () => {
         if (parseInt(props.vehicle.seats) > 0) {
@@ -22,16 +33,27 @@ const CardSearch = (props) => {
                         namePassenger: currentUser.userName
                     }
 
-                    const wheelHist = {
+                    const wheelHistNew = {
                         TID: props.TID,
                         isRate: false
                     }
 
-                    props.passengers.push(passenger)
-                    const passengers = props.passengers
-                    await updateTravel(props.TID, { passengers })
-                    setCurrentUser({ ...currentUser, wheelHist })
-                    await updateUser(credentials.UID, { ...currentUser, wheelHist })
+                    if (verifyPassenger()) {
+                        // props.passengers.push(passenger)
+                        let passNew = []
+                        let histUpdate = currentUser?.wheelHist
+                        passNew.push(passenger)
+                        histUpdate.push(wheelHistNew)
+                        const wheelHist = histUpdate
+                        // const passengers = props.passengers
+                        const passengers = passNew
+                        await updateTravel(props.TID, { passengers })
+                        passNew = []
+                        setCurrentUser({ ...currentUser, wheelHist: wheelHist })
+                        await updateUser(credentials.UID, { ...currentUser, wheelHist: wheelHist })
+                    } else {
+                        alert('Lo sentimos no puedes volver a aplicar al mismo viaje')
+                    }
 
                 } catch (error) {
                     console.error({ message: error.message });

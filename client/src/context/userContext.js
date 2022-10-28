@@ -120,7 +120,6 @@ export const UserProvider = ({ children }) => {
   const updateTravel = async (id, filter) => {
     try {
       const res = await updateTravelRequest(id, filter)
-      console.log(res.data);
       return res.data
     } catch (error) {
       console.error({message: error.message});

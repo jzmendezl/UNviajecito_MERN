@@ -1,6 +1,10 @@
 import { useState } from 'react'
 import { useUsers } from '../context/userContext'
 import '../resources/css/createdTravels.css'
+import viewMoreIcon from '../resources/img/viewMore.png'
+import startTravelIcon from '../resources/img/startTravel.png'
+import finishTravelIcon from '../resources/img/finishTravel.png'
+
 
 const CreatedTravels = (props) => {
 
@@ -35,22 +39,31 @@ const CreatedTravels = (props) => {
         viewMoreInfo
           ?
           <div>
-            <button id='btnViewCT' onClick={moreInfo}>
+            <div className='headCard'>
+              <button id='btnViewCT' onClick={moreInfo}>
+                <img src={viewMoreIcon} alt="" />
+              </button>
+              {
+                props.status === 'Created'
+                  ?
+                  <div className='headCard'>
+                    <button id='btnStartCT' onClick={startTravel}>
+                      <img src={startTravelIcon} alt="" />
+                    </button>
+                    <p>Iniciar viaje</p>
+                  </div>
+                  : props.status === 'Started'
+                    ?
+                    <div className='headCard'>
+                      <button id='btnFinishCT' onClick={finishTravel}>
+                        <img src={finishTravelIcon} alt="" />
+                      </button>
+                      <p>Finalizar Viaje</p>
+                    </div>
+                    : ''
 
-            </button>
-            {
-              props.status === 'Created'
-                ?
-                <button id='btnStartCT' onClick={startTravel}>
-
-                </button>
-                : props.status === 'Started'
-                  ? <button id='btnFinishCT' onClick={finishTravel}>
-                    <p>Fin</p>
-                  </button>
-                  : ''
-
-            }
+              }
+            </div>
             <div className="fieldCT">
               <p className='titleFieldCT'>Origen</p>
               <p>{props.source}</p>
@@ -99,9 +112,11 @@ const CreatedTravels = (props) => {
 
           :
           <div>
-            <button id='btnViewCT' onClick={moreInfo}>
-
-            </button>
+            <div className='headCard'>
+              <button id='btnViewCT' onClick={moreInfo}>
+                <img src={viewMoreIcon} alt="" className='ViewMoreIcon' />
+              </button>
+            </div>
             <div className="fieldCT">
               <p className='titleFieldCT'>Origen</p>
               <p>{props.source}</p>

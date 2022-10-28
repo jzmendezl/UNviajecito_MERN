@@ -20,23 +20,24 @@ const Searchv2 = () => {
 
                 // * Filter user
                 let TravelsUser = []
-                // eslint-disable-next-line array-callback-return
-                currentUser?.userWheels.map(travel => {
+                currentUser?.userWheels.forEach(travel => {
                     TravelsUser.push(travel)
-                })
+                });
 
                 let noUserTravels = res.filter(travel => TravelsUser.indexOf(travel._id) === -1)
 
                 //  * Filter on travel
-                let onTravel = []
-                // eslint-disable-next-line array-callback-return
-                currentUser?.wheelHist.map(travel => {
-                    onTravel.push(travel)
-                })
+                if (currentUser?.wheelHist.length > 0) {
+                    let onTravel = []
+                    currentUser?.wheelHist.forEach(travel => {
+                        onTravel.push(travel.TID)
+                    })
+                    console.log('on',onTravel);
+                    let viewTravels = noUserTravels.filter(travel => onTravel.indexOf(travel._id) === -1)
+                    console.log('vi', viewTravels);
+                    setResults(viewTravels)
+                }
 
-                let viewTravels = noUserTravels.filter(travel => onTravel.indexOf(travel._id) === -1)
-
-                setResults(viewTravels)
             } catch (error) {
                 console.error({ message: error.message });
             }

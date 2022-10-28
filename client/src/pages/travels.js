@@ -22,7 +22,6 @@ const TravelsPage = () => {
             currentUser?.userWheels?.forEach(async travel => {
                 const { data } = await getTravel(travel)
                 results.push(data)
-                console.log('resuuuuu', results);
                 setInfoTravels([...results])
             })
         }
@@ -51,13 +50,11 @@ const TravelsPage = () => {
     const cancelAddRoute = () => {
         setViewRender(false)
     }
-    if (infoTravels.length > 0) {
-        console.log('hola');
-    }
+    
 
-    console.log('infoT', infoTravels);
-    console.log('Hist', histUser);
-    // console.log(currentUser);
+    // console.log('infoT', infoTravels);
+    // console.log('Hist', histUser);
+    // // console.log(currentUser);
     
 
     return (
