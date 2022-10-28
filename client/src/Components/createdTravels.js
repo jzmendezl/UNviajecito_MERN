@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useUsers } from '../context/userContext'
 import '../resources/css/createdTravels.css'
 
@@ -6,7 +6,7 @@ const CreatedTravels = (props) => {
 
   const { updateTravel } = useUsers()
   const [viewMoreInfo, setViewMoreInfo] = useState(false)
-  const [statusTravel, setStatusTravel] = useState('')
+  // const [statusTravel, setStatusTravel] = useState('')
 
   const moreInfo = () => {
     setViewMoreInfo(!viewMoreInfo)
@@ -16,9 +16,6 @@ const CreatedTravels = (props) => {
     return new Date(date).toLocaleString('es-CO')
   }
 
-  // useEffect(() => {
-  //   setStatusTravel(props.status)
-  // }, [props.status])
 
   const startTravel = async () => {
     const res = await updateTravel(props.tid, { status: 'Started' })

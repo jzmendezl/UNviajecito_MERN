@@ -58,7 +58,6 @@ export default function AccountPage() {
     e.target.reset()
   }
 
-console.log(currentUser);
   return (
     <div className='accountPage'>
       <Header />

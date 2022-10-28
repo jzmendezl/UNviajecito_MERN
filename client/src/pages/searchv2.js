@@ -8,6 +8,7 @@ import "../resources/css/search2.css";
 const Searchv2 = () => {
 
     const { currentUser } = useUsers()
+    // eslint-disable-next-line no-unused-vars
     const [search, setSearch] = useState('')
     const [results, setResults] = useState([])
     const { getAllTravels } = useUsers()

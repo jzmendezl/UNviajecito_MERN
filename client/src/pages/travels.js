@@ -10,42 +10,38 @@ import cancelBtn from '../resources/img/cancelIcon.svg'
 const TravelsPage = () => {
 
     const { viewRender, setViewRender, currentUser, getTravel, } = useUsers()
-    // const [wheeelsRender, setWheeelsRender] = useState([])
-    // const [histRender, setHistRender] = useState([])
-    const [results, setResults] = useState([])
     const [histUser, setHistUser] = useState([])
-
-    // const [histUser, setHistUser] = useState([])
     const [infoTravels, setInfoTravels] = useState([])
 
+
     useEffect(() => {
+        const results = []
+        const histResults = []
+
         const getInfoTravelsUser = async () => {
-            currentUser?.userWheels.forEach(async travel => {
+            currentUser?.userWheels?.forEach(async travel => {
                 const { data } = await getTravel(travel)
                 results.push(data)
+                console.log('resuuuuu', results);
+                setInfoTravels([...results])
             })
-            setResults(results)
-            setInfoTravels(results)
         }
 
+        
+        
         const getHistUser = async () => {
 
             currentUser?.wheelHist.forEach(async travel => {
                 const { data } = await getTravel(travel)
-                histUser.push(data)
+                histResults.push(data)
             })
-            setHistUser(histUser)
+            setHistUser(histResults)
         }
 
-        if (infoTravels.length === 0) {
-            getInfoTravelsUser()
-        }
+        getInfoTravelsUser()
+        getHistUser()
 
-        if (histUser.length === 0) {
-            getHistUser()
-        }
-
-    }, [currentUser?.userWheels, currentUser?.wheelHist, getTravel, histUser, infoTravels.length, results])
+    }, [currentUser?.userWheels, currentUser?.wheelHist, getTravel])
 
 
     const addNewRoute = () => {
@@ -55,10 +51,14 @@ const TravelsPage = () => {
     const cancelAddRoute = () => {
         setViewRender(false)
     }
+    if (infoTravels.length > 0) {
+        console.log('hola');
+    }
 
-    // console.log('infoT', infoTravels);
-    // console.log('Hist', histUser);
+    console.log('infoT', infoTravels);
+    console.log('Hist', histUser);
     // console.log(currentUser);
+    
 
     return (
         <div className='travelsPage'>
@@ -124,6 +124,7 @@ const TravelsPage = () => {
                                                 status={travel.status}
                                             />
                                         ))
+
                                     }
                                 </div>
 

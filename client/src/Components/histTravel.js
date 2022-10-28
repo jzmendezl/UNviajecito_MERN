@@ -6,14 +6,16 @@ import React, { useState } from 'react'
 const HistTravel = (props) => {
 
     const [viewMoreInfo, setViewMoreInfo] = useState(false)
+    // eslint-disable-next-line no-unused-vars
     const [isRating, setIsRating] = useState(false)
+    // eslint-disable-next-line no-unused-vars
     const [rate, setRate] = useState(0)
     const [statusTravel, setStatusTravel] = useState(false)
 
     const moreInfo = () => {
         setViewMoreInfo(!viewMoreInfo)
     }
-
+    // eslint-disable-next-line no-unused-vars
     const ratingTrtavel = (e) => {
         e.preventDefautl()
 
