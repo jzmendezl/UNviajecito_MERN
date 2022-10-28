@@ -23,7 +23,7 @@ function App() {
         <Route path='/confirm/:token' element={<VerifiedMail />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/account' element={<AccountPage />} />
-        <Route path='/search' element={<SearchPage />} />
+        {/* <Route path='/search' element={<SearchPage />} /> */}
         <Route path='/travels' element={<TravelsPage />} />
         <Route path='/search2' element={<Searchv2 />} />
         <Route path='/aboutUs' element={<AboutUsPage />} />

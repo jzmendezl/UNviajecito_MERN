@@ -34,9 +34,9 @@ export default function Header() {
     <div className='header'>
       <div className='navBar'>
         <div className='optNavBar' onClick={goAccount}>Cuenta</div>
-        <div className='optNavBar' onClick={goSearch}>Buscar</div>
+        {/* <div className='optNavBar' onClick={goSearch}>Buscar</div> */}
         <div className='optNavBar' onClick={goTravels}>Mis Viajes</div>
-        <div className='optNavBar' onClick={goSearch2}>Buscar 2</div>
+        <div className='optNavBar' onClick={goSearch2}>Buscar</div>
         <div className='optNavBar' onClick={goAboutUs}>About Us</div>
         <div className='optNavBar' onClick={LogOut}>LogOut</div>
       </div>
