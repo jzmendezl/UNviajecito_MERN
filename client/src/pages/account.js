@@ -3,7 +3,9 @@ import Header from '../Components/header'
 import Photo from '../resources/img/photo_user.svg'
 import { useUsers } from '../context/userContext'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Vehicle from '../Components/vehicle'
+
 
 export default function AccountPage() {
 
@@ -16,6 +18,10 @@ export default function AccountPage() {
   const [color, setColor] = useState('')
   const [seats, setSeats] = useState(0)
   const [vehicleUser, setVehicleUser] = useState([])
+  const [index, setIndex] = useState(0);
+  const timeoutRef = useRef(null);
+
+  const delay = 25000;
 
   let navigate = useNavigate()
 
@@ -31,6 +37,27 @@ export default function AccountPage() {
 
   }, [currentUser?.vehicle, getCredentials, isLogged, navigate])
 
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
+  useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(
+      () =>
+        setIndex((prevIndex) =>
+          prevIndex === vehicleUser.length - 1 ? 0 : prevIndex + 1
+        ),
+      delay
+    );
+
+    return () => {
+      resetTimeout();
+    };
+  }, [index]);
+
   const updateData = async (id, filter) => {
     try {
       const res = await updateUser(id, filter)
@@ -39,7 +66,6 @@ export default function AccountPage() {
       console.error({ message: error });
     }
   }
-
 
   const linkVehicle = async (e) => {
     e.preventDefault();
@@ -57,6 +83,8 @@ export default function AccountPage() {
     await updateData(userCredentials.UID, { vehicle: vehicleUser })
     e.target.reset()
   }
+  console.log(vehicleUser);
+
 
   return (
     <div className='accountPage'>
@@ -75,47 +103,36 @@ export default function AccountPage() {
         </div>
 
         <div className='linkToUser'>
-          <div className='yourVehicles'>
-            <p className='titleLinkUserView'>Vehiculos vinculados a tu cuenta</p>
-            {
-              currentUser?.vehicle?.length > 0
-                ?
-                <ul>
-                  <p>Vehiculo</p>
-                  <li className='viewVehicle'>
+          <div className="slideshow">
+            <div className="slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+              {
+                vehicleUser.map((v, i) => (
+                  <div className="slide">
+                    <Vehicle
+                      key={i}
+                      plate={v.plate}
+                      color={v.color}
+                      model={v.model}
+                      seats={v.seats}
+                      kind={v.kind}
+                    />
+                  </div>
+                ))
+              }
+            </div>
 
-                    <p className='titleViewForm'>Tipo</p>
-                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.kind : 'Cargando'}</p>
+            <div className="slideshowDots">
+              {vehicleUser.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`slideshowDot${index === idx ? " active" : ""}`}
+                  onClick={() => {
+                    setIndex(idx);
+                  }}
+                ></div>
+              ))}
+            </div>
 
-                  </li>
-                  <li className='viewVehicle'>
-
-                    <p className='titleViewForm'>Placa</p>
-                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.plate : 'Cargando'}</p>
-
-                  </li>
-                  <li className='viewVehicle'>
-
-                    <p className='titleViewForm'>Modelo</p>
-                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.model : 'Cargando'}</p>
-
-                  </li>
-                  <li className='viewVehicle'>
-
-                    <p className='titleViewForm'>Color</p>
-                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.color : 'Cargando'}</p>
-
-                  </li>
-                  <li className='viewVehicle'>
-
-                    <p className='titleViewForm'>Puestos</p>
-                    <p className='valueViewForm'>{currentUser ? currentUser?.vehicle[0]?.seats : 'Cargando'}</p>
-
-                  </li>
-                </ul>
-                :
-                <p>No tienes vehiculos asociados a tu cuenta</p>
-            }
           </div>
 
           <div className='newLink'>
@@ -154,8 +171,9 @@ export default function AccountPage() {
               </div>
             </form>
           </div>
+
         </div>
       </div>
-    </div>
+    </div >
   )
 }
