@@ -5,23 +5,21 @@ import { useUsers } from '../context/userContext'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import Vehicle from '../Components/vehicle'
+import ModalVehicle from '../Components/ModalVehicle'
+import addIcon from '../resources/img/addIcon.png'
 
 
 export default function AccountPage() {
 
-  const { currentUser, isLogged, setCurrentUser, updateUser, getCredentials } = useUsers()
-  const [userCredentials, setUserCredentials] = useState('')
+  const { currentUser, isLogged, getCredentials } = useUsers()
+  const [isOpen, setIsOpen] = useState(false)
 
-  const [kind, setKind] = useState(0)
-  const [plate, setPlate] = useState('')
-  const [model, setModel] = useState('')
-  const [color, setColor] = useState('')
-  const [seats, setSeats] = useState(0)
+
   const [vehicleUser, setVehicleUser] = useState([])
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
 
-  const delay = 25000;
+  const delay = 250000;
 
   let navigate = useNavigate()
 
@@ -29,8 +27,6 @@ export default function AccountPage() {
 
     if (!isLogged()) {
       navigate('/')
-    } else {
-      setUserCredentials(getCredentials())
     }
 
     setVehicleUser(currentUser?.vehicle)
@@ -56,34 +52,8 @@ export default function AccountPage() {
     return () => {
       resetTimeout();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
-
-  const updateData = async (id, filter) => {
-    try {
-      const res = await updateUser(id, filter)
-      return res
-    } catch (error) {
-      console.error({ message: error });
-    }
-  }
-
-  const linkVehicle = async (e) => {
-    e.preventDefault();
-
-    let vehicle = {
-      kind,
-      plate,
-      model,
-      color,
-      seats
-    }
-
-    vehicleUser.push(vehicle)
-    setCurrentUser({ ...currentUser, vehicle: vehicleUser })
-    await updateData(userCredentials.UID, { vehicle: vehicleUser })
-    e.target.reset()
-  }
-  console.log(vehicleUser);
 
 
   return (
@@ -103,6 +73,17 @@ export default function AccountPage() {
         </div>
 
         <div className='linkToUser'>
+
+          <ModalVehicle open={isOpen} close={() => setIsOpen(false)} />
+          <div id='btnAddVehicle'>
+            <button onClick={() => setIsOpen(true)} id='btnAddVehicle'>
+              <div id='lblAddVehicle'>
+                <img src={addIcon} alt="" id='iconAdd'/>
+                <p>Añadir Vehiculo</p>
+              </div>
+            </button>
+          </div>
+
           <div className="slideshow">
             <div className="slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
               {
@@ -135,15 +116,15 @@ export default function AccountPage() {
 
           </div>
 
-          <div className='newLink'>
+
+
+          {/* <div className='newLink'>
             <form onSubmit={linkVehicle}>
               <p className='titleLinkUser'>Vincular Vehiculo a la cuenta</p>
               <div id='kind'>
                 <label htmlFor="kindCar" className='lblLinkUser'>
                   <p className='titleFormLink'>Carro</p>
                   <input type='radio' id='kindCar' name='kind' value={'Carro'} onChange={(e) => setKind(e.target.value)} />
-                  {/* <p className='titleFormLink'>Moto</p>
-                <input type='radio' id='kind' name='kind' value={'Moto'} onChange={(e) => setKind(e.target.value)} /> */}
                 </label>
                 <label htmlFor="kindBike" className='lblLinkUser'>
                   <p className='titleFormLink'>Moto</p>
@@ -170,9 +151,10 @@ export default function AccountPage() {
                 <button type="submit" id='btnAdd'>Agregar</button>
               </div>
             </form>
-          </div>
+          </div> */}
 
         </div>
+
       </div>
     </div >
   )

@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --main-bg-color: #282c34;
+    --enfacis-color: #2ecece;
+    box-sizing: border-box;
+  }
+
+.modalVehicleBody {
+    position : fixed;
+    top: 50%;
+    left: 50%;
+    transform : translate(-50%,-50%);
+    background-color:  #282c34;
+    border-radius: 18px;
+    padding: 50px;
+    z-index: 1000;
+}
+
+.overlayModalVehicle {
+    position : fixed;
+    top : 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color : rgba(0,0,0,.7);
+    z-index: 1000;
+}
+
+#divBtnCancel {
+    position: relative;
+    box-sizing: border-box;
+    margin-bottom: -20px;
+    padding: 0;
+    width: 130%;
+    height: 30px;
+}
+
+#btnCancelVehicle {
+    position: absolute;
+    left: 280px;
+    top: -30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
