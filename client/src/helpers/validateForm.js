@@ -55,3 +55,77 @@ export const validateDomain = (email) => {
 
     return true;
   }
+
+  export const validateFormVehicle = (vehicle) => {
+    let expRegPlateCar = /([A-Z]{3})([-]{1})([0-9]{3})/;
+    let expRegPlateBike = /([A-Z]{3})([-]{1})([0-9]{2})([A-Z]{1})/;
+
+    if (vehicle?.kind === 'Carro' && (expRegPlateCar.exec(vehicle?.plate) === null)) {
+        toast.error('El Campo Placa Debe Ser Valida',
+            {
+                style: {
+                    borderRadius: '10px',
+                    background: '#282c34',
+                    color: '#2ececece',
+                },
+            }
+        )
+        return false
+    }
+
+    if (vehicle?.kind === 'Moto' && (expRegPlateBike.exec(vehicle?.plate) === null)) {
+      alert('que pasa')  
+      toast.error('El Campo Placa Debe Ser Valida',
+            {
+                style: {
+                    borderRadius: '10px',
+                    background: '#282c34',
+                    color: '#2ececece',
+                },
+            }
+        )
+        return false
+    }
+
+    if (vehicle?.model < 1990 || vehicle?.model > 2023) {
+        toast.error('El Campo Modelo debe estar entre 1990 y 2023',
+            {
+                style: {
+                    borderRadius: '10px',
+                    background: '#282c34',
+                    color: '#2ececece',
+                },
+            }
+        )
+        return false
+    }
+
+    if (vehicle?.kind === 'Moto' && !(parseInt(vehicle?.seats) === 1)) {
+        toast.error('El Campo Puesto Solo Puede Ser 1 Si Eliges Una Moto',
+            {
+                style: {
+                    borderRadius: '10px',
+                    background: '#282c34',
+                    color: '#2ececece',
+                },
+            }
+        )
+        return false
+    }
+
+    if (vehicle?.kind === 'Carro' && (parseInt(vehicle?.seats) < 1 || parseInt(vehicle?.seats) > 5)) {
+
+        toast.error('El Campo Puesto Debe Estar Entre 1 y 5 Si Es Un Carro',
+            {
+                style: {
+                    borderRadius: '10px',
+                    background: '#282c34',
+                    color: '#2ececece',
+                },
+            }
+        )
+        return false
+    }
+
+    return true
+}

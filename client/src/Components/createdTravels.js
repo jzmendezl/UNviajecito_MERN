@@ -10,7 +10,7 @@ const CreatedTravels = (props) => {
 
   const { updateTravel } = useUsers()
   const [viewMoreInfo, setViewMoreInfo] = useState(false)
-  // const [statusTravel, setStatusTravel] = useState('')
+  const [statusTravel, setStatusTravel] = useState(props.status)
 
   const moreInfo = () => {
     setViewMoreInfo(!viewMoreInfo)
@@ -22,13 +22,17 @@ const CreatedTravels = (props) => {
 
 
   const startTravel = async () => {
+    setStatusTravel('Started')
     const res = await updateTravel(props.tid, { status: 'Started' })
+    setViewMoreInfo(!viewMoreInfo)
     console.log('startTravel', res);
 
   }
 
   const finishTravel = async () => {
+    setStatusTravel('Finished')
     const res = await updateTravel(props.tid, { status: 'Finished' })
+    setViewMoreInfo(!viewMoreInfo)
     console.log('finishTravel', res);
 
   }
@@ -44,7 +48,7 @@ const CreatedTravels = (props) => {
                 <img src={viewMoreIcon} alt="" />
               </button>
               {
-                props.status === 'Created'
+               statusTravel === 'Created'
                   ?
                   <div className='headCard'>
                     <button id='btnStartCT' onClick={startTravel}>
@@ -52,7 +56,7 @@ const CreatedTravels = (props) => {
                     </button>
                     <p>Iniciar viaje</p>
                   </div>
-                  : props.status === 'Started'
+                  : statusTravel === 'Started'
                     ?
                     <div className='headCard'>
                       <button id='btnFinishCT' onClick={finishTravel}>
@@ -99,10 +103,10 @@ const CreatedTravels = (props) => {
             <div className="fieldCT">
               <p className='titleFieldCT'>Estado</p>
               <p>
-                {
-                  props.status === 'Created'
+              {
+                  statusTravel === 'Created'
                     ? 'Creado'
-                    : props.status === 'Started'
+                    : statusTravel === 'Started'
                       ? 'Iniciado'
                       : 'Finalizado'
                 }
@@ -133,9 +137,9 @@ const CreatedTravels = (props) => {
               <p className='titleFieldCT'>Estado</p>
               <p>
                 {
-                  props.status === 'Created'
+                  statusTravel === 'Created'
                     ? 'Creado'
-                    : props.status === 'Started'
+                    : statusTravel === 'Started'
                       ? 'Iniciado'
                       : 'Finalizado'
                 }

@@ -69,7 +69,6 @@ const sendRoute = () => {
     }, 1000);
 }
 
-console.log(currentUser);
 return (
     <div id='bodyAR'>
         <p id='titleAR'>Agregar Nueva Ruta</p>

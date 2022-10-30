@@ -45,11 +45,12 @@ const CardSearch = (props) => {
                         passNew.push(passenger)
                         histUpdate.push(wheelHistNew)
                         const wheelHist = histUpdate
+                        console.log('updHist', wheelHist);
                         // const passengers = props.passengers
                         const passengers = passNew
                         await updateTravel(props.TID, { passengers })
                         passNew = []
-                        setCurrentUser({ ...currentUser, wheelHist: wheelHist })
+                        setCurrentUser({ ...currentUser, wheelHist: { wheelHist } })
                         await updateUser(credentials.UID, { ...currentUser, wheelHist: wheelHist })
                     } else {
                         alert('Lo sentimos no puedes volver a aplicar al mismo viaje')
@@ -66,7 +67,8 @@ const CardSearch = (props) => {
         }
 
     }
-
+    console.log(currentUser);
+    
     return (
         <div className='cardSearch'>
             <div className='btnsCS'>

@@ -25,16 +25,14 @@ const TravelsPage = () => {
                 setInfoTravels([...results])
             })
         }
-
-        
         
         const getHistUser = async () => {
 
-            currentUser?.wheelHist.forEach(async travel => {
-                const { data } = await getTravel(travel)
+            currentUser?.wheelHist?.forEach(async travel => {
+                const { data } = await getTravel(travel.TID)
                 histResults.push(data)
+                setHistUser([...histResults])
             })
-            setHistUser(histResults)
         }
 
         getInfoTravelsUser()
@@ -56,7 +54,6 @@ const TravelsPage = () => {
     // console.log('Hist', histUser);
     // // console.log(currentUser);
     
-
     return (
         <div className='travelsPage'>
             <Header />
@@ -95,6 +92,7 @@ const TravelsPage = () => {
                                                     passengers={travel.passengers}
                                                     remark={travel.remark}
                                                     status={travel.status}
+                                                    ratings={travel.ratings}
                                                 />
                                             ))
                                             :

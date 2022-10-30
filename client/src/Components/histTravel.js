@@ -1,34 +1,58 @@
 import '../resources/css/histTravel.css'
 import starIcon from '../resources/img/starIcon2.png'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useUsers } from '../context/userContext'
 
 const HistTravel = (props) => {
 
+    const { updateTravel, updateUser, getCredentials, currentUser , setCurrentUser} = useUsers()
     const [viewMoreInfo, setViewMoreInfo] = useState(false)
-    // eslint-disable-next-line no-unused-vars
-    const [isRating, setIsRating] = useState(false)
-    // eslint-disable-next-line no-unused-vars
+    const [isRating, setIsRating] = useState(currentUser?.wheelHist?.isRate)
     const [rate, setRate] = useState(0)
-    const [statusTravel, setStatusTravel] = useState(false)
+    const [statusTravel, setStatusTravel] = useState(props.status)
+    const [userCredentials, setUserCredentials] = useState('')
 
+    useEffect(() => {
+        setUserCredentials(getCredentials())
+
+        if (props.status === 'Finished') {
+            setStatusTravel(true)
+        }
+
+        const ratingTrtavel = async () => {
+            const addRate = []
+            props?.ratings?.forEach(rate => (addRate.push(rate)))
+            // addRate.push(props.ratings)
+            addRate.push(rate)
+            setRate(0)
+            const ratings = addRate
+            await updateTravel(props.tid, { ratings: ratings })
+            const index = currentUser?.wheelHist?.findIndex(travel =>  travel.TID === props.tid)
+            let newHist = [...currentUser?.wheelHist]
+            newHist[index] = {...newHist[index], isRate: true}
+            const wheelHist = newHist
+
+            setCurrentUser({ ...currentUser, wheelHist: wheelHist })
+            await updateUser(userCredentials.UID, { ...currentUser, wheelHist: wheelHist })
+        }
+
+        if (rate !== 0) {
+            ratingTrtavel()
+            setIsRating(true)
+        }
+
+    }, [currentUser, currentUser?.wheelHist, getCredentials, props?.ratings, props.status, props.tid, rate, setCurrentUser, updateTravel, updateUser, userCredentials.UID])
+    
+    
     const moreInfo = () => {
         setViewMoreInfo(!viewMoreInfo)
     }
-    // eslint-disable-next-line no-unused-vars
-    const ratingTrtavel = (e) => {
-        e.preventDefautl()
 
-    }
 
     const formatDate = (date) => {
         return new Date(date).toLocaleString('es-CO')
     }
-    if (props.status === 'Finished') {
-        setStatusTravel(true)
-    }
-
-    // console.log(rate);
 
     return (
         <div className='objectHT'>

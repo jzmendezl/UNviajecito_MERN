@@ -12,25 +12,26 @@ const Searchv2 = () => {
     const [search, setSearch] = useState('')
     const [results, setResults] = useState([])
     const { getAllTravels } = useUsers()
-
+    // console.log(currentUser);
     useEffect(() => {
         const getTravels = async () => {
             try {
                 const res = await getAllTravels()
-
+                
                 // * Filter user
                 let TravelsUser = []
                 currentUser?.userWheels.forEach(travel => {
                     TravelsUser.push(travel)
                 });
-
+                
                 let noUserTravels = res.filter(travel => TravelsUser.indexOf(travel._id) === -1)
-
+                
                 //  * Filter on travel
-                if (currentUser?.wheelHist.length > 0) {
+                if (currentUser?.wheelHist.length >= 0) {
                     let onTravel = []
                     currentUser?.wheelHist.forEach(travel => {
                         onTravel.push(travel.TID)
+                        console.log('hola');
                     })
                     console.log('on',onTravel);
                     let viewTravels = noUserTravels.filter(travel => onTravel.indexOf(travel._id) === -1)
