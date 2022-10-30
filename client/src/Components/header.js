@@ -37,8 +37,8 @@ export default function Header() {
         <div className='optNavBar' onClick={goSearch}>Buscar</div>
         <div className='optNavBar' onClick={goTravels}>Mis Viajes</div>
         <div className='optNavBar' onClick={goSearch2}>Buscar 2</div>
-        <div className='optNavBar' onClick={goAboutUs}>About Us</div>
-        <div className='optNavBar' onClick={LogOut}>LogOut</div>
+        <div className='optNavBar' onClick={goAboutUs}>Acerca de nosotros</div>
+        <div className='optNavBar' onClick={LogOut}>Salir</div>
       </div>
       <hr />
     </div>

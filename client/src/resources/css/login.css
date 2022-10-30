@@ -4,7 +4,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     --main-bg-color: #282c34;
-    --enfacis-color: #2ecece;
+    --enfacis-color: #e7810d;
 }
 
 /* Change the white to any color ;) */
@@ -19,7 +19,9 @@ input:-webkit-autofill:active {
 
 
 #pageLogin {
-    background-color: #282c34;
+    background: rgb(73,187,20);
+    background: linear-gradient(180deg, rgba(73,187,20,1) 1%, rgba(230,255,0,1) 100%);
+  
     min-height: 100vh;
 
     display: flex;

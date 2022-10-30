@@ -1,12 +1,14 @@
 * {
   margin: 0;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand LightOblique-Regular', sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --main-bg-color: #282c34;
-  --enfacis-color: #2ecece;
+  /*-moz-osx-font-smoothing: grayscale;*/
+  --background-color:  rgb(99, 250, 99);
+  --enfacis-color: #91ce2e;
   box-sizing: border-box;
 }
+
+
 
 .pageRoot {
   width: 100vw;
@@ -15,14 +17,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-bg-color);
-}
+  background: rgb(73,187,20);
+  background: linear-gradient(180deg, rgba(73,187,20,1) 1%, rgba(230,255,0,1) 100%);}
 
 .txtRoot {
   width: 500px;
   text-align: center;
   margin: 100px;
-  color: #2ecece;
+  color: #be281e;
 }
 
 .btns{
@@ -31,15 +33,20 @@
   flex-direction: row;
   justify-content: space-around;
 }
+#image {
+  width: 100px;
+
+}
 
 #btnLoginRoot {
   margin-top: 20px;
-  background: #2f3542;
+  background: #6d7991;
   outline: 0px;
-  border: none;
-  color: #2ecece;
-  padding: 5px;
+  border: 2px outset #42a508 ;
+  color: #42a508;
+  padding: 30px;
   cursor: pointer;
+  font-size: 28px;
 }
 
 #btnSgnRoot {
