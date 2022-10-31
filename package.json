@@ -21,7 +21,7 @@
     "fs-extra": "^10.1.0",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.6.5",
+    "mongoose": "^6.7.0",
     "morgan": "^1.10.0",
     "nodejs-nodemailer-outlook": "^1.2.4",
     "nodemailer": "^6.8.0",
