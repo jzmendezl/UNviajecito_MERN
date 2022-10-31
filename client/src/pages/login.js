@@ -1,9 +1,12 @@
 import '../resources/css/login.css'
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../context/userContext';
-import toast from 'react-hot-toast'
-import { useEffect, useState } from 'react';
-
+import toast, { Toaster } from 'react-hot-toast'
+import React,{ useEffect, useState } from 'react';
+import { Box, Button, Typography } from '@mui/material'
+import  logoX from '../resources/img/logoX.png'
+import {FiLogIn} from 'react-icons/fi'
+import {SlBookOpen} from 'react-icons/sl'
 
 export default function LoginPage() {
 
@@ -42,7 +45,7 @@ export default function LoginPage() {
     try {
       if (email && password) {
         const newUser = await loginUser(authUser)
-
+        console.log(newUser)
         if (newUser) {
           window.localStorage.setItem(
             'User', JSON.stringify({ 'token': newUser.token, 'UID': newUser.UID })
@@ -66,13 +69,10 @@ export default function LoginPage() {
             navigate('/account')
           }, 2000);
         } else {
+          console.log('holi')
           toast.error('Credenciales Invalidas!',
             {
-              style: {
-                borderRadius: '10px',
-                background: '#282c34',
-                color: '#2ececece',
-              },
+
             }
           );
         }
@@ -87,24 +87,36 @@ export default function LoginPage() {
   }
 
   return (
+ 
     <div id='pageLogin'>
-      <div id='contentLogin'>
+    <div id='image'  >
+    <img src={logoX} alt="Logo-UNviajecito" border="0" width={200}  />
+    </div> 
+       <div id='contentLogin'>
         <form id='formLogin' onSubmit={handleLoginEmail}>
           <label htmlFor="email" className='lbl-email'>
-            <span className='txt-email'>Email</span>
-            <input type="email" name="email" id="email" placeholder='example@example.com' onChange={(e) => setEmail(e.target.value)} />
+            <Typography color={"black"} variant="h6" >
+              Email
+            </Typography>
+            <input type="email" name="email" id="email" placeholder='example@unal.edu.co' onChange={(e) => setEmail(e.target.value)} required />
           </label>
           <label htmlFor="password">
-            <span>Password</span>
-            <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+          <Typography color={"black"} variant="h6" >
+              Contraseña
+            </Typography>
+            <input type="password" name="password" id="password" placeholder='Contraseña' onChange={(e) => setPassword(e.target.value)} required/>
           </label>
-          <button type="submit" className='sendLogin'>Login</button>
-        </form>
-        <div className='option'>
-          <p id='txtNewAccount'>Obten una cuenta</p>
-          <button className='sendSignin' onClick={handleSignin}>Signin</button>
-        </div>
+          <Button type="submit" className='sendLogin'variant='contained' sx={{backgroundColor: "gray" }} >Iniciar Sesión &nbsp; <FiLogIn size={20}/></Button>         
+          </form>
+          <Toaster /> 
+         <div className='option'>
+          <p id='txtNewAccount'>Obtén una cuenta</p>
+          </div>
+        <div className='option2'>
+        <Button variant='contained' sx={{backgroundColor: "gray",padding:'10px', textAlign:"center"}} onClick={handleSignin}>Registrarse &nbsp;</Button>
+      </div>
       </div>
     </div>
+
   )
 }

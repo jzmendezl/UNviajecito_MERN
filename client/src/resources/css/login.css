@@ -17,17 +17,24 @@ input:-webkit-autofill:active {
 }
 
 
-
 #pageLogin {
     background: rgb(73,187,20);
     background: linear-gradient(180deg, rgba(73,187,20,1) 1%, rgba(230,255,0,1) 100%);
-  
-    min-height: 100vh;
+    position: fixed;
 
+    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 10000;
     align-items: center;
+}
+#image {
+position: absolute;
+left: 0;
+top: 0;
+z-index: 1000;
 }
 
 #contentLogin {
@@ -38,8 +45,8 @@ input:-webkit-autofill:active {
     padding-bottom: 30px;
     gap: 20px;
 
-    width: 220px;
-    color: #FFFFFF;
+    width: 240px;
+    color: #ffffff;
 
     /* background: aquamarine; */
     border-radius: 30px;
@@ -118,14 +125,20 @@ input:-internal-autofill-selected {
 }
 
 .option {
-    width: 220px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     margin-top: 30px;
-    border-top: 1px solid #414141;
+    border-top: 1px solid #000000;
     padding-top: 25px;
+}
+.option {
+    display: flex;
+    flex-direction: row;
+    align-items:Right;
+    justify-content: space-evenly;
+    margin-top: 0px;
 }
 
 .otherLogin {
