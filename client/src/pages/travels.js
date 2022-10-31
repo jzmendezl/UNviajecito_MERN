@@ -50,10 +50,6 @@ const TravelsPage = () => {
     }
     
 
-    // console.log('infoT', infoTravels);
-    // console.log('Hist', histUser);
-    // // console.log(currentUser);
-    
     return (
         <div className='travelsPage'>
             <Header />

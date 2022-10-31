@@ -43,7 +43,7 @@ export default function LoginPage() {
     try {
       if (email && password) {
         const newUser = await loginUser(authUser)
-
+        console.log(newUser)
         if (newUser) {
           window.localStorage.setItem(
             'User', JSON.stringify({ 'token': newUser.token, 'UID': newUser.UID })
@@ -67,13 +67,10 @@ export default function LoginPage() {
             navigate('/account')
           }, 2000);
         } else {
+          console.log('holi')
           toast.error('Credenciales Invalidas!',
             {
-              style: {
-                borderRadius: '10px',
-                background: '#282c34',
-                color: '#2ececece',
-              },
+
             }
           );
         }
@@ -88,6 +85,7 @@ export default function LoginPage() {
   }
 
   return (
+ 
     <div id='pageLogin'>
       <div id='contentLogin'>
       <div class="conicono">
@@ -96,12 +94,16 @@ export default function LoginPage() {
       <h2 class="titulo-form">Iniciar sesión</h2><br></br>
         <form id='formLogin' onSubmit={handleLoginEmail}>
           <label htmlFor="email" className='lbl-email'>
-            <span className='txt-email'>Email</span>
-            <input type="email" name="email" id="email" placeholder='example@example.com' onChange={(e) => setEmail(e.target.value)} />
+            <Typography color={"black"} variant="h6" >
+              Email
+            </Typography>
+            <input type="email" name="email" id="email" placeholder='example@unal.edu.co' onChange={(e) => setEmail(e.target.value)} required />
           </label>
           <label htmlFor="password">
-            <span>Password</span>
-            <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)} />
+          <Typography color={"black"} variant="h6" >
+              Contraseña
+            </Typography>
+            <input type="password" name="password" id="password" placeholder='Contraseña' onChange={(e) => setPassword(e.target.value)} required/>
           </label>
           <button type="submit" className='sendLogin'>Login</button>
         </form>
@@ -110,5 +112,6 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+
   )
 }

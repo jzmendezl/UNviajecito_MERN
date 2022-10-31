@@ -67,7 +67,7 @@ const CardSearch = (props) => {
         }
 
     }
-    console.log(currentUser);
+    // console.log(currentUser);
     
     return (
         <div className='cardSearch'>
@@ -106,7 +106,7 @@ const CardSearch = (props) => {
             </div>
 
             <div className='btnsCS'>
-                <button id='btnViewMap'>Ver Mapa</button>
+                {/* <button id='btnViewMap'>Ver Mapa</button> */}
             </div>
         </div>
     )

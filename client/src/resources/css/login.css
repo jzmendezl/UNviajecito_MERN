@@ -17,16 +17,16 @@ input:-webkit-autofill:active {
 }
 
 
-
 #pageLogin {
     background: white;
     background: linear-gradient(180deg,   rgb(24, 142, 146)1%, rgb(229, 230, 228) 100%);
   
     min-height: 100vh;
-
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 10000;
     align-items: center;
 }
 .conicono{
@@ -145,12 +145,18 @@ input:-internal-autofill-selected {
 }
 
 .option {
-    width: 220px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     padding-top: 25px;
+}
+.option {
+    display: flex;
+    flex-direction: row;
+    align-items:Right;
+    justify-content: space-evenly;
+    margin-top: 0px;
 }
 
 .otherLogin {
