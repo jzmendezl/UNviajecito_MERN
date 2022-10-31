@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../context/userContext';
 import toast from 'react-hot-toast'
 import { useEffect, useState } from 'react';
+import iconoL from '../resources/img/iconoL.png'
 
 
 export default function LoginPage() {
@@ -89,6 +90,10 @@ export default function LoginPage() {
   return (
     <div id='pageLogin'>
       <div id='contentLogin'>
+      <div class="conicono">
+      <img src={iconoL} alt="" class='iconopag' />
+      </div>
+      <h2 class="titulo-form">Iniciar sesión</h2><br></br>
         <form id='formLogin' onSubmit={handleLoginEmail}>
           <label htmlFor="email" className='lbl-email'>
             <span className='txt-email'>Email</span>
@@ -101,8 +106,7 @@ export default function LoginPage() {
           <button type="submit" className='sendLogin'>Login</button>
         </form>
         <div className='option'>
-          <p id='txtNewAccount'>Obten una cuenta</p>
-          <button className='sendSignin' onClick={handleSignin}>Signin</button>
+          <a className='sendSignin' onClick={handleSignin}>Obtener una cuenta</a>
         </div>
       </div>
     </div>

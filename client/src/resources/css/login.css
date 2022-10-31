@@ -19,8 +19,8 @@ input:-webkit-autofill:active {
 
 
 #pageLogin {
-    background: rgb(73,187,20);
-    background: linear-gradient(180deg, rgba(73,187,20,1) 1%, rgba(230,255,0,1) 100%);
+    background: white;
+    background: linear-gradient(180deg,   rgb(24, 142, 146)1%, rgb(229, 230, 228) 100%);
   
     min-height: 100vh;
 
@@ -29,7 +29,15 @@ input:-webkit-autofill:active {
     justify-content: center;
     align-items: center;
 }
-
+.conicono{
+    display: flex;
+    float: left;
+}
+.iconopag{
+    width: 100px;
+    margin-left: -400px; 
+    margin-top: -20px;
+}
 #contentLogin {
     display: flex;
     flex-direction: column;
@@ -38,7 +46,7 @@ input:-webkit-autofill:active {
     padding-bottom: 30px;
     gap: 20px;
 
-    width: 220px;
+    width: 300px;
     color: #FFFFFF;
 
     /* background: aquamarine; */
@@ -46,6 +54,17 @@ input:-webkit-autofill:active {
     /* box-shadow: 0px 0px 50px 10px rgb(17, 12, 12); */
 }
 
+.titulo-form{
+    background: white;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color:#500B87;
+    font-weight: 850;
+    font-size: 20px;
+    border-radius: 10px;
+    text-transform: uppercase; margin-top: -100px;
+}
 #formLogin {
     display: flex;
     flex-direction: column;
@@ -56,6 +75,17 @@ input:-webkit-autofill:active {
     overflow: hidden;
 }
 
+label span{
+    background: white;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color:#500B87;
+    font-weight: 850;
+    font-size: 14px;
+    border-radius: 10px;
+
+}
 label input {
     display: flex;
     flex-direction: column;
@@ -64,10 +94,11 @@ label input {
     border: none;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #c7c7c7;
+    border-bottom: 5px solid #000000;
     color: #fff;
 
     font-size: 14px;
+    font-weight: 600;
 }
 
 label {
@@ -82,6 +113,8 @@ label input:focus {
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
+
+
 
 input:-internal-autofill-selected {
     color: #fff;
@@ -99,22 +132,16 @@ input:-internal-autofill-selected {
 
 .sendLogin {
     margin-top: 20px;
-    background: #2f3542;
+    background: gray;
     outline: 0px;
-    border: none;
-    color: #2ecece;
+    color: #ddf1f1;
     padding: 5px;
     cursor: pointer;
+    font-size: 15px;
 }
 
 .sendSignin {
-    background: #2f3542;
-    outline: 0px;
-    border: none;
-    color: #2ecece;
-    cursor: pointer;
-    width: 50px;
-    height: 20px;
+    font-style: initial;
 }
 
 .option {
@@ -123,8 +150,6 @@ input:-internal-autofill-selected {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: 30px;
-    border-top: 1px solid #414141;
     padding-top: 25px;
 }
 

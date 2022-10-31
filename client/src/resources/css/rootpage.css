@@ -18,13 +18,17 @@
   justify-content: center;
   align-items: center;
   background: rgb(73,187,20);
-  background: linear-gradient(180deg, rgba(73,187,20,1) 1%, rgba(230,255,0,1) 100%);}
+  background: linear-gradient(180deg,  rgba(73, 187, 20, 0.753) 1%, rgba(201, 223, 4, 0.856) 100%);}
 
 .txtRoot {
   width: 500px;
   text-align: center;
   margin: 100px;
   color: #be281e;
+}
+
+.imgRoot{
+  width: 300px;
 }
 
 .btns{
