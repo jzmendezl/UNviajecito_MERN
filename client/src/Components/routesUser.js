@@ -64,17 +64,19 @@ const RoutesUser = () => {
             wheels.push(res.tid)
             setCurrentUser({ ...currentUser, userWheels: wheels })
             await updateData(credentials.UID, { userWheels: wheels })
+            setViewRender(false)
+            e.target.reset()
         }
         // await updateUser(credentials.UID, { userWheels: wheels })
     }
 
-    const sendRoute = () => {
-        setTimeout(() => {
-            if (correctForm) {
-                setViewRender(false)
-            }
-        }, 500);
-    }
+    // const sendRoute = () => {
+    //     setTimeout(() => {
+    //         if (correctForm) {
+    //             setViewRender(false)
+    //         }
+    //     }, 500);
+    // }
     console.log(travel);
     return (
         <div id='bodyAR'>
@@ -131,7 +133,7 @@ const RoutesUser = () => {
                     </select>
 
                 </label>
-                <button type="submit" id='btnFormAR' onClick={sendRoute}>Agregar</button>
+                <button type="submit" id='btnFormAR' >Agregar</button>
             </form>
         </div>
     )

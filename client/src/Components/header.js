@@ -13,9 +13,9 @@ export default function Header() {
   const goAboutUs = () => {
     navigate('/aboutUs', {state:  currentUser })
   }
-  const goSearch = () => {
-    navigate('/search')
-  }
+  // const goSearch = () => {
+  //   navigate('/search')
+  // }
   const goTravels = () => {
     navigate('/travels')
   }

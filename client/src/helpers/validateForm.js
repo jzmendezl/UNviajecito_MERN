@@ -176,7 +176,7 @@ export const validateAddTravel = (travel) => {
     return false
   }
 
-  if ((travel?.vehicle?.kind === 'Carro' && (travel?.seats < 1 || travel?.seats > 5) || isNaN(travel?.seats)) ) {
+  if ((travel?.vehicle?.kind === 'Carro' && (travel?.seats < 1 || travel?.seats > 5)) || isNaN(travel?.seats) ) {
     toast.error('El Campo Cupos Debe Estar Entre 1 y 5 Si Es Un Carro',
       {
         style: {
