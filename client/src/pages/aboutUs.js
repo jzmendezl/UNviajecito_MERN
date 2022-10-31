@@ -10,9 +10,12 @@ import GHIcon from '../resources/img/Github_white.svg'
 import GMIcon from '../resources/img/Gmail_white.svg'
 import LdIcon from '../resources/img/LinkedIN_white.svg'
 
-
-
-
+import Joe_img from '../resources/img/Joe.png'
+import Brian_img from '../resources/img/Brian.png'
+import Aleja_img from '../resources/img/Aleja.png'
+import Camilo_img from '../resources/img/Camilo.png'
+import Pablo_img from '../resources/img/Pablo.png'
+import Karen_img from '../resources/img/Karen.png'
 
 export default function AboutUsPage() {
 
@@ -42,7 +45,7 @@ export default function AboutUsPage() {
       <div className='viewUS'>
 
         <div className='linksUs'>
-          <img src={userIcon} alt="" className='PhotoUS' />
+          <img src={Joe_img} alt="" className='PhotoUS' />
           <p>Joe Mendez</p>
           <div className='socialUS'>
             <button className='btnIconAU'>
@@ -69,7 +72,7 @@ export default function AboutUsPage() {
         </div>
 
         <div className='linksUs'>
-          <img src={userIcon} alt="" className='PhotoUS' />
+          <img src={Brian_img} alt="" className='PhotoUS' />
           <p>Brian Chaparro</p>
           <div className='socialUS'>
             <button className='btnIconAU'>
@@ -96,7 +99,7 @@ export default function AboutUsPage() {
         </div>
 
         <div className='linksUs'>
-          <img src={userIcon} alt="" className='PhotoUS' />
+          <img src={Camilo_img} alt="" className='PhotoUS' />
           <p>Camilo Fierro</p>
           <div className='socialUS'>
             <button className='btnIconAU'>
@@ -123,7 +126,7 @@ export default function AboutUsPage() {
         </div>
 
         <div className='linksUs'>
-          <img src={userIcon} alt="" className='PhotoUS' />
+          <img src={Pablo_img} alt="" className='PhotoUS' />
           <p>Juan Caicedo</p>
           <div className='socialUS'>
             <button className='btnIconAU'>
@@ -150,7 +153,7 @@ export default function AboutUsPage() {
         </div>
 
         <div className='linksUs'>
-          <img src={userIcon} alt="" className='PhotoUS' />
+          <img src={Karen_img} alt="" className='PhotoUS' />
           <p>Karen Medina</p>
           <div className='socialUS'>
             <button className='btnIconAU'>
@@ -177,7 +180,7 @@ export default function AboutUsPage() {
         </div>
 
         <div className='linksUs'>
-          <img src={userIcon} alt="" className='PhotoUS' />
+          <img src={Aleja_img} alt="" className='PhotoUS' />
           <p>Alejandra Jimenez</p>
           <div className='socialUS'>
             <button className='btnIconAU'>
