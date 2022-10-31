@@ -3,13 +3,13 @@
   font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --main-bg-color: #282c34;
+  --main-bg-color: #1A1A1A;
   --enfacis-color: #2ecece;
   box-sizing: border-box;
 }
 
 .pageAboutUs {
-  background-color: #282c34;
+  background-color: #1A1A1A;
   min-height: 100vh;
 
   display: flex;

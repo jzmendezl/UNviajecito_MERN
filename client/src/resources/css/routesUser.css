@@ -3,7 +3,7 @@
     font-family: 'Quicksand', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    --main-bg-color: #282c34;
+    --main-bg-color:#1A1A1A;
     --enfacis-color: #2ecece;
     box-sizing: border-box;
 }
@@ -19,7 +19,7 @@ input:-webkit-autofill:active {
 ::-webkit-calendar-picker-indicator { padding-left: 170px; margin-top: -18px;}
 
 #bodyAR {
-    background-color: #282c34;
+    background-color: #1A1A1A;
     padding: 60px;
     width: 900px;
     height: 600px;

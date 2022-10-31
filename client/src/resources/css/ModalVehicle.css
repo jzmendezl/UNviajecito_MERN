@@ -3,7 +3,7 @@
     font-family: 'Quicksand', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    --main-bg-color: #282c34;
+    --main-bg-color: #1A1A1A;
     --enfacis-color: #2ecece;
     box-sizing: border-box;
   }
@@ -13,7 +13,7 @@
     top: 50%;
     left: 50%;
     transform : translate(-50%,-50%);
-    background-color:  #282c34;
+    background-color:  #1A1A1A;
     border-radius: 18px;
     padding: 50px;
     z-index: 1000;
