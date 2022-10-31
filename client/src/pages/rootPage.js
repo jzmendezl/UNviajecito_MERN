@@ -31,10 +31,10 @@ export default function RootPage() {
     <div className='pageRoot'>
       <div className=''>
         <Typography variant='h4' component='div' gutterBottom color={"white"}>
-            Bienvenido
+          Bienvenido
         </Typography>
       </div>
-  <img src={logoX} alt="Logo-UNviajecito" border="0" className='imgRoot' />
+  <img src={logoX} alt="Logo-UNviajecito" border="0" className='imgRoot' width={'25%'}  />
       <div>
           <Box fontWeight='fontWeightBold' m={1} sx={{outlineStyle: "solid", padding: "7px", borderRadius: "10px", outlineColor:"white"}}>
             <Typography color={"white"}>            
