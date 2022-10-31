@@ -93,16 +93,12 @@ export default function LoginPage() {
       </div>
       <h2 class="titulo-form">Iniciar sesión</h2><br></br>
         <form id='formLogin' onSubmit={handleLoginEmail}>
-          <label htmlFor="email" className='lbl-email'>
-            <Typography color={"black"} variant="h6" >
-              Email
-            </Typography>
+          <label htmlFor="email">
+              <span>Email</span>
             <input type="email" name="email" id="email" placeholder='example@unal.edu.co' onChange={(e) => setEmail(e.target.value)} required />
           </label>
-          <label htmlFor="password">
-          <Typography color={"black"} variant="h6" >
-              Contraseña
-            </Typography>
+          <label htmlFor="password" >
+             <span>Password</span> 
             <input type="password" name="password" id="password" placeholder='Contraseña' onChange={(e) => setPassword(e.target.value)} required/>
           </label>
           <button type="submit" className='sendLogin'>Login</button>
