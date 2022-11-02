@@ -11,38 +11,12 @@ export const loginUser = async (req, res) => {
 
     if (authUser && (await compare(password, authUser.password))) {
       return res.status(201).json({
-        // userName: authUser.userName,
-        // celPhone: authUser.celPhone,
-        // email: authUser.email,
-        // photoUser: authUser.photoUser,
         UID: authUser._id,
         token: generateToken(authUser._id)
       })
     } else {
       return res.status(401).json({ message: 'Invalid Credentials' })
     }
-    // if (!authUser) {
-    //   res.status(404)
-    //   res.send({
-    //     error: 'User not found'
-    //   })
-    //   return
-    // }
-
-    // const checkPassword = await compare(password, authUser.password)
-
-    // if (checkPassword) {
-    //   res.send(authUser)
-    //   return
-    // }
-
-    // if (!checkPassword) {
-    //   res.status(409)
-    //   res.send({
-    //     error: 'Invalid Password'
-    //   })
-    //   return
-    // }
 
   } catch (error) {
     return res.status(401).json({ message: error.message })
@@ -57,11 +31,16 @@ export const createUsers = async (req, res) => {
 
     await User.findOne({ email })
 
+    // if (req.files.photoUser) {
+    //   const res = await uploadPhotoUser(req.files.photoUser.tempFilePath)
+    //   console.log(res);
+    // }
+
     // * image dafault
 
     let photoUser = {
-      "url": "https://res.cloudinary.com/joemendez/image/upload/v1663568344/usersPhoto/rzdivknzd1ojeeqtdg40.png",
-      "publicId": "usersPhoto/rzdivknzd1ojeeqtdg40"
+      "url": "https://res.cloudinary.com/joemendez/image/upload/v1666375716/usersPhoto/IconUser_dqau58.png",
+      "public_id": 'usersPhoto/k2kfvqwqj6v0iuqknhxz'
     };
 
     const newUser = await User.create({
@@ -94,17 +73,17 @@ export const createUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-
+    
     let photoUser;
 
-    if (req.files.photoUser) {
+    if (req.files?.photoUser) {
       const result = await uploadPhotoUser(req.files.photoUser.tempFilePath)
       photoUser = {
         url: result.secure_url,
         publicId: result.public_id
       }
     }
-
+    
     return res.send(updatedUser)
 
   } catch (error) {
@@ -132,7 +111,6 @@ export const getUser = async (req, res) => {
       userWheels: user.userWheels,
       verifyAccount: user.verifyAccount
     }
-    console.log(newUser);
     return res.json(newUser)
     // return res.send({newUser})
 
@@ -178,19 +156,18 @@ export const generateToken = (id) => {
 }
 
 export const getTokenData = (token) => {
-  
-  let data = jwt.decode(token, process.env.JWT_SECRET,(err, decoded) => {
-      if(err) {
-          console.log('Error al obtener data del token');
-      } else {
-          data = decoded;
-      }
+
+  let data = jwt.decode(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      console.log('Error al obtener data del token');
+    } else {
+      data = decoded;
+    }
   }
   );
 
   return data;
 }
-
 
 export const confirmUser = async (req, res) => {
   try {

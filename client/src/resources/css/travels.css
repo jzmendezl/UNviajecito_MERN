@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --main-bg-color: #1A1A1A;
+    --enfacis-color: #2ecece;
+    box-sizing: border-box;
+}
+
+.travelsPage {
+    background-color: #1A1A1A;
+    /* min-height: 100vh; */
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    overflow-y: auto;    
+}
+
+
+.bodyTP {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 80vw;
+    margin-top: 40px;
+}
+
+.addTravelTP {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 30px;
+}
+
+#btnAddRouteTP {
+    border: none;
+    background: none;
+    color: #2ecece;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+#btnAddRouteTP:hover {
+    font-size: 20px;
+  }
+
+.downTP {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+}
+
+.rigthTP {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 500px;
+    padding: 20px;
+
+    /* border-radius: 18px;
+    box-shadow: 0px 10px 10px 10px #14171b; */
+}
+
+.leftTP {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 500px;
+}
+
+#cancelAddRoute {
+    margin-top: 50px;
+    margin-left: 840px;
+
+    border: none;
+    background: none;
+}
+
+.myTravelTP {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: max-content;
+    height: 400px;
+    margin-bottom: 50px;
+    padding: 20px 80px;
+}

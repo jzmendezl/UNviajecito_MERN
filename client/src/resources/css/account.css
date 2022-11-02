@@ -3,26 +3,30 @@
   font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --main-bg-color: #282c34;
+  --main-bg-color: #1A1A1A;
   --enfacis-color: #2ecece;
+  box-sizing: border-box;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input[type=number] { -moz-appearance:textfield; }
+input[type=number] {
+  -moz-appearance: textfield;
+}
 
 .accountPage {
   min-height: 100vh;
-
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: #ffffff;
-  background: var(--main-bg-color);
+  background: #1A1A1A;
+  z-index: 2;
 }
 
 .bodyAccount {
@@ -76,14 +80,34 @@ input[type=number] { -moz-appearance:textfield; }
   text-align: center;
   padding-bottom: 50px;
   color: var(--enfacis-color);
-  
+
 }
 
-textarea {
-  border-radius: 14px;
-  background: #282c34;
-  color: #ffffff;
-  padding: 20px;
+.titleLinkUserView {
+  padding: 30px 0px 50px 0px;
+  text-align: center;
+  color: var(--enfacis-color);
+  margin-top: 20px;
+}
+
+#lblAddVehicle {
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#btnAddVehicle {
+  background: none;
+  border: none;
+  color: #2ecece;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#iconAdd {
+  width: 15px;
 }
 
 #btnAdd {
@@ -122,14 +146,6 @@ textarea {
   /* background: #ffffff; */
 }
 
-.yourVehicles {
-  margin-top: -50px;
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
-}
-
-
 .newLink {
   margin-top: -10px;
   width: 300px;
@@ -142,4 +158,61 @@ textarea {
   justify-content: space-between;
   border-radius: 14px;
   box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
+}
+
+#kind {
+  display: flex;
+  flex-direction: row;
+}
+
+.viewVehicle {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+
+.titleViewForm {
+  width: 100px;
+  margin-left: 50px;
+  color: #2ecece;
+}
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 300px;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 14px;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+}
+
+.slide {
+  display: inline-block;
+
+  height: 350px;
+  width: 100%;
+}
+
+.slideshowDots {
+  text-align: center;
+  /* margin-top: -60px; */
+  margin-bottom: 20px;
+  z-index: 1;
+}
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0px 7px 0px;
+  background-color: #2ecece;
+}
+
+#btnAddVehicle {
+  position: 'relative';
+  z-index: 1;
 }

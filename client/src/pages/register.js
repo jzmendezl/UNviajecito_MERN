@@ -4,6 +4,7 @@ import { useUsers } from '../context/userContext'
 
 import { useEffect } from 'react';
 import { formValidate } from '../helpers/validateForm';
+import iconoL from '../resources/img/iconoL.png';
 
 
 
@@ -47,11 +48,16 @@ export default function RegisterPage() {
   }
 
   return (
-    <div id='pageLogin'>
+    
+    <div id='pageLogin' >
       <div id='contentLogin'>
+      <div class="conicono">
+      <img src={iconoL} alt="" class='iconopag' />
+      </div>
+        <h2 class="titulo-form">Crea una cuenta</h2><br></br>
         <form action="" id='formLogin' onSubmit={handleSignInEmail}>
           <label htmlFor="name">
-            <span>Nombre de Usuario</span>
+            <span>Usuario</span>
             <input type="text" name="name" id="name" placeholder='Example' />
           </label>
 
@@ -66,15 +72,14 @@ export default function RegisterPage() {
           </label>
 
           <label htmlFor="password">
-            <span>Password</span>
+            <span>Contraseña</span>
             <input type="password" name="password" id="password" />
           </label>
-          <button type="submit" className='sendLogin'>Sign In</button>
+          <button type="submit" className='sendLogin'>Registrarse</button>
         </form>
 
         <div className='option'>
-          <p id='txtNewAccount'>Ya tienes una cuenta</p>
-          <button className='sendSignin' onClick={goToLogin}>Login</button>
+          <a className='sendSignin' onClick={goToLogin}>¿Ya tienes una cuenta?</a>
         </div>
       </div>
     </div>

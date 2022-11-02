@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --main-bg-color: #1A1A1A;
+    --enfacis-color: #2ecece;
+    box-sizing: border-box;
+  }
+
+  .objectHT {
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    width: 350px;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0px 10px 10px 10px #0e1013;
+  }
+
+  .fieldHT {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+  }
+
+  .titleFieldHT {
+    color: #2ecece;
+    width: 90px;
+  }
+
+  #btnViewHT {
+    position: absolute;
+    top: 15px;
+    left: 320px;
+    cursor: pointer;
+  }
+
+  #titleRateHT{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: #2ecece;
+    text-align: center;
+  }
+
+  #rateTravelField{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 310px;
+    height: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .rateStar {
+    cursor: pointer;
+    opacity: 20%;
+  }
+
+  .rateStar:hover {
+    width: 20px;
+    height: 20px;
+    color: #298f8f;
+    opacity: 100%;
+  }
+
+  .starIcon {
+    width: 20px;
+    height: 20px;
+  }

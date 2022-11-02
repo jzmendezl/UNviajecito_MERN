@@ -25,7 +25,6 @@ const userSchema = new mongoose.Schema({
   },
   vehicle: {
     type: Array,
-    required: false,
   },
   favorite: {
     type: Array,
