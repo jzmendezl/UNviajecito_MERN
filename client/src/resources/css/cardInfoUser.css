@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --main-bg-color: #1A1A1A;
+  --enfacis-color: #2ecece;
+  box-sizing: border-box;
+}
+
+.dataUser {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+  gap: 50px;
+  margin-top: 100px;
+  border-radius: 14px;
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
+}
+
+.infoUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #2ecece;
+}
+
+.divEdit {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.btnEdit {
+  position: absolute;
+  border: none;
+  background: none;
+  width: fit-content;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+#iconEdit {
+  width: 20px;
+  height: 20px;
+}
+
+#photoUser {
+  width: 200px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+#photoUser:hover {
+  opacity: 40%;
+}
+
+.titleInfoUser {
+  padding-bottom: 20px;
+}
+
+.infoUserCU {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #2ecece;
+  
+
+}
+
+#userNameCU {
+  border: none;
+  background: #3b3b3b;
+  color: #2ecece;
+  outline: none;
+}
+
+#celPhoneCU {
+  border: none;
+  background: #3b3b3b;
+  color: #2ecece;
+  outline: none;
+}
+
+.btnApplyEdit {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

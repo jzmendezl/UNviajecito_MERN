@@ -1,12 +1,13 @@
 import '../resources/css/account.css'
 import Header from '../Components/header'
-import Photo from '../resources/img/photo_user.svg'
+
 import { useUsers } from '../context/userContext'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import Vehicle from '../Components/vehicle'
 import ModalVehicle from '../Components/ModalVehicle'
 import addIcon from '../resources/img/addIcon.png'
+import CardInfoUser from '../Components/CardInfoUser'
 
 
 export default function AccountPage() {
@@ -55,22 +56,14 @@ export default function AccountPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
+  
 
   return (
     <div className='accountPage'>
       <Header />
 
       <div className='bodyAccount'>
-        <div className='dataUser'>
-          <div id='photoUser'>
-            <img src={currentUser ? currentUser?.photoUser?.url : Photo} alt="Foto Usuario" id='photoUser' />
-          </div>
-          <div className='infoUser'>
-            <p className='titleInfoUser'>{currentUser ? currentUser?.userName : 'Cargando'}</p>
-            <p className='titleInfoUser'>{currentUser ? currentUser?.email : 'Cargando'}</p>
-            <p className='titleInfoUser'>{currentUser ? currentUser?.celPhone : 'Cargando'}</p>
-          </div>
-        </div>
+        <CardInfoUser />
 
         <div className='linkToUser'>
 

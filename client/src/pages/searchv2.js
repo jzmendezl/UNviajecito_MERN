@@ -165,8 +165,6 @@ const Searchv2 = () => {
                         />
                     </div>
 
-                    {/* <Test/> */}
-
                     <div className="bodyCardsSP">
                         <div className="cardsSP">
                             {
