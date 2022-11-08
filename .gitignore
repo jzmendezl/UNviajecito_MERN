@@ -7,5 +7,5 @@ node_modules
 .env
 
 #production
-/build
+# /build
 # /client/build
