@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon server/index.js",
+    "start": "serve -s build",
     "dev": "nodemon server/index.js --ignore client",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
@@ -27,7 +27,8 @@
     "morgan": "^1.10.0",
     "nodejs-nodemailer-outlook": "^1.2.4",
     "nodemailer": "^6.8.0",
-    "react-icons": "^4.6.0"
+    "react-icons": "^4.6.0",
+    "serve": "^14.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
