@@ -45,9 +45,10 @@ export const getTemplate = (name, token) => {
             <p>Para confirmar tu cuenta, ingresa al siguiente enlace</p>
             <br />
             <a
-                href="http://localhost:4000/confirm/${token}"
+                href="/confirm/${token}"
                 target="_parent"
             >Confirmar Cuenta</a>
         </div>
       `;
 }
+//http://localhost:4000/confirm/${token}
