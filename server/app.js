@@ -7,10 +7,10 @@ import cors from 'cors'
 import path from "path"
 import {fileURLToPath} from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-console.log('directory-name 👉️', __dirname);
-console.log(path.join(__dirname, '/dist', 'index.html'));
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// console.log('directory-name 👉️', __dirname);
+// console.log(path.join(__dirname, '/dist', 'index.html'));
 
 const app = express()
 
@@ -34,7 +34,9 @@ app.use(travelsRoutes)
 
 // __dirname = path.resolve()
 if(process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, '/client/build')))
+  app.use(express.static(path.join(__dirname, 'public')))
+  app.use("/uploads", express.static(join(__dirname, "public/uploads")));
+  app.use(express.static(join(__dirname, "../client/dist")));
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
