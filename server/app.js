@@ -13,6 +13,7 @@ import {fileURLToPath} from 'url';
 // console.log(path.join(__dirname, '/dist', 'index.html'));
 
 const app = express()
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // * Midelware
 
