@@ -188,7 +188,7 @@ export const confirmUser = async (req, res) => {
     await user.save();
 
     // Redireccionar a la confirmación
-    return res.redirect(`https://unviajecito.herokuapp.com/login`);
+    return res.redirect(`https://unviajecito.herokuapp.com`);
 
   } catch (error) {
     console.log(error);
