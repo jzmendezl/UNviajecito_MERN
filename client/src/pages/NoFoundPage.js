@@ -4,7 +4,7 @@ import '../resources/css/NoFoundPage.css'
 
 const NoFoundPage = () => {
   return (
-    <body>
+    <body id='page404'>
         <div id='divCentral'>
             <p id='codeError'>404</p>
             <p id='txtPNF'>Page No Found</p>
