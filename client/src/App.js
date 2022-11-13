@@ -13,6 +13,7 @@ import VerifiedMail from './pages/verifiedMail';
 import SendVerifyMail from './pages/sendVerifyMail';
 import Searchv2 from './pages/searchv2';
 import TravelsPage from './pages/travels';
+import NoFoundPage from './pages/NoFoundPage';
 
 function App() {
   return (
@@ -22,12 +23,14 @@ function App() {
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/confirm/:token' element={<VerifiedMail />} />
         <Route path='/login' element={<LoginPage />} />
-        <Route path='/account' element={<AccountPage />} />
+        <Route path='/my_account' element={<AccountPage />} />
         {/* <Route path='/search' element={<SearchPage />} /> */}
-        <Route path='/travels' element={<TravelsPage />} />
-        <Route path='/search2' element={<Searchv2 />} />
+        <Route path='/my_travels' element={<TravelsPage />} />
+        <Route path='/search' element={<Searchv2 />} />
         <Route path='/aboutUs' element={<AboutUsPage />} />
         <Route path='/sendVerify' element={<SendVerifyMail />} />
+        <Route path='/*' element={<NoFoundPage />} />
+
       </Routes>
       <Toaster
         position="top-center"

@@ -1,0 +1,29 @@
+body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    text-align: center;
+    background-image: url('../img/bg.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    opacity: 85%;
+}
+
+#divCentral {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#codeError {
+    font-size: 500px;
+    color: #fff;
+}
+
+#txtPNF {
+    font-size: xx-large;
+    color: #fff;
+}

@@ -17,13 +17,13 @@ export default function Header() {
   //   navigate('/search')
   // }
   const goTravels = () => {
-    navigate('/travels')
+    navigate('/my_travels')
   }
   const goSearch2 = () => {
-    navigate('/search2')
+    navigate('/search')
   }
   const goAccount = () => {
-    navigate('/account', {state:  currentUser })
+    navigate('/my_account', {state:  currentUser })
   }
   const LogOut = () => {
     logout()
