@@ -1,6 +1,6 @@
 import { useState, useContext, createContext, useEffect, } from "react";
 import { addTravelRequest, getTravelRequest, getAllTravelsRequest, updateTravelRequest } from "../api/travels";
-import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest, updateUserRequest } from "../api/users";
+import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest, updateUserRequest, updateUserDataRequest } from "../api/users";
 
 
 const userContext = createContext()
@@ -84,7 +84,7 @@ export const UserProvider = ({ children }) => {
     try {
       const user = await updateUserRequest(id, userUpdate)
       setCurrentUser(user.data)
-      console.log('UC',user);
+      console.log('UC',user.data);
       return user.data
     } catch (error) {
       console.error(error.message);
@@ -93,9 +93,9 @@ export const UserProvider = ({ children }) => {
   
   const updateDataUser = async (id, userUpdate) => {
     try {
-      const user = await updateUserRequest(id, userUpdate)
+      const user = await updateUserDataRequest(id, userUpdate)
       setCurrentUser(user.data)
-      console.log('UDC',user);
+      console.log('UDC',user.data);
       return user.data
     } catch (error) {
       console.error(error.message);

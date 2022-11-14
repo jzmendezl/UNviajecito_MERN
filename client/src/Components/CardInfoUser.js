@@ -34,6 +34,7 @@ const CardInfoUser = () => {
       setCurrentUser({ ...currentUser, userName, celPhone, photoUser })
       setChangeDataUser(!changeDataUser)
       const user = await updateDataUser(credentials.UID, { ...currentUser, userName, celPhone, photoUser: file })
+      console.log(user);
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user)
       )
