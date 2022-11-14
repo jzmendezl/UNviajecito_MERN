@@ -16,7 +16,7 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (isLogged()) {
-      navigate('/account')
+      navigate('/my_account')
     }  
   }, [isLogged, navigate])
 
@@ -43,7 +43,6 @@ export default function LoginPage() {
     try {
       if (email && password) {
         const newUser = await loginUser(authUser)
-        console.log(newUser)
         if (newUser) {
           window.localStorage.setItem(
             'User', JSON.stringify({ 'token': newUser.token, 'UID': newUser.UID })
@@ -64,7 +63,7 @@ export default function LoginPage() {
             }
           );
           setTimeout(() => {
-            navigate('/account')
+            navigate('/my_account')
           }, 2000);
         } else {
           console.log('holi')

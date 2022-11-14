@@ -17,6 +17,7 @@ const RoutesUser = () => {
     const [userVehicle, setUserVehicle] = useState([])
     const [vehicleToTravel, setVehicleToTravel] = useState(null)
     const [credentials, setCredentials] = useState(null)
+    // eslint-disable-next-line no-unused-vars
     const [correctForm, setCorrectForm] = useState(false)
 
     const [wheels, setWheels] = useState([])
@@ -70,14 +71,6 @@ const RoutesUser = () => {
         // await updateUser(credentials.UID, { userWheels: wheels })
     }
 
-    // const sendRoute = () => {
-    //     setTimeout(() => {
-    //         if (correctForm) {
-    //             setViewRender(false)
-    //         }
-    //     }, 500);
-    // }
-    console.log(travel);
     return (
         <div id='bodyAR'>
             <p id='titleAR'>Agregar Nueva Ruta</p>

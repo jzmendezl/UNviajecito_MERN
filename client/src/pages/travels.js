@@ -9,9 +9,10 @@ import cancelBtn from '../resources/img/cancelIcon.svg'
 
 const TravelsPage = () => {
 
-    const { viewRender, setViewRender, currentUser, getTravel, } = useUsers()
+    const { currentUser, getTravel, } = useUsers()
     const [histUser, setHistUser] = useState([])
     const [infoTravels, setInfoTravels] = useState([])
+    const [renderNewTravel, setRenderNewTravel] = useState(false)
 
 
     useEffect(() => {
@@ -25,7 +26,7 @@ const TravelsPage = () => {
                 setInfoTravels([...results])
             })
         }
-        
+
         const getHistUser = async () => {
 
             currentUser?.wheelHist?.forEach(async travel => {
@@ -41,23 +42,14 @@ const TravelsPage = () => {
     }, [currentUser?.userWheels, currentUser?.wheelHist, getTravel])
 
 
-    const addNewRoute = () => {
-        setViewRender(!viewRender)
-    }
-
-    const cancelAddRoute = () => {
-        setViewRender(false)
-    }
-    
-
     return (
         <div className='travelsPage'>
             <Header />
             {
-                viewRender
+                renderNewTravel
                     ?
                     <div>
-                        <button onClick={cancelAddRoute} id='cancelAddRoute'>
+                        <button onClick={() => setRenderNewTravel(!renderNewTravel)} id='cancelAddRoute'>
                             <img src={cancelBtn} alt="" />
                         </button>
                         <RoutesUser />
@@ -65,7 +57,7 @@ const TravelsPage = () => {
                     :
                     <div className='bodyTP'>
                         <div className='addTravelTP'>
-                            <button onClick={addNewRoute} id='btnAddRouteTP' >Añadir Ruta</button>
+                            <button onClick={() => setRenderNewTravel(!renderNewTravel)} id='btnAddRouteTP' >Añadir Ruta</button>
                         </div>
 
                         <div className='downTP'>
