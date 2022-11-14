@@ -3,6 +3,7 @@ import { uploadPhotoUser, deletePhotoUser } from "../libs/cloudinary.js";
 import { encrypt, compare } from '../libs/bcrypt.js';
 import jwt from 'jsonwebtoken'
 import { sendEmail, getTemplate } from "../libs/confirmMail.js";
+import fs from "fs-extra";
 
 export const loginUser = async (req, res) => {
   try {
@@ -72,22 +73,24 @@ export const createUsers = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-    
-    let photoUser;
+    const {id} = req.params
 
     if (req.files?.photoUser) {
       const result = await uploadPhotoUser(req.files.photoUser.tempFilePath)
-      photoUser = {
+      await fs.remove(req.files.photoUser.tempFilePath);
+      req.body.photoUser = {
         url: result.secure_url,
         publicId: result.public_id
       }
     }
+    console.log(req.body);
+
+    const updatedUser = await User.findByIdAndUpdate(id, { $set: req.body }, { new: true })
     
-    return res.send(updatedUser)
+    return res.json(updatedUser)
 
   } catch (error) {
-
+    console.log(error);
     return res.status(500).json({ message: error.message })
   }
 }

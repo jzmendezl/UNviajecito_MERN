@@ -56,7 +56,7 @@ export default function AccountPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
-  
+
 
   return (
     <div className='accountPage'>
@@ -71,80 +71,49 @@ export default function AccountPage() {
           <div id='btnAddVehicle'>
             <button onClick={() => setIsOpen(true)} id='btnAddVehicle'>
               <div id='lblAddVehicle'>
-                <img src={addIcon} alt="" id='iconAdd'/>
+                <img src={addIcon} alt="" id='iconAdd' />
                 <p>Añadir Vehiculo</p>
               </div>
             </button>
           </div>
 
-          <div className="slideshow">
-            <div className="slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
-              {
-                vehicleUser.map((v, i) => (
-                  <div className="slide">
-                    <Vehicle
-                      key={i}
-                      plate={v.plate}
-                      color={v.color}
-                      model={v.model}
-                      seats={v.seats}
-                      kind={v.kind}
-                    />
-                  </div>
-                ))
-              }
-            </div>
+          {
+            vehicleUser[0] === ''
+              ?
+              <p>No tienes Vehiculos Asociados A Tu Cuenta</p>
+              :
+              <div className="slideshow">
+                <div className="slideshowSlider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+                  {
+                    vehicleUser.map((v, i) => (
+                      <div className="slide">
+                        <Vehicle
+                          key={i}
+                          plate={v.plate}
+                          color={v.color}
+                          model={v.model}
+                          seats={v.seats}
+                          kind={v.kind}
+                        />
+                      </div>
+                    ))
+                  }
+                </div>
 
-            <div className="slideshowDots">
-              {vehicleUser.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`slideshowDot${index === idx ? " active" : ""}`}
-                  onClick={() => {
-                    setIndex(idx);
-                  }}
-                ></div>
-              ))}
-            </div>
+                <div className="slideshowDots">
+                  {vehicleUser.map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`slideshowDot${index === idx ? " active" : ""}`}
+                      onClick={() => {
+                        setIndex(idx);
+                      }}
+                    ></div>
+                  ))}
+                </div>
 
-          </div>
-
-
-
-          {/* <div className='newLink'>
-            <form onSubmit={linkVehicle}>
-              <p className='titleLinkUser'>Vincular Vehiculo a la cuenta</p>
-              <div id='kind'>
-                <label htmlFor="kindCar" className='lblLinkUser'>
-                  <p className='titleFormLink'>Carro</p>
-                  <input type='radio' id='kindCar' name='kind' value={'Carro'} onChange={(e) => setKind(e.target.value)} />
-                </label>
-                <label htmlFor="kindBike" className='lblLinkUser'>
-                  <p className='titleFormLink'>Moto</p>
-                  <input type='radio' id='kindBike' name='kind' value={'Moto'} onChange={(e) => setKind(e.target.value)} />
-                </label>
               </div>
-              <label htmlFor="plate" className='lblLinkUser'>
-                <p className='titleFormLink'>Placa</p>
-                <input type="text" id='plate' onChange={(e) => setPlate(e.target.value)} />
-              </label>
-              <label htmlFor="model" className='lblLinkUser'>
-                <p className='titleFormLink'>Modelo</p>
-                <input type="text" id='model' onChange={(e) => setModel(e.target.value)} />
-              </label>
-              <label htmlFor="color" className='lblLinkUser'>
-                <p className='titleFormLink'>Color</p>
-                <input type="text" id='color' onChange={(e) => setColor(e.target.value)} />
-              </label>
-              <label htmlFor="seats" className='lblLinkUser'>
-                <p className='titleFormLink'>Puestos</p>
-                <input type="number" id='seats' min={1} max={5} onChange={(e) => setSeats(e.target.value)} />
-              </label>
-              <div id='btnFormLink'>
-                <button type="submit" id='btnAdd'>Agregar</button>
-              </div>
-            </form>
-          </div> */}
+          }
 
         </div>
 

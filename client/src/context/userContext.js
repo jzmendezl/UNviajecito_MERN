@@ -84,6 +84,18 @@ export const UserProvider = ({ children }) => {
     try {
       const user = await updateUserRequest(id, userUpdate)
       setCurrentUser(user.data)
+      console.log('UC',user);
+      return user.data
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+  
+  const updateDataUser = async (id, userUpdate) => {
+    try {
+      const user = await updateUserRequest(id, userUpdate)
+      setCurrentUser(user.data)
+      console.log('UDC',user);
       return user.data
     } catch (error) {
       console.error(error.message);
@@ -140,6 +152,7 @@ export const UserProvider = ({ children }) => {
       loginUser,
       createUser,
       updateUser,
+      updateDataUser,
       currentUser,
       setCurrentUser,
       token,

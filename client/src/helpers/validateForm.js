@@ -176,7 +176,7 @@ export const validateAddTravel = (travel) => {
     return false
   }
 
-  if ((travel?.vehicle?.kind === 'Carro' && (travel?.seats < 1 || travel?.seats > 5)) || isNaN(travel?.seats) ) {
+  if ((travel?.vehicle?.kind === 'Carro' && (travel?.seats < 1 || travel?.seats > 5)) || isNaN(travel?.seats)) {
     toast.error('El Campo Cupos Debe Estar Entre 1 y 5 Si Es Un Carro',
       {
         style: {
@@ -242,4 +242,55 @@ export const validateAddTravel = (travel) => {
   }
 
   return true
+}
+
+export const ValidateChangedata = (userName, celPhone) => {
+  // let userName = user.userName
+  // let celPhone = user.celPhone
+
+  let expRegName = /^[a-zA-Z0-9_-\s]{3,16}$/;
+  let expRegCel = /^([3]{1})([0-9]{9})$/;
+
+  if (!userName) {
+    toast.error('El Campo Nombre de Usuario Es Requerido',
+      {
+        style: {
+          borderRadius: '10px',
+          background: '#282c34',
+          color: '#2ececece',
+        },
+      }
+    );
+    return false;
+  }
+
+  if (!expRegName.exec(userName)) {
+    // alert('El Campo Nombre Admite Letras Y Espacios')
+    toast.error('El Campo Nombre de Usuario Admite Letras Y Espacio',
+      {
+        style: {
+          borderRadius: '10px',
+          background: '#282c34',
+          color: '#2ececece',
+        },
+      }
+    );
+    return false
+  }
+
+  if (!expRegCel.exec(celPhone)) {
+    // alert('El Campo Nombre Admite Letras Y Espacios')
+    toast.error('El Celular debe cumplir con el formato de Colombia',
+      {
+        style: {
+          borderRadius: '10px',
+          background: '#282c34',
+          color: '#2ececece',
+        },
+      }
+    );
+    return false
+  }
+
+  return true;
 }

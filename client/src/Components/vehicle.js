@@ -7,7 +7,7 @@ const Vehicle = ({ kind, color, plate, seats, model }) => {
     return (
         <div className='yourVehicles'>
             <p className='titleLinkUserView'>Vehiculos vinculados a tu cuenta</p>
-            <ul>
+            <ul id="fieldBody">
                 <li className='viewVehicle'>
 
                     <p className='titleViewForm'>Tipo</p>

@@ -50,7 +50,7 @@ input[type=number] {
   text-align: center;
   padding-bottom: 50px;
   color: var(--enfacis-color);
-
+  
 }
 
 .titleLinkUserView {
@@ -58,6 +58,8 @@ input[type=number] {
   text-align: center;
   color: var(--enfacis-color);
   margin-top: 20px;
+  margin-left: -40px;
+
 }
 
 #lblAddVehicle {
@@ -163,7 +165,8 @@ input[type=number] {
   display: inline-block;
 
   height: 350px;
-  width: 100%;
+  /* width: 100%; */
+  width: 350px;
 }
 
 .slideshowDots {
@@ -185,4 +188,8 @@ input[type=number] {
 #btnAddVehicle {
   position: 'relative';
   z-index: 1;
+}
+
+#fieldBody {
+  margin-left: -40px;
 }
