@@ -65,7 +65,7 @@ const CardInfoUser = () => {
             </div>
             <form onSubmit={ChangeData}>
               <label id='photoUserChanged'>
-                <img src={photoUser ? photoUser?.url : 0} alt="Foto Usuario" id='photoUserChanged' />
+                <img src={photoUser ? photoUser?.url : currentUser?.photoUser.url} alt="Foto Usuario" id='photoUserChanged' />
                 <input type="file" name="photoUserChanged" id="inputChange" onChange={viewNewPhoto} />
               </label>
               <div className='infoUserCU'>
