@@ -37,6 +37,9 @@ const CardInfoUser = () => {
 
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user))
+        setTimeout(() => {
+          
+        }, 2000);
       e.target.reset()
     }
   }
