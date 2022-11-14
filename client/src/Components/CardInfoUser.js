@@ -33,11 +33,13 @@ const CardInfoUser = () => {
     if (ValidateChangedata(userName, celPhone)) {
       setCurrentUser({ ...currentUser, userName, celPhone, photoUser })
       setChangeDataUser(!changeDataUser)
-      const user = await updateDataUser(credentials.UID, { ...currentUser, userName, celPhone, photoUser: file })
-      console.log(user);
-      window.localStorage.setItem(
-        'loggedUser', JSON.stringify(user)
-      )
+      setTimeout( async () => {
+        const user = await updateDataUser(credentials.UID, { ...currentUser, userName, celPhone, photoUser: file })
+        console.log(user);
+        window.localStorage.setItem(
+          'loggedUser', JSON.stringify(user)
+        )
+      }, 1000);
       setTimeout(() => {
         e.target.reset()
       }, 1000);
