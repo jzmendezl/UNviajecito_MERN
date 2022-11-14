@@ -37,7 +37,7 @@ const CardInfoUser = () => {
 
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user))
-
+      e.target.reset()
     }
   }
 
