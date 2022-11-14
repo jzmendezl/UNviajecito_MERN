@@ -16,7 +16,6 @@ export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null)
   const [token, setToken] = useState('')
   const [viewRender, setViewRender] = useState(false)
-  // const [userVehicle, setUserVehicle] = useState(null)
 
 
   useEffect(() => {
@@ -46,7 +45,6 @@ export const UserProvider = ({ children }) => {
 
   const getUsers = async () => {
     const res = await getUsersRequest()
-    console.log(res);
     setCurrentUser(res.data)
   }
 
@@ -84,18 +82,16 @@ export const UserProvider = ({ children }) => {
     try {
       const user = await updateUserRequest(id, userUpdate)
       setCurrentUser(user.data)
-      // console.log('UC',user.data);
       return user.data
     } catch (error) {
       console.error(error.message);
     }
   }
   
-  const updateDataUser = async (id, userUpdate) => {
+  const updateDataUser = async (id, userDataUpdate) => {
     try {
-      const user = await updateUserDataRequest(id, userUpdate)
+      const user = await updateUserDataRequest(id, userDataUpdate)
       setCurrentUser(user.data)
-      // console.log('UDC',user.data);
       return user.data
     } catch (error) {
       console.error(error.message);

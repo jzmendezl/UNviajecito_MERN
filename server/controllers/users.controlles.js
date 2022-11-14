@@ -83,7 +83,6 @@ export const updateUser = async (req, res) => {
         publicId: result.public_id
       }
     }
-    console.log(req.body);
 
     const updatedUser = await User.findByIdAndUpdate(id, { $set: req.body }, { new: true })
     
