@@ -33,8 +33,8 @@ const CardInfoUser = () => {
     if (ValidateChangedata(userName, celPhone)) {
       setCurrentUser({ ...currentUser, userName, celPhone, photoUser })
       setChangeDataUser(!changeDataUser)
-      setTimeout( async () => {
-        const user = await updateDataUser(credentials.UID, { ...currentUser, userName, celPhone, photoUser: file })
+      const user = await updateDataUser(credentials.UID, { ...currentUser, userName, celPhone, photoUser: file })
+      setTimeout(() => {
         console.log(user);
         window.localStorage.setItem(
           'loggedUser', JSON.stringify(user)
