@@ -84,7 +84,7 @@ export const UserProvider = ({ children }) => {
     try {
       const user = await updateUserRequest(id, userUpdate)
       setCurrentUser(user.data)
-      console.log('UC',user.data);
+      // console.log('UC',user.data);
       return user.data
     } catch (error) {
       console.error(error.message);
@@ -95,7 +95,7 @@ export const UserProvider = ({ children }) => {
     try {
       const user = await updateUserDataRequest(id, userUpdate)
       setCurrentUser(user.data)
-      console.log('UDC',user.data);
+      // console.log('UDC',user.data);
       return user.data
     } catch (error) {
       console.error(error.message);
