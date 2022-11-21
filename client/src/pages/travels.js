@@ -41,7 +41,7 @@ const TravelsPage = () => {
 
     }, [currentUser?.userWheels, currentUser?.wheelHist, getTravel])
 
-
+    // console.log(histUser);
     return (
         <div className='travelsPage'>
             <Header />
@@ -66,12 +66,14 @@ const TravelsPage = () => {
                                 <p>Historial</p>
                                 <div>
                                     {
-                                        histUser
+                                        histUser.length !== 0
                                             ?
                                             histUser.map(travel => (
                                                 <HistTravel
                                                     key={travel._id}
                                                     tid={travel._id}
+                                                    contact={travel.contact}
+                                                    userName={travel.userName}
                                                     source={travel.source}
                                                     destiny={travel.destiny}
                                                     dateTime={travel.dateTime}
@@ -84,7 +86,7 @@ const TravelsPage = () => {
                                                 />
                                             ))
                                             :
-                                            'No Has Participado En Ningun Viaje Aun'
+                                            <p id='txtNoHist'>No Has Participado En Ningun Viaje Aun</p>
                                     }
                                 </div>
                             </div>

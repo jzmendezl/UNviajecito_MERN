@@ -1,12 +1,12 @@
 import '../resources/css/histTravel.css'
 import starIcon from '../resources/img/starIcon2.png'
-
+import viewMoreIcon from '../resources/img/viewMore.png'
 import React, { useEffect, useState } from 'react'
 import { useUsers } from '../context/userContext'
 
 const HistTravel = (props) => {
 
-    const { updateTravel, updateUser, getCredentials, currentUser , setCurrentUser} = useUsers()
+    const { updateTravel, updateUser, getCredentials, currentUser, setCurrentUser } = useUsers()
     const [viewMoreInfo, setViewMoreInfo] = useState(false)
     const [isRating, setIsRating] = useState(currentUser?.wheelHist?.isRate)
     const [rate, setRate] = useState(0)
@@ -28,9 +28,9 @@ const HistTravel = (props) => {
             setRate(0)
             const ratings = addRate
             await updateTravel(props.tid, { ratings: ratings })
-            const index = currentUser?.wheelHist?.findIndex(travel =>  travel.TID === props.tid)
+            const index = currentUser?.wheelHist?.findIndex(travel => travel.TID === props.tid)
             let newHist = [...currentUser?.wheelHist]
-            newHist[index] = {...newHist[index], isRate: true}
+            newHist[index] = { ...newHist[index], isRate: true }
             const wheelHist = newHist
 
             setCurrentUser({ ...currentUser, wheelHist: wheelHist })
@@ -43,8 +43,8 @@ const HistTravel = (props) => {
         }
 
     }, [currentUser, currentUser?.wheelHist, getCredentials, props?.ratings, props.status, props.tid, rate, setCurrentUser, updateTravel, updateUser, userCredentials.UID])
-    
-    
+
+
     const moreInfo = () => {
         setViewMoreInfo(!viewMoreInfo)
     }
@@ -60,8 +60,11 @@ const HistTravel = (props) => {
                 viewMoreInfo
                     ?
                     <div>
+                        <div className='headCardHT'>
                         <button id='btnViewHT' onClick={moreInfo}>
+                            <img src={viewMoreIcon} alt="" />
                         </button>
+                        </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Origen</p>
                             <p>{props.source}</p>
@@ -79,8 +82,8 @@ const HistTravel = (props) => {
                             <p>{props.price}</p>
                         </div>
                         <div className="fieldHT">
-                            <p className='titleFieldHT'>Cupos</p>
-                            <p>{props.seats}</p>
+                            <p className='titleFieldHT'>Conductor</p>
+                            <p>{props.userName}</p>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Estado</p>
@@ -127,9 +130,11 @@ const HistTravel = (props) => {
 
                     :
                     <div>
-                        <button id='btnViewHT' onClick={moreInfo}>
-
-                        </button>
+                        <div className='headCardHT'>
+                            <button id='btnViewHT' onClick={moreInfo}>
+                                <img src={viewMoreIcon} alt="" />
+                            </button>
+                        </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Origen</p>
                             <p>{props.source}</p>
