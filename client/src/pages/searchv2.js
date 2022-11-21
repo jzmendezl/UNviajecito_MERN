@@ -41,21 +41,16 @@ const Searchv2 = () => {
                     let onTravel = []
                     currentUser?.wheelHist.forEach(travel => {
                         onTravel.push(travel.TID)
-                        console.log('hola');
                     })
-                    // console.log('on',onTravel);
                     let viewTravels = noUserTravels.filter(travel => onTravel.indexOf(travel._id) === -1)
-                    // console.log('vi', viewTravels);
                     AllTravels = [...viewTravels]
                     setResults(viewTravels)
                     setFilters(viewTravels)
                 }
 
                 //  * Filter Kind
-                console.log(kind);
                 if (kind === 'Carro') {
                     let car = []
-                    console.log('all', AllTravels);
                     car = AllTravels.filter(travel => (
                         travel.vehicle.kind === 'Carro'
                     ))
@@ -64,7 +59,6 @@ const Searchv2 = () => {
 
                 if (kind === 'Moto') {
                     let bike = []
-                    console.log('all', AllTravels);
                     bike = AllTravels.filter(travel => (
                         travel.vehicle.kind === 'Moto'
                     ))
@@ -72,41 +66,32 @@ const Searchv2 = () => {
                 }
 
                 //  * Filter price
-                console.log('priceFilter', price);
                 if (price === 1) {
                     let price = []
-                    console.log('all', AllTravels);
                     price = AllTravels.filter(travel => (
                         travel.price <= 5000
                     ))
-                    console.log('price', price);
                     setFilters(price)
                 }
                 if (price === 2) {
                     let price = []
-                    console.log('all', AllTravels);
                     price = AllTravels.filter(travel => (
                         travel.price > 5000 && travel.price <= 10000
                     ))
-                    console.log('price', price);
                     setFilters(price)
                 }
                 if (price === 3) {
                     let price = []
-                    console.log('all', AllTravels);
                     price = AllTravels.filter(travel => (
                         travel.price > 10000 && travel.price <= 15000
                     ))
-                    console.log('price', price);
                     setFilters(price)
                 }
                 if (price === 4) {
                     let price = []
-                    console.log('all', AllTravels);
                     price = AllTravels.filter(travel => (
                         travel.price > 15000
                     ))
-                    console.log('price', price);
                     setFilters(price)
                 }
 
@@ -115,7 +100,6 @@ const Searchv2 = () => {
 
                 if (place === 'Source') {
                     let place = []
-                    console.log('all', AllTravels);
                     place = AllTravels.filter(travel => (
                         travel.source.toLowerCase().includes(search.toLowerCase())
                     ))
@@ -124,7 +108,6 @@ const Searchv2 = () => {
 
                 if (place === 'Destiny') {
                     let place = []
-                    console.log('all', AllTravels);
                     place = AllTravels.filter(travel => (
                         travel.destiny.toLowerCase().includes(search.toLowerCase())
                     ))
@@ -135,7 +118,6 @@ const Searchv2 = () => {
 
                 if (search !== '') {
                     let searchBar = []
-                    console.log('all', AllTravels);
                     searchBar = AllTravels.filter(travel => (
                         travel.source.toLowerCase().includes(search.toLowerCase()) ||
                         travel.destiny.toLowerCase().includes(search.toLowerCase())

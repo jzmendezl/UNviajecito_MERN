@@ -66,7 +66,7 @@ const TravelsPage = () => {
                                 <p>Historial</p>
                                 <div>
                                     {
-                                        histUser
+                                        histUser.length !== 0
                                             ?
                                             histUser.map(travel => (
                                                 <HistTravel
@@ -84,7 +84,7 @@ const TravelsPage = () => {
                                                 />
                                             ))
                                             :
-                                            'No Has Participado En Ningun Viaje Aun'
+                                            <p id='txtNoHist'>No Has Participado En Ningun Viaje Aun</p>
                                     }
                                 </div>
                             </div>

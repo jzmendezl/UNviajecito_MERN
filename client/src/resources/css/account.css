@@ -58,7 +58,7 @@ input[type=number] {
   text-align: center;
   color: var(--enfacis-color);
   margin-top: 20px;
-  margin-left: -40px;
+  /* margin-left: -40px; */
 
 }
 
@@ -166,7 +166,7 @@ input[type=number] {
 
   height: 350px;
   /* width: 100%; */
-  width: 350px;
+  width: 300px;
 }
 
 .slideshowDots {

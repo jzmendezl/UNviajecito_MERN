@@ -13,7 +13,7 @@
     margin-top: 20px;
     margin-bottom: 30px;
     width: 350px;
-    padding: 20px;
+    padding-bottom: 20px;
     border-radius: 14px;
     box-shadow: 0px 10px 10px 10px #0e1013;
   }
@@ -21,7 +21,8 @@
   .fieldHT {
     display: flex;
     flex-direction: row;
-    padding-top: 10px;
+    margin-top: 10px;
+    padding: 10px 30px 0px 30px;
   }
 
   .titleFieldHT {
@@ -29,11 +30,30 @@
     width: 90px;
   }
 
+  .headCardHT {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #282c34;
+    font-weight: 800;
+
+    /* margin: -20px; */
+    border-radius: 14px 14px 0px 0px;
+    width: 350px;
+    height: 50px;
+    background: rgba(255, 228, 196, 0.233);
+  }
+
   #btnViewHT {
-    position: absolute;
+    /* position: absolute;
     top: 15px;
-    left: 320px;
+    left: 320px; */
     cursor: pointer;
+    
+    background: none;
+    border: none;
+    transform: rotate(90deg);
   }
 
   #titleRateHT{
