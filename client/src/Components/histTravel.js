@@ -82,8 +82,8 @@ const HistTravel = (props) => {
                             <p>{props.price}</p>
                         </div>
                         <div className="fieldHT">
-                            <p className='titleFieldHT'>Cupos</p>
-                            <p>{props.seats}</p>
+                            <p className='titleFieldHT'>Conductor</p>
+                            <p>{props.userName}</p>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Estado</p>

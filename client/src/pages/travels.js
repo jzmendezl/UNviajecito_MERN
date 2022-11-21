@@ -41,7 +41,7 @@ const TravelsPage = () => {
 
     }, [currentUser?.userWheels, currentUser?.wheelHist, getTravel])
 
-
+    // console.log(histUser);
     return (
         <div className='travelsPage'>
             <Header />
@@ -72,6 +72,8 @@ const TravelsPage = () => {
                                                 <HistTravel
                                                     key={travel._id}
                                                     tid={travel._id}
+                                                    contact={travel.contact}
+                                                    userName={travel.userName}
                                                     source={travel.source}
                                                     destiny={travel.destiny}
                                                     dateTime={travel.dateTime}
