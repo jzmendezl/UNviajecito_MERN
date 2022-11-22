@@ -23,6 +23,7 @@ const TravelsPage = () => {
             currentUser?.userWheels?.forEach(async travel => {
                 const { data } = await getTravel(travel)
                 results.push(data)
+                console.log(data);
                 setInfoTravels([...results])
             })
         }

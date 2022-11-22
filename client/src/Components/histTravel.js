@@ -15,6 +15,8 @@ const HistTravel = (props) => {
 
     useEffect(() => {
         setUserCredentials(getCredentials())
+        const index = currentUser?.wheelHist?.findIndex(travel => travel.TID === props.tid)
+        setIsRating(currentUser?.wheelHist[index].isRate)
 
         if (props.status === 'Finished') {
             setStatusTravel(true)
@@ -61,9 +63,9 @@ const HistTravel = (props) => {
                     ?
                     <div>
                         <div className='headCardHT'>
-                        <button id='btnViewHT' onClick={moreInfo}>
-                            <img src={viewMoreIcon} alt="" />
-                        </button>
+                            <button id='btnViewHT' onClick={moreInfo}>
+                                <img src={viewMoreIcon} alt="" />
+                            </button>
                         </div>
                         <div className="fieldHT">
                             <p className='titleFieldHT'>Origen</p>
