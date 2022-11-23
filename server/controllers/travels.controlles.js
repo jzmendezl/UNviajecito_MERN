@@ -85,7 +85,7 @@ export const getAllTravels = async (req, res) => {
 export const updateTravel = async (req, res) => {
     try {
         const updatedTravel = await Travel.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        
+
         return res.send(updatedTravel)
     } catch (error) {
         return res.status(500).json({ message: error.message })

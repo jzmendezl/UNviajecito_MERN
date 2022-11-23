@@ -12,8 +12,9 @@ import CardInfoUser from '../Components/CardInfoUser'
 
 export default function AccountPage() {
 
-  const { currentUser, isLogged, getCredentials } = useUsers()
+  const { currentUser, isLogged, getCredentials, getAllTravels } = useUsers()
   const [isOpen, setIsOpen] = useState(false)
+  
 
 
   const [vehicleUser, setVehicleUser] = useState([])
@@ -23,16 +24,16 @@ export default function AccountPage() {
   const delay = 250000;
 
   let navigate = useNavigate()
-
+  
   useEffect(() => {
-
     if (!isLogged()) {
       navigate('/')
     }
 
     setVehicleUser(currentUser?.vehicle)
 
-  }, [currentUser?.vehicle, getCredentials, isLogged, navigate])
+  }, [currentUser?.email, currentUser?.vehicle, getAllTravels, isLogged, navigate])
+
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -55,8 +56,6 @@ export default function AccountPage() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
-
-
 
   return (
     <div className='accountPage'>
