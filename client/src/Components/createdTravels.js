@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useUsers } from '../context/userContext'
 import '../resources/css/createdTravels.css'
-import viewMoreIcon from '../resources/img/viewMore.png'
-import startTravelIcon from '../resources/img/startTravel.png'
-import finishTravelIcon from '../resources/img/finishTravel.png'
+import{HiDotsHorizontal} from 'react-icons/hi'
+import{HiDotsVertical} from 'react-icons/hi'
+import {FaLocationArrow} from 'react-icons/fa'
+
+import{BiCurrentLocation} from 'react-icons/bi'
 
 
 const CreatedTravels = (props) => {
@@ -44,15 +46,15 @@ const CreatedTravels = (props) => {
           ?
           <div>
             <div className='headCard'>
-              <button id='btnViewCT' onClick={moreInfo}>
-                <img src={viewMoreIcon} alt="" />
+              <button id='btnViewCT' onClick={moreInfo} >
+                <HiDotsVertical size={25}  />
               </button>
               {
                statusTravel === 'Created'
                   ?
                   <div className='headCard'>
                     <button id='btnStartCT' onClick={startTravel}>
-                      <img src={startTravelIcon} alt="" />
+                      <FaLocationArrow size={20}   />
                     </button>
                     <p>Iniciar viaje</p>
                   </div>
@@ -60,7 +62,7 @@ const CreatedTravels = (props) => {
                     ?
                     <div className='headCard'>
                       <button id='btnFinishCT' onClick={finishTravel}>
-                        <img src={finishTravelIcon} alt="" />
+                        <BiCurrentLocation size={20} />
                       </button>
                       <p>Finalizar Viaje</p>
                     </div>
@@ -118,7 +120,7 @@ const CreatedTravels = (props) => {
           <div>
             <div className='headCard'>
               <button id='btnViewCT' onClick={moreInfo}>
-                <img src={viewMoreIcon} alt="" className='ViewMoreIcon' />
+              <HiDotsHorizontal size={25}  />
               </button>
             </div>
             <div className="fieldCT">

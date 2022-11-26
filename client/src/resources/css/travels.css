@@ -9,10 +9,10 @@
 }
 
 .travelsPage {
-    background-color: #1A1A1A;
+    background: rgb(56,187,20);
+    background: radial-gradient(circle, rgba(56,187,20,1) 28%, rgba(171,241,7,1) 100%);
     /* min-height: 100vh; */
     height: 100vh;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,11 +36,17 @@
 }
 
 #btnAddRouteTP {
-    border: none;
-    background: none;
-    color: #2ecece;
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 14px;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color:#465841;
+    color: #f173f1;
     cursor: pointer;
     font-size: 17px;
+    border: none;
 }
 
 #btnAddRouteTP:hover {
@@ -77,7 +83,7 @@
 #cancelAddRoute {
     margin-top: 50px;
     margin-left: 840px;
-
+    color: #465841;
     border: none;
     background: none;
 }
