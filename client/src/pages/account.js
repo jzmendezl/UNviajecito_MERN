@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 import Vehicle from '../Components/vehicle'
 import ModalVehicle from '../Components/ModalVehicle'
 import addIcon from '../resources/img/addIcon.png'
+import { IoMdAdd } from "react-icons/io";
 import CardInfoUser from '../Components/CardInfoUser'
 
 
@@ -70,7 +71,8 @@ export default function AccountPage() {
           <div id='btnAddVehicle'>
             <button onClick={() => setIsOpen(true)} id='btnAddVehicle'>
               <div id='lblAddVehicle'>
-                <img src={addIcon} alt="" id='iconAdd' />
+               
+                <IoMdAdd size={20}  />
                 <p>Añadir Vehiculo</p>
               </div>
             </button>

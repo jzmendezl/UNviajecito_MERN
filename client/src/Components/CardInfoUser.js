@@ -3,6 +3,7 @@ import { useUsers } from '../context/userContext'
 import Photo from '../resources/img/photo_user.svg'
 import '../resources/css/cardInfoUser.css'
 import editIcon from '../resources/img/editIcon.png'
+import {CiEdit} from  "react-icons/ci";
 import { ValidateChangedata } from '../helpers/validateForm'
 import { useEffect } from 'react'
 
@@ -88,7 +89,7 @@ const CardInfoUser = () => {
           <div className='dataUser'>
             <div className='divEdit'>
               <button onClick={() => setChangeDataUser(!changeDataUser)} className='btnEdit'>
-                <img src={editIcon} alt="" id='iconEdit' />
+                <CiEdit id='iconEdit' />
               </button>
             </div>
             <form onSubmit={ChangeData}>
@@ -112,7 +113,7 @@ const CardInfoUser = () => {
           <div className='dataUser'>
             <div className='divEdit'>
               <button onClick={() => setChangeDataUser(!changeDataUser)} className='btnEdit'>
-                <img src={editIcon} alt="" id='iconEdit' />
+                <CiEdit id='iconEdit' />
               </button>
             </div>
             <div id='photoUser'>

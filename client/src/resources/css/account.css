@@ -4,7 +4,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --main-bg-color: #1A1A1A;
-  --enfacis-color: #2ecece;
+  --enfacis-color: #f173f1;;
   box-sizing: border-box;
 }
 
@@ -25,8 +25,9 @@ input[type=number] {
   flex-direction: column;
   align-items: center;
   color: #ffffff;
-  background: #1A1A1A;
-  z-index: 2;
+  background: rgb(56,187,20);
+  background: radial-gradient(circle, rgba(56,187,20,1) 28%, rgba(171,241,7,1) 100%);
+ z-index: 2;
 }
 
 .bodyAccount {
@@ -56,7 +57,7 @@ input[type=number] {
 .titleLinkUserView {
   padding: 30px 0px 50px 0px;
   text-align: center;
-  color: var(--enfacis-color);
+  color:   #f17ff5;
   margin-top: 20px;
   /* margin-left: -40px; */
 
@@ -66,20 +67,23 @@ input[type=number] {
   width: 150px;
   display: flex;
   flex-direction: row;
+  border-radius: 14px;
   align-items: center;
   justify-content: space-evenly;
+  background-color:#465841;
 }
 
 #btnAddVehicle {
   background: none;
   border: none;
-  color: #2ecece;
+  color: #f173f1;
   cursor: pointer;
   font-size: 15px;
 }
 
 #iconAdd {
   width: 15px;
+  /*background-color: #f173f1;*/
 }
 
 #btnAdd {
@@ -146,7 +150,7 @@ input[type=number] {
 .titleViewForm {
   width: 100px;
   margin-left: 50px;
-  color: #2ecece;
+  color: #f173f1;
 }
 
 .slideshow {
@@ -155,10 +159,13 @@ input[type=number] {
   max-width: 300px;
   box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.2);
   border-radius: 14px;
+  background:  #465841;
 }
 
 .slideshowSlider {
   white-space: nowrap;
+  
+
 }
 
 .slide {
@@ -174,6 +181,7 @@ input[type=number] {
   /* margin-top: -60px; */
   margin-bottom: 20px;
   z-index: 1;
+
 }
 .slideshowDot {
   display: inline-block;
@@ -182,11 +190,12 @@ input[type=number] {
   border-radius: 50%;
   cursor: pointer;
   margin: 0px 7px 0px;
-  background-color: #2ecece;
+  background-color:#f173f1;
 }
 
 #btnAddVehicle {
   position: 'relative';
+ 
   z-index: 1;
 }
 

@@ -46,8 +46,9 @@
 }
 
 #iconEdit {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+  color:#f17ff5;
 }
 
 #photoUser {
@@ -89,7 +90,7 @@
   text-align: center;
   border: none;
   background: #3b3b3b;
-  color: #2ecece;
+  color:  #f17ff5;
   outline: none;
   padding: 10px 0px;
 }
@@ -98,7 +99,7 @@
   text-align: center;
   border: none;
   background: #3b3b3b;
-  color: #7e7fd8;
+  color:  #f17ff5;
   outline: none;
   padding: 10px 0px;
 }
@@ -108,6 +109,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  color: #b7fa1b;
 }
 
 #btnFormUIA {
@@ -118,10 +120,11 @@
   cursor: pointer;
 }
 
+
 #btnFormUIC {
   background: none;
   border: none;
-  color: #2ecece;
+  color:  #b7fa1b;
   font-size: 18px;
   cursor: pointer;
 }
