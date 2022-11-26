@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 
 const CardInfoUser = () => {
 
-  const { currentUser, setCurrentUser, getCredentials, updateDataUser } = useUsers()
+  const { currentUser, setCurrentUser, getCredentials, updateDataUser, getAllTravels } = useUsers()
   const [changeDataUser, setChangeDataUser] = useState(false)
   const [userName, setUserName] = useState(currentUser?.userName)
   const [celPhone, setCelPhone] = useState(currentUser?.celPhone)
@@ -16,8 +16,11 @@ const CardInfoUser = () => {
   const [credentials, setCredentials] = useState(null)
   const [file, setFile] = useState(null)
   const [prevData, setPrevData] = useState({})
+  const [travels_User, setTravels_User] = useState([])
+  const [rateUser, setRateUser] = useState(currentUser?.rateUser)
 
   useEffect(() => {
+    let rate = []
     setCredentials(getCredentials())
     setCurrentUser(currentUser)
     setPrevData({
@@ -26,14 +29,36 @@ const CardInfoUser = () => {
       photoUser: currentUser?.photoUser
     })
     setPhotoUser(currentUser?.photoUser)
-  }, [currentUser, getCredentials, setCurrentUser])
+
+    const getUT = async () => {
+      try {
+        const res = await getAllTravels()
+        const TU = res.filter(travel => (travel.email === currentUser?.email))
+        TU.forEach(element => {
+          if (element.ratings.length !== 0) {
+            rate.push(element.ratings.reduce((a, b) => a + b, 0) / element.ratings.length)
+          }
+        })
+        setTravels_User(TU)
+        if (rate.length !== 0) {
+          setRateUser(rate.reduce((a, b) => a + b, 0) / rate.length)
+        }
+        
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getUT()
+
+  }, [currentUser, getAllTravels, getCredentials, setCurrentUser])
 
   const ChangeData = async (e) => {
     e.preventDefault()
     if (ValidateChangedata(userName, celPhone)) {
-      setCurrentUser({ ...currentUser, userName, celPhone, photoUser })
+      setCurrentUser({ ...currentUser, userName, celPhone, photoUser, rateUser })
       setChangeDataUser(!changeDataUser)
-      const user = await updateDataUser(credentials.UID, { ...currentUser, userName, celPhone, photoUser: file })
+      const user = await updateDataUser(credentials.UID, { ...currentUser, userName, celPhone, rateUser, photoUser: file })
       window.localStorage.setItem(
         'loggedUser', JSON.stringify(user)
       )
@@ -53,6 +78,7 @@ const CardInfoUser = () => {
       setPhotoUser(prevData.photoUser)
     }
   }
+  // console.log(currentUser);
 
   return (
     <div >
@@ -93,6 +119,7 @@ const CardInfoUser = () => {
               <img src={currentUser ? currentUser?.photoUser?.url : Photo} alt="Foto Usuario" id='photoUser' />
             </div>
             <div className='infoUser'>
+              <p className='titleInfoUser'>Calificacion: {rateUser ? rateUser : 'Cargando'}</p>
               <p className='titleInfoUser'>{currentUser ? currentUser?.userName : 'Cargando'}</p>
               <p className='titleInfoUser'>{currentUser ? currentUser?.email : 'Cargando'}</p>
               <p className='titleInfoUser'>{currentUser ? currentUser?.celPhone : 'Cargando'}</p>

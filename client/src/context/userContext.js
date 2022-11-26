@@ -1,5 +1,5 @@
 import { useState, useContext, createContext, useEffect, } from "react";
-import { addTravelRequest, getTravelRequest, getAllTravelsRequest, updateTravelRequest } from "../api/travels";
+import { addTravelRequest, getTravelRequest, getAllTravelsRequest, updateTravelRequest,  } from "../api/travels";
 import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest, updateUserRequest, updateUserDataRequest } from "../api/users";
 
 
@@ -125,6 +125,17 @@ export const UserProvider = ({ children }) => {
       }
   }
 
+//   const getAllUserTravelsByEmail = async (email) => {
+//     try {
+//       console.log('EUC',email)
+//       const res = await getAllUserTravelsByEmailRequest(email)
+//       return res.data
+//     } catch (error) {
+//       console.error({message: error.message});
+//     }
+// }
+  
+
   const updateTravel = async (id, filter) => {
     try {
       const res = await updateTravelRequest(id, filter)
@@ -155,7 +166,8 @@ export const UserProvider = ({ children }) => {
       addTravel,
       getTravel,
       getAllTravels,
-      updateTravel
+      updateTravel,
+      // getAllUserTravelsByEmail
     }}>
       {children}
     </userContext.Provider>
