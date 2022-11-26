@@ -9,7 +9,9 @@
 }
 
 .pageAboutUs {
-  background-color: #1A1A1A;
+  background: rgb(56,187,20);
+  background: radial-gradient(circle, rgba(56,187,20,1) 28%, rgba(171,241,7,1) 100%);
+
   min-height: 100vh;
 
   display: flex;
@@ -21,14 +23,14 @@
 #bodyAU {
   margin-top: 50px;
   width: 500px;
-
+  background-color:#465841;
   padding: 50px;
   border-radius: 18px;
-  box-shadow: 0px 10px 10px 10px #14161a;  
+  box-shadow: 0px 10px 10px 10px#354231;  
 }
 
 #titleAU {
-  color: #2ecece;
+  color: #f173f1;
   font-size: 25px;
 }
 
