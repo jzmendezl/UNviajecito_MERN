@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import Vehicle from '../Components/vehicle'
 import ModalVehicle from '../Components/ModalVehicle'
-import addIcon from '../resources/img/addIcon.png'
 import { IoMdAdd } from "react-icons/io";
 import CardInfoUser from '../Components/CardInfoUser'
 

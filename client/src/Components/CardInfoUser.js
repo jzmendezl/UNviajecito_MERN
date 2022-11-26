@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useUsers } from '../context/userContext'
 import Photo from '../resources/img/photo_user.svg'
 import '../resources/css/cardInfoUser.css'
-import editIcon from '../resources/img/editIcon.png'
 import {CiEdit} from  "react-icons/ci";
 import { ValidateChangedata } from '../helpers/validateForm'
 import { useEffect } from 'react'

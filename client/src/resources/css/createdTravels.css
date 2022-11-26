@@ -4,7 +4,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     --main-bg-color: #1A1A1A;
-    --enfacis-color: #2ecece;
+    --enfacis-color: #f173f1;
     box-sizing: border-box;
   }
 
@@ -15,7 +15,8 @@
     width: 350px;
     padding-bottom: 20px;
     border-radius: 14px;
-    box-shadow: 0px 10px 10px 10px #0e1013;
+    background-color: #465841;
+    box-shadow: 0px 10px 10px 10px #354231;
   }
 
   .headCard {
@@ -23,14 +24,14 @@
     flex-direction: row-reverse;
     justify-content: space-evenly;
     align-items: center;
-    color: #282c34;
+    color: #f173f1;
     font-weight: 800;
 
     /* margin: -20px; */
     border-radius: 14px 14px 0px 0px;
     width: 350px;
     height: 50px;
-    background: rgba(255, 228, 196, 0.233);
+    background: #465841;
   }
 
   .fieldCT {
@@ -43,7 +44,7 @@
   }
 
   .titleFieldCT {
-    color: #2ecece;
+    color: #f173f1;
     width: 90px;
   }
 
@@ -52,20 +53,23 @@
     /* top: 10px;
     left: 300px; */
     cursor: pointer;
-    
+    color: #f173f1;
     background: none;
     border: none;
-    transform: rotate(90deg);
+ 
+
   }
 
   #btnStartCT {
     cursor: pointer;
     background: none;
     border: none;
+    color: #f173f1;
   }
 
   #btnFinishCT {
     cursor: pointer;
     background: none;
     border: none;
+    color: #f173f1;
   }

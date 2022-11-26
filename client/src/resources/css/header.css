@@ -3,7 +3,7 @@
   font-family: 'Quicksand', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --main-bg-color: #282c34;
+  --main-bg-color: #465841;
   --enfacis-color: #cdebeb;
   box-sizing: content-box;
 }
@@ -36,7 +36,7 @@
 
 .optNavBar:hover {
   color: #b7fa1b;
-  outline-color: #282c34;
+  outline-color: #465841;
 }
 
 hr {

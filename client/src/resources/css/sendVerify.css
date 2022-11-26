@@ -4,7 +4,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --main-bg-color: #1A1A1A;
-  --enfacis-color: #2ecece;
+  --enfacis-color: #f173f1;
 }
 
 #pageSV {
@@ -41,12 +41,12 @@
 
 .nameApp {
   font-size: 35px;
-  color: #2ecece;
+  color: #f173f1;
   text-align: center;
   padding-bottom: 10px;
 }
 
 #mailSV {
   padding-top: 30px;
-  color: #2ecece;
+  color: #f173f1;
 }
