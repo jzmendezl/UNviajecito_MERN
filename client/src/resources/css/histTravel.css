@@ -15,7 +15,8 @@
     width: 350px;
     padding-bottom: 20px;
     border-radius: 14px;
-    box-shadow: 0px 10px 10px 10px #0e1013;
+    box-shadow: 0px 10px 10px 10px #354231;
+    background-color: #465841;
   }
 
   .fieldHT {
@@ -35,25 +36,22 @@
     flex-direction: row-reverse;
     justify-content: space-evenly;
     align-items: center;
-    color: #465841;
+    color: #f173f1;
     font-weight: 800;
 
     /* margin: -20px; */
     border-radius: 14px 14px 0px 0px;
     width: 350px;
     height: 50px;
-    background: rgba(255, 228, 196, 0.233);
+    background: #465841;
   }
 
   #btnViewHT {
-    /* position: absolute;
-    top: 15px;
-    left: 320px; */
-    cursor: pointer;
-    
+    cursor: pointer;   
     background: none;
     border: none;
-    transform: rotate(90deg);
+    color: #f173f1;
+    ;
   }
 
   #titleRateHT{

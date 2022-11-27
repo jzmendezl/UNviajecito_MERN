@@ -1,8 +1,8 @@
 import '../resources/css/histTravel.css'
 import starIcon from '../resources/img/starIcon2.png'
-import viewMoreIcon from '../resources/img/viewMore.png'
 import React, { useEffect, useState } from 'react'
 import { useUsers } from '../context/userContext'
+import{HiDotsHorizontal} from 'react-icons/hi'
 
 const HistTravel = (props) => {
 
@@ -64,7 +64,7 @@ const HistTravel = (props) => {
                     <div>
                         <div className='headCardHT'>
                             <button id='btnViewHT' onClick={moreInfo}>
-                                <img src={viewMoreIcon} alt="" />
+                                <HiDotsHorizontal  size={30}/>
                             </button>
                         </div>
                         <div className="fieldHT">
@@ -134,7 +134,7 @@ const HistTravel = (props) => {
                     <div>
                         <div className='headCardHT'>
                             <button id='btnViewHT' onClick={moreInfo}>
-                                <img src={viewMoreIcon} alt="" />
+                                <HiDotsHorizontal  size={30}/>
                             </button>
                         </div>
                         <div className="fieldHT">
