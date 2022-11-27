@@ -34,8 +34,8 @@ export default function Header() {
   return (
     <div className='header'>
       <div className='navBar'>
-      <div class="holi" >
-      <img src={iconoL} alt=""  class='sizeImage'   />   </div>
+      <div className="holi">
+      <img src={iconoL} alt=""  className='sizeImage'   />   </div>
         <div className='optNavBar' onClick={goAccount}> <h3>Cuenta</h3></div>
         <div className='optNavBar' onClick={goTravels}><h3>Mis Viajes</h3></div>
         <div className='optNavBar' onClick={goSearch2}><h3>Buscar</h3></div>
