@@ -98,31 +98,33 @@ const Searchv2 = () => {
 
                 //  * Filter place
 
-                if (place === 'Source') {
-                    let place = []
-                    place = AllTravels.filter(travel => (
+                if (search !== '' && place === 'Source') {
+                    let placeSorce = []
+                    placeSorce = AllTravels.filter(travel => (
                         travel.source.toLowerCase().includes(search.toLowerCase())
                     ))
-                    setFilters(place)
+                    console.log('place',placeSorce);
+                    setFilters(placeSorce)
                 }
 
-                if (place === 'Destiny') {
-                    let place = []
-                    place = AllTravels.filter(travel => (
+                if (search !== '' && place === 'Destiny') {
+                    let placeSorce = []
+                    placeSorce = AllTravels.filter(travel => (
                         travel.destiny.toLowerCase().includes(search.toLowerCase())
                     ))
-                    setFilters(place)
+                    setFilters(placeSorce)
                 }
-                
+
                 //  * Filter SearchBar
 
-                if (search !== '') {
+                if (search !== '' && place === null) {
                     let searchBar = []
                     searchBar = AllTravels.filter(travel => (
                         travel.source.toLowerCase().includes(search.toLowerCase()) ||
                         travel.destiny.toLowerCase().includes(search.toLowerCase())
                     ))
                     setFilters(searchBar)
+
                 }
 
 
@@ -135,7 +137,7 @@ const Searchv2 = () => {
         getTravels()
     }, [currentUser?.userWheels, currentUser?.wheelHist, getAllTravels, kind, place, price, search])
 
-
+    console.log(place);
     return (
         <div className='pageSearch'>
             <Header />

@@ -12,6 +12,7 @@ const HistTravel = (props) => {
     const [rate, setRate] = useState(0)
     const [statusTravel, setStatusTravel] = useState(props.status)
     const [userCredentials, setUserCredentials] = useState('')
+    const [grade, setGrade] = useState(false)
 
     useEffect(() => {
         setUserCredentials(getCredentials())
@@ -19,7 +20,7 @@ const HistTravel = (props) => {
         setIsRating(currentUser?.wheelHist[index].isRate)
 
         if (props.status === 'Finished') {
-            setStatusTravel(true)
+            setGrade(true)
         }
 
         const ratingTrtavel = async () => {
@@ -100,7 +101,7 @@ const HistTravel = (props) => {
                             </p>
                         </div>
                         {
-                            !isRating && statusTravel
+                            !isRating && grade
                                 ?
                                 <div>
                                     <p id='titleRateHT'>Calificar</p>

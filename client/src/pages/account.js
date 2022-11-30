@@ -12,7 +12,7 @@ import CardInfoUser from '../Components/CardInfoUser'
 
 export default function AccountPage() {
 
-  const { currentUser, isLogged, getCredentials, getAllTravels } = useUsers()
+  const { currentUser, isLogged, getCredentials, getAllTravels, setCurrentUser } = useUsers()
   const [isOpen, setIsOpen] = useState(false)
   
 
@@ -31,6 +31,8 @@ export default function AccountPage() {
     }
 
     setVehicleUser(currentUser?.vehicle)
+    
+    
 
   }, [currentUser?.email, currentUser?.vehicle, getAllTravels, isLogged, navigate])
 
@@ -56,6 +58,7 @@ export default function AccountPage() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
+
 
   return (
     <div className='accountPage'>

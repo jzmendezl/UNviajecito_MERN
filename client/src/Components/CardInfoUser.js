@@ -119,7 +119,13 @@ const CardInfoUser = () => {
               <img src={currentUser ? currentUser?.photoUser?.url : Photo} alt="Foto Usuario" id='photoUser' />
             </div>
             <div className='infoUser'>
-              <p className='titleInfoUser'>Calificacion: {rateUser ? rateUser : 'Cargando'}</p>
+              {
+                rateUser === null
+                ?
+                ''
+                :
+                <p className='titleInfoUser'>Calificacion: {rateUser ? rateUser : 'Cargando'}</p>
+              }
               <p className='titleInfoUser'>{currentUser ? currentUser?.userName : 'Cargando'}</p>
               <p className='titleInfoUser'>{currentUser ? currentUser?.email : 'Cargando'}</p>
               <p className='titleInfoUser'>{currentUser ? currentUser?.celPhone : 'Cargando'}</p>

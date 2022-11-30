@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { Children, useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import { useUsers } from "../context/userContext"
 import { validateFormVehicle } from "../helpers/validateForm"
@@ -54,6 +54,11 @@ const ModalVehicle = ({ children, open, close }) => {
             vehicleUser.push(vehicle)
             setCurrentUser({ ...currentUser, vehicle: vehicleUser })
             await updateData(userCredentials.UID, { vehicle: vehicleUser })
+            let user = JSON.parse(window.localStorage.getItem('loggedUser'))
+            user.vehicle = vehicleUser
+            window.localStorage.setItem(
+                'loggedUser', JSON.stringify(user)
+              )
             e.target.reset()
         } else {
             toast.error('Verifica Los Campos',
@@ -66,7 +71,10 @@ const ModalVehicle = ({ children, open, close }) => {
             }
         )
         }
+        
     }
+
+    
 
     if (!open) return null
 
@@ -110,7 +118,7 @@ const ModalVehicle = ({ children, open, close }) => {
                         <input type="number" id='seats'  onChange={(e) => setSeats(e.target.value)} placeholder='1'/>
                     </label>
                     <div id='btnFormLink'>
-                        <button type="submit" id='btnAdd' >Agregar</button>
+                        <button type="submit" id='btnAdd'>Agregar</button>
                     </div>
                 </form>
                 {children}
