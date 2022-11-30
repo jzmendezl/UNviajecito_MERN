@@ -128,8 +128,6 @@ const Searchv2 = () => {
                 }
 
 
-
-
             } catch (error) {
                 console.error({ message: error.message });
             }
@@ -137,7 +135,7 @@ const Searchv2 = () => {
         getTravels()
     }, [currentUser?.userWheels, currentUser?.wheelHist, getAllTravels, kind, place, price, search])
 
-    console.log(place);
+    // console.log(place);
     return (
         <div className='pageSearch'>
             <Header />

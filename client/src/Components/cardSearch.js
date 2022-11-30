@@ -40,7 +40,7 @@ const CardSearch = (props) => {
 
                     if (verifyPassenger()) {
                         // props.passengers.push(passenger)
-                        let passNew = []
+                        let passNew = props?.passengers
                         let histUpdate = currentUser?.wheelHist
                         passNew.push(passenger)
                         histUpdate.push(wheelHistNew)
@@ -48,6 +48,7 @@ const CardSearch = (props) => {
                         console.log('updHist', wheelHist);
                         // const passengers = props.passengers
                         const passengers = passNew
+                        console.log('Pasen',passNew);
                         await updateTravel(props.TID, { passengers })
                         passNew = []
                         setCurrentUser({ ...currentUser, wheelHist: { wheelHist } })
