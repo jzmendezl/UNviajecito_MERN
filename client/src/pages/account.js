@@ -6,14 +6,15 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import Vehicle from '../Components/vehicle'
 import ModalVehicle from '../Components/ModalVehicle'
-import addIcon from '../resources/img/addIcon.png'
+import { IoMdAdd } from "react-icons/io";
 import CardInfoUser from '../Components/CardInfoUser'
 
 
 export default function AccountPage() {
 
-  const { currentUser, isLogged, getCredentials } = useUsers()
+  const { currentUser, isLogged, getCredentials, getAllTravels, setCurrentUser } = useUsers()
   const [isOpen, setIsOpen] = useState(false)
+  
 
 
   const [vehicleUser, setVehicleUser] = useState([])
@@ -23,16 +24,18 @@ export default function AccountPage() {
   const delay = 250000;
 
   let navigate = useNavigate()
-
+  
   useEffect(() => {
-
     if (!isLogged()) {
       navigate('/')
     }
 
     setVehicleUser(currentUser?.vehicle)
+    
+    
 
-  }, [currentUser?.vehicle, getCredentials, isLogged, navigate])
+  }, [currentUser?.email, currentUser?.vehicle, getAllTravels, isLogged, navigate])
+
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -57,7 +60,6 @@ export default function AccountPage() {
   }, [index]);
 
 
-
   return (
     <div className='accountPage'>
       <Header />
@@ -71,7 +73,8 @@ export default function AccountPage() {
           <div id='btnAddVehicle'>
             <button onClick={() => setIsOpen(true)} id='btnAddVehicle'>
               <div id='lblAddVehicle'>
-                <img src={addIcon} alt="" id='iconAdd' />
+               
+                <IoMdAdd size={20}  />
                 <p>Añadir Vehiculo</p>
               </div>
             </button>

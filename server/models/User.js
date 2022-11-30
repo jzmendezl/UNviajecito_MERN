@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false
+  },
+  rateUser: {
+    type: Number,
+    default: 0
   }
 }, {
   timestamps: true

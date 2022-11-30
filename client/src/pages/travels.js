@@ -5,7 +5,7 @@ import HistTravel from '../Components/histTravel'
 import RoutesUser from '../Components/routesUser'
 import { useUsers } from '../context/userContext'
 import '../resources/css/travels.css'
-import cancelBtn from '../resources/img/cancelIcon.svg'
+import {MdCancel} from 'react-icons/md'
 
 const TravelsPage = () => {
 
@@ -23,6 +23,7 @@ const TravelsPage = () => {
             currentUser?.userWheels?.forEach(async travel => {
                 const { data } = await getTravel(travel)
                 results.push(data)
+                // console.log(data);
                 setInfoTravels([...results])
             })
         }
@@ -50,7 +51,7 @@ const TravelsPage = () => {
                     ?
                     <div>
                         <button onClick={() => setRenderNewTravel(!renderNewTravel)} id='cancelAddRoute'>
-                            <img src={cancelBtn} alt="" />
+                            <MdCancel size={30}  />
                         </button>
                         <RoutesUser />
                     </div>

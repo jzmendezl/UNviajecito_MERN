@@ -51,10 +51,10 @@ export default function RegisterPage() {
     
     <div id='pageLogin' >
       <div id='contentLogin'>
-      <div class="conicono">
-      <img src={iconoL} alt="" class='iconopag' />
+      <div className="conicono">
+      <img src={iconoL} alt="" className='iconopag' />
       </div>
-        <h2 class="titulo-form">Crea una cuenta</h2><br></br>
+        <h2 className="titulo-form">Crea una cuenta</h2><br></br>
         <form action="" id='formLogin' onSubmit={handleSignInEmail}>
           <label htmlFor="name">
             <span>Usuario</span>

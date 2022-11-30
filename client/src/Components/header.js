@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import '../resources/css/header.css'
 
 import { useUsers } from '../context/userContext'
+import iconoL from '../resources/img/iconoL.png'
 
 
 export default function Header() {
@@ -33,12 +34,13 @@ export default function Header() {
   return (
     <div className='header'>
       <div className='navBar'>
-        <div className='optNavBar' onClick={goAccount}>Cuenta</div>
-        {/* <div className='optNavBar' onClick={goSearch}>Buscar</div> */}
-        <div className='optNavBar' onClick={goTravels}>Mis Viajes</div>
-        <div className='optNavBar' onClick={goSearch2}>Buscar</div>
-        <div className='optNavBar' onClick={goAboutUs}>Acerca de nosotros</div>
-        <div className='optNavBar' onClick={LogOut}>Salir</div>
+      <div className="holi">
+      <img src={iconoL} alt=""  className='sizeImage'   />   </div>
+        <div className='optNavBar' onClick={goAccount}> <h3>Cuenta</h3></div>
+        <div className='optNavBar' onClick={goTravels}><h3>Mis Viajes</h3></div>
+        <div className='optNavBar' onClick={goSearch2}><h3>Buscar</h3></div>
+        <div className='optNavBar' onClick={goAboutUs}><h3>Acerca de nosotros</h3></div>
+        <div className='optNavBar' onClick={LogOut}><h3>Salir</h3></div>
       </div>
       <hr />
     </div>

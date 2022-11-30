@@ -4,7 +4,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     --main-bg-color:#1A1A1A;
-    --enfacis-color: #2ecece;
+    --enfacis-color: #f173f1;
     box-sizing: border-box;
 }
 
@@ -12,7 +12,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #282c34 inset !important;
+    -webkit-box-shadow: 0 0 0 30px #465841 inset !important;
     -webkit-text-fill-color: #fff;
 }
 
@@ -35,7 +35,7 @@ input:-webkit-autofill:active {
 #titleAR {
     margin-bottom: 80px;
     font-size: 50px;
-    color: #2ecece;
+    color: #f173f1;
 }
 
 .formAR {
@@ -50,7 +50,7 @@ label input:focus {
     border: none;
     background: none;
     outline: none;
-    border-bottom: 1px solid #2ecece;
+    border-bottom: 1px solid #f173f1;
     color: #fff;
     transition: all 0.3s ease-in-out;
 }
@@ -66,11 +66,11 @@ input:-internal-autofill-selected {
 #btnFormAR {
     border: none;
     background: none;
-    color: #2ecece;
+    color: #f173f1;
     font-size: 20px;
     margin-top: 70px;
     margin-left: 150px;
-    outline-color: #2ecece;
+    outline-color: #f173f1;
     cursor: pointer;
 }
 

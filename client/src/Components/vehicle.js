@@ -1,8 +1,6 @@
 
 
-
 const Vehicle = ({ kind, color, plate, seats, model }) => {
-
 
     return (
         <div className='yourVehicles'>
