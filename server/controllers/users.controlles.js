@@ -4,11 +4,15 @@ import { encrypt, compare } from '../libs/bcrypt.js';
 import jwt from 'jsonwebtoken'
 import { sendEmail, getTemplate } from "../libs/confirmMail.js";
 import fs from "fs-extra";
+import config from "../config/config.js";
 
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body
     const authUser = await User.findOne({ email })
+    console.log('====================================');
+    console.log(authUser);
+    console.log('====================================');
 
     if (authUser && (await compare(password, authUser.password))) {
       return res.status(201).json({
@@ -73,7 +77,7 @@ export const createUsers = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const {id} = req.params
+    const { id } = req.params
 
     if (req.files?.photoUser) {
       const result = await uploadPhotoUser(req.files.photoUser.tempFilePath)
@@ -85,7 +89,7 @@ export const updateUser = async (req, res) => {
     }
 
     const updatedUser = await User.findByIdAndUpdate(id, { $set: req.body }, { new: true })
-    
+
     return res.json(updatedUser)
 
   } catch (error) {
@@ -152,14 +156,14 @@ export const deleteUser = async (req, res) => {
 }
 
 export const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
+  return jwt.sign({ id }, config.SECRET, {
     expiresIn: '30d'
   })
 }
 
 export const getTokenData = (token) => {
 
-  let data = jwt.decode(token, process.env.JWT_SECRET, (err, decoded) => {
+  let data = jwt.decode(token, config.SECRET, (err, decoded) => {
     if (err) {
       console.log('Error al obtener data del token');
     } else {

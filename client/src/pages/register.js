@@ -8,7 +8,7 @@ import iconoL from '../resources/img/iconoL.png';
 
 
 
-export default function RegisterPage() {
+export default function RegisterPage () {
 
   let navigate = useNavigate()
 
@@ -48,12 +48,12 @@ export default function RegisterPage() {
   }
 
   return (
-    
+
     <div id='pageLogin' >
       <div id='contentLogin'>
-      <div class="conicono">
-      <img src={iconoL} alt="" class='iconopag' />
-      </div>
+        <div class="conicono">
+          <img src={iconoL} alt="" class='iconopag' />
+        </div>
         <h2 class="titulo-form">Crea una cuenta</h2><br></br>
         <form action="" id='formLogin' onSubmit={handleSignInEmail}>
           <label htmlFor="name">

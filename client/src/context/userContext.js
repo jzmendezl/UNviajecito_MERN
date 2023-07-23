@@ -3,6 +3,7 @@ import { addTravelRequest, getTravelRequest, getAllTravelsRequest, updateTravelR
 import { createUsersRequest, loginUserRequest, getUserRequest, getUsersRequest, updateUserRequest, updateUserDataRequest } from "../api/users";
 
 
+
 const userContext = createContext()
 
 export const useUsers = () => {
@@ -28,7 +29,7 @@ export const UserProvider = ({ children }) => {
     }
   }, [])
 
- 
+
   const getCredentials = () => {
     const user = JSON.parse(window.localStorage.getItem('User'))
     const token = user.token
@@ -87,7 +88,7 @@ export const UserProvider = ({ children }) => {
       console.error(error.message);
     }
   }
-  
+
   const updateDataUser = async (id, userDataUpdate) => {
     try {
       const user = await updateUserDataRequest(id, userDataUpdate)
@@ -103,7 +104,7 @@ export const UserProvider = ({ children }) => {
       const res = await addTravelRequest(travel)
       return res.data
     } catch (error) {
-      console.error({message: error.message});
+      console.error({ message: error.message });
     }
   }
 
@@ -111,18 +112,18 @@ export const UserProvider = ({ children }) => {
     try {
       return await getTravelRequest(id)
     } catch (error) {
-      console.error({message: error.message});
+      console.error({ message: error.message });
     }
   }
 
   const getAllTravels = async () => {
-      try {
-        const res = await getAllTravelsRequest()
-        
-        return res.data
-      } catch (error) {
-        console.error({message: error.message});
-      }
+    try {
+      const res = await getAllTravelsRequest()
+
+      return res.data
+    } catch (error) {
+      console.error({ message: error.message });
+    }
   }
 
   const updateTravel = async (id, filter) => {
@@ -130,7 +131,7 @@ export const UserProvider = ({ children }) => {
       const res = await updateTravelRequest(id, filter)
       return res.data
     } catch (error) {
-      console.error({message: error.message});
+      console.error({ message: error.message });
     }
 
   }
